@@ -6,7 +6,7 @@ default_platform :ios
 platform :ios do
 
   library_name = "ScrollKit"
-  pod_name = "ScrollKit"
+  pod_name = "DSScrollKit"
   main_branch = "main"
   build_folder_docs = ".build/docs"
 

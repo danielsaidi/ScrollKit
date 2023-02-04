@@ -7,7 +7,7 @@ platform :ios do
 
   library_name = "ScrollKit"
   pod_name = "ScrollKit"
-  main_branch = "master"
+  main_branch = "main"
   build_folder_docs = ".build/docs"
 
 

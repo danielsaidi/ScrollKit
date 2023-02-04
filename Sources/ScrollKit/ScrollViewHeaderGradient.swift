@@ -1,5 +1,5 @@
 //
-//  ScrollViewHeader.swift
+//  ScrollViewHeaderGradient.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-04.
@@ -22,15 +22,29 @@ public struct ScrollViewHeaderGradient: View {
 
      - Parameters:
        - startColor: The top start color, by default `.clear`.
-       - startPoint: The top start point, by default `.top`.
        - endColor: The bottom end color, by default `.black` with `0.3` opacity.
-       - endPoint: The top start point, by default `.bottom`.
      */
     public init(
         _ startColor: Color = .clear,
-        _ startPoint: UnitPoint = .top,
+        _ endColor: Color = .black.opacity(0.4)
+    ) {
+        self.init(startColor, .top, endColor, .bottom)
+    }
+
+    /**
+     Create a scroll view header gradient.
+
+     - Parameters:
+       - startColor: The top start color, by default `.clear`.
+       - startPoint: The top start point.
+       - endColor: The bottom end color, by default `.black` with `0.3` opacity.
+       - endPoint: The top start point.
+     */
+    public init(
+        _ startColor: Color = .clear,
+        _ startPoint: UnitPoint,
         _ endColor: Color = .black.opacity(0.3),
-        _ endPoint: UnitPoint = .bottom
+        _ endPoint: UnitPoint
     ) {
         self.startColor = startColor
         self.startPoint = startPoint
@@ -47,7 +61,8 @@ public struct ScrollViewHeaderGradient: View {
         LinearGradient(
             colors: [startColor, endColor],
             startPoint: startPoint,
-            endPoint: endPoint)
+            endPoint: endPoint
+        )
     }
 }
 

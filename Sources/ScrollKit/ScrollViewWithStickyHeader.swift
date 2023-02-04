@@ -131,9 +131,8 @@ private extension ScrollViewWithStickyHeader {
     }
 
     var scrollHeader: some View {
-        ScrollViewHeader {
-            header()
-        }.frame(height: headerHeight)
+        ScrollViewHeader(content: header)
+            .frame(height: headerHeight)
     }
 
     func handleScrollOffset(_ offset: CGPoint) {

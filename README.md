@@ -36,7 +36,7 @@ https://github.com/danielsaidi/ScrollKit.git
 or with CocoaPods:
 
 ```
-pod ScrollKit
+pod DSScrollKit
 ```
 
 

@@ -5,8 +5,8 @@ default_platform :ios
 
 platform :ios do
 
-  library_name = "SystemNotification"
-  pod_name = "SystemNotification"
+  library_name = "ScrollKit"
+  pod_name = "ScrollKit"
   main_branch = "master"
   build_folder_docs = ".build/docs"
 

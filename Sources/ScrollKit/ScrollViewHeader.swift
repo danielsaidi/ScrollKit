@@ -78,7 +78,6 @@ public struct ScrollViewHeader<Content: View>: View {
                             width: geo.size.width,
                             height: geo.size.height
                         )
-                        .zIndex(1)
                         .offset(y: -(geo.frame(in: .global).minY / 100))
                 } else {
                     content()
@@ -101,15 +100,8 @@ struct ScrollViewHeader_Previews: PreviewProvider {
         var body: some View {
             ScrollViewHeader {
                 ZStack(alignment: .bottomLeading) {
-                    LinearGradient(
-                        colors: [.blue, .yellow],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing)
-                    LinearGradient(
-                        colors: [.clear, .black],
-                        startPoint: .top,
-                        endPoint: .bottom
-                    ).opacity(0.5)
+                    ScrollViewHeaderGradient(.blue, .topLeading, .yellow, .bottom)
+                    ScrollViewHeaderGradient()
                     headerTitle
                 }
             }

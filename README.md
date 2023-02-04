@@ -20,6 +20,9 @@ ScrollKit has a `ScrollViewWithOffset` that provides you with the scroll view of
 
 The result can look like this, or completely different:
 
+<p align="center" style="border-radius: 10px">
+    <img src="Resources/Demo.gif" width=300 />
+</p>
 
 The scroll views are designed to be easy to use, and basically just add more properties to the standard SwiftUI `ScrollView`. They can be used on all Apple platforms, including iOS, macOS, tvOS and watchOS.
 

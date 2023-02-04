@@ -13,7 +13,7 @@ let package = Package(
     products: [
         .library(
             name: "ScrollKit",
-            targets: ["ScrollKit"]),
+            targets: ["ScrollKit"])
     ],
     dependencies: [],
     targets: [

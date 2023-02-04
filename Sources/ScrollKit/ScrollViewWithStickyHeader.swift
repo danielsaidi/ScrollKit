@@ -105,7 +105,7 @@ private extension ScrollViewWithStickyHeader {
 
     @ViewBuilder
     var navbarOverlay: some View {
-        if (headerVisibleRatio <= 0) {
+        if headerVisibleRatio <= 0 {
             Color.clear
                 .frame(height: navigationBarHeight)
                 .overlay(scrollHeader, alignment: .bottom)

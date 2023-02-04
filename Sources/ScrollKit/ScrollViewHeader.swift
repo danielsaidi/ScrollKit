@@ -92,7 +92,6 @@ public struct ScrollViewHeader<Content: View>: View {
     }
 }
 
-@available(iOS 16.0, *)
 struct ScrollViewHeader_Previews: PreviewProvider {
 
     struct PreviewHeader: View {

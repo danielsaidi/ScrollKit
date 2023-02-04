@@ -91,7 +91,9 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
                 .frame(minHeight: headerMinHeight)
         }
         .prefersTransparentNavigationBar()
+        #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
     }
 }
 
@@ -167,6 +169,7 @@ struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
                     }.padding()
                 }
                 .navigationTitle("\(scrollOffset.y) | \(headerVisibleRatio)")
+                #if os(iOS) || os(macOS) || os(tvOS)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Text("Demo Title")
@@ -174,6 +177,7 @@ struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
                             .opacity(1 - headerVisibleRatio)
                     }
                 }
+                #endif
             }
         }
 
@@ -214,10 +218,14 @@ private extension View {
 
     @ViewBuilder
     func prefersTransparentNavigationBar() -> some View {
-        if #available(iOS 16.0, *) {
-            self.toolbarBackground(.hidden, for: .navigationBar)
+        #if os(iOS) || os(macOS)
+        if #available(iOS 16.0, macOS 13.0, *) {
+            self.toolbarBackground(.hidden)
         } else {
             self
         }
+        #else
+        self
+        #endif
     }
 }

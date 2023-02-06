@@ -154,6 +154,6 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 [Website]: http://www.danielsaidi.com
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
-[Documentation]: https://danielsaidi.github.io/ScrollKit/documentation/ScrollKit/
-[GettingStarted]: https://danielsaidi.github.io/ScrollKit/documentation/ScrollKit/getting-started
+[Documentation]: https://danielsaidi.github.io/ScrollKit/documentation/scrollkit/
+[GettingStarted]: https://danielsaidi.github.io/ScrollKit/documentation/scrollkit/getting-started
 [License]: https://github.com/danielsaidi/ScrollKit/blob/master/LICENSE

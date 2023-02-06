@@ -34,13 +34,13 @@ public struct ScrollViewWithOffset<Content: View>: View {
     ) {
         self.axes = axes
         self.showsIndicators = showsIndicators
-        self.onScroll = onScroll
+        self.onScroll = onScroll ?? { _ in }
         self.content = content
     }
 
     private let axes: Axis.Set
     private let showsIndicators: Bool
-    private let onScroll: ScrollAction?
+    private let onScroll: ScrollAction
     private let content: () -> Content
 
     public typealias ScrollAction = (_ offset: CGPoint) -> Void
@@ -48,20 +48,34 @@ public struct ScrollViewWithOffset<Content: View>: View {
     public var body: some View {
         ScrollView(axes, showsIndicators: showsIndicators) {
             ZStack(alignment: .top) {
-                GeometryReader { geo in
-                    Color.clear
-                        .preference(
-                            key: ScrollOffsetPreferenceKey.self,
-                            value: geo.frame(in: .named(ScrollOffsetNamespace.namespace)).origin
-                        )
-                }
-                .frame(height: 0)
-
+                ScrollViewOffsetTracker()
                 content()
             }
+        }.withOffsetTracking(action: onScroll)
+    }
+}
+
+private struct ScrollViewOffsetTracker: View {
+
+    var body: some View {
+        GeometryReader { geo in
+            Color.clear
+                .preference(
+                    key: ScrollOffsetPreferenceKey.self,
+                    value: geo.frame(in: .named(ScrollOffsetNamespace.namespace)).origin
+                )
         }
-        .coordinateSpace(name: ScrollOffsetNamespace.namespace)
-        .onPreferenceChange(ScrollOffsetPreferenceKey.self) { onScroll?($0) }
+        .frame(height: 0)
+    }
+}
+
+private extension ScrollView {
+
+    func withOffsetTracking(
+        action: @escaping (_ offset: CGPoint) -> Void
+    ) -> some View {
+        self.coordinateSpace(name: ScrollOffsetNamespace.namespace)
+            .onPreferenceChange(ScrollOffsetPreferenceKey.self, perform: action)
     }
 }
 
@@ -113,8 +127,8 @@ struct ScrollViewWithOffset_Previews: PreviewProvider {
             "Offset: \(Int(scrollOffset.y))"
         }
 
-        func updateScrollOffset(_ newValue: CGPoint) {
-            self.scrollOffset = newValue
+        func updateScrollOffset(_ offset: CGPoint) {
+            self.scrollOffset = offset
         }
     }
 

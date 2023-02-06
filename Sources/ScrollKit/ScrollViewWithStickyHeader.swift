@@ -141,6 +141,7 @@ private extension ScrollViewWithStickyHeader {
     }
 }
 
+@available(iOS 15.0, *)
 struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
 
     struct Preview: View {
@@ -151,50 +152,35 @@ struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
         @State
         private var headerVisibleRatio: CGFloat = 1
 
-        let headerHeight: CGFloat = 250
-
         var body: some View {
             NavigationView {
                 ScrollViewWithStickyHeader(
                     header: header,
-                    headerHeight: headerHeight,
+                    headerHeight: SpotifyPreviewHeader.height,
                     onScroll: handleScrollOffset
                 ) {
-                    VStack {
-                        ForEach(1...100, id: \.self) {
-                            Text("\($0)").frame(maxWidth: .infinity)
-                            Divider()
-                        }
-                    }.padding()
+                    SpotifyPreviewContent()
                 }
-                .navigationTitle("\(scrollOffset.y) | \(headerVisibleRatio)")
                 #if os(iOS) || os(macOS) || os(tvOS)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Text("Demo Title")
-                            .previewHeaderContent()
-                            .opacity(1 - headerVisibleRatio)
+                        toolbarTitle
                     }
                 }
                 #endif
             }
         }
 
-        func header() -> some View {
-            ZStack(alignment: .bottomLeading) {
-                LinearGradient(colors: [.blue, .yellow], startPoint: .topLeading, endPoint: .bottom)
-                LinearGradient(colors: [.clear, .black.opacity(0.2)], startPoint: .top, endPoint: .bottom)
-                headerTitle.previewHeaderContent()
-            }
+        var toolbarTitle: some View {
+            Text("We've Come for You All")
+                .font(.headline.bold())
+                .opacity(-headerVisibleRatio)
         }
 
-        var headerTitle: some View {
-            VStack(alignment: .leading, spacing: 5) {
-                Text("Demo Title").font(.largeTitle)
-                Text("Some additional information")
-            }
-            .padding(20)
-            .opacity(headerVisibleRatio)
+        func header() -> some View {
+            SpotifyPreviewHeader(
+                headerVisibleRatio: headerVisibleRatio
+            )
         }
 
         func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
@@ -205,15 +191,12 @@ struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
 
     static var previews: some View {
         Preview()
+            .accentColor(.white)
+            .colorScheme(.dark)
     }
 }
 
 private extension View {
-
-    func previewHeaderContent() -> some View {
-        self.foregroundColor(.white)
-            .shadow(color: .black.opacity(0.4), radius: 1, x: 1, y: 1)
-    }
 
     @ViewBuilder
     func prefersNavigationBarHidden() -> some View {

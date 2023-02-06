@@ -93,94 +93,11 @@ private extension View {
 @available(iOS 15.0, *)
 struct ScrollViewHeader_Previews: PreviewProvider {
 
-    static var header: some View {
-        ScrollViewHeader {
-            ZStack {
-                LinearGradient(
-                    colors: [.init(red: 0.5, green: 0.4, blue: 0.5), .black],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-                AsyncImage(
-                    url: URL(string: "https://upload.wikimedia.org/wikipedia/en/8/8f/AnthraxWCFYA.jpg"),
-                    content: { image in
-                        image.image?.resizable()
-                            .aspectRatio(contentMode: .fit)
-                    }
-                )
-                .aspectRatio(1, contentMode: .fit)
-                .cornerRadius(5)
-                .shadow(radius: 10)
-                .padding(.top, 60)
-                .padding(.horizontal, 20)
-            }
-        }
-        .frame(height: 280)
-    }
-
-    static var content: some View {
-        VStack(spacing: 20) {
-            title
-            buttons
-            list
-        }
-        .padding()
-    }
-
-    static var title: some View {
-        VStack(alignment: .leading, spacing: 8) {
-            Text("We've Come for You All")
-                .font(.title2.bold())
-                .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Anthrax")
-                .font(.footnote.bold())
-            Text("Album · 2003")
-                .font(.footnote.bold())
-                .foregroundColor(.secondary)
-        }
-    }
-
-    static var buttons: some View {
-        HStack(spacing: 15) {
-            Image(systemName: "heart")
-            Image(systemName: "arrow.down.circle")
-            Image(systemName: "ellipsis")
-            Spacer()
-            Image(systemName: "shuffle")
-            Image(systemName: "play.circle.fill")
-                .font(.largeTitle)
-                .foregroundColor(.green)
-        }
-        .font(.title3)
-        .navigationBarTitleDisplayMode(.large)
-    }
-
-    static var list: some View {
-        LazyVStack(alignment: .leading, spacing: 30) {
-            listItem("Contact")
-            listItem("What Doesn't Die")
-            listItem("Superhero")
-            listItem("Refuse to Be Denied")
-            listItem("Safe Home")
-            listItem("Any Place But Here")
-            listItem("Nobody Knows Anything")
-        }
-    }
-
-    static func listItem(_ song: String) -> some View {
-        VStack(alignment: .leading) {
-            Text(song).font(.headline)
-            Text("Anthrax")
-                .font(.footnote)
-                .foregroundColor(.secondary)
-        }
-    }
-
     static var previews: some View {
         NavigationView {
             ScrollView {
-                header
-                content
+                SpotifyPreviewHeader()
+                SpotifyPreviewContent()
             }
         }
         .accentColor(.white)

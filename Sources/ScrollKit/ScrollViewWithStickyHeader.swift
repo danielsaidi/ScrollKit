@@ -90,7 +90,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
                 .ignoresSafeArea(edges: .top)
                 .frame(minHeight: headerMinHeight)
         }
-        .prefersTransparentNavigationBar()
+        .prefersNavigationBarHidden()
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -216,7 +216,7 @@ private extension View {
     }
 
     @ViewBuilder
-    func prefersTransparentNavigationBar() -> some View {
+    func prefersNavigationBarHidden() -> some View {
         #if os(iOS) || os(macOS)
         if #available(iOS 16.0, macOS 13.0, *) {
             self.toolbarBackground(.hidden)

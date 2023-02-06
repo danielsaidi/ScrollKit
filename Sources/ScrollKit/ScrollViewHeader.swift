@@ -71,64 +71,119 @@ public struct ScrollViewHeader<Content: View>: View {
 
     public var body: some View {
         GeometryReader { geo in
-            ZStack {
-                if geo.frame(in: .global).minY <= 0 {
-                    content()
-                        .frame(
-                            width: geo.size.width,
-                            height: geo.size.height
-                        )
-                        .offset(y: -(geo.frame(in: .global).minY / 100))
-                } else {
-                    content()
-                        .frame(
-                            width: geo.size.width,
-                            height: geo.size.height + geo.frame(in: .global).minY
-                        )
-                        .offset(y: -geo.frame(in: .global).minY)
-                }
-            }
+            content()
+                .stretchable(in: geo)
         }
     }
 }
 
+private extension View {
+
+    @ViewBuilder
+    func stretchable(in geo: GeometryProxy) -> some View {
+        let width = geo.size.width
+        let height = geo.size.height
+        let minY = geo.frame(in: .global).minY
+        let useStandard = minY <= 0
+        self.frame(width: width, height: height + (useStandard ? 0 : minY))
+            .offset(y: useStandard ? 0 : -minY)
+    }
+}
+
+@available(iOS 15.0, *)
 struct ScrollViewHeader_Previews: PreviewProvider {
 
-    struct PreviewHeader: View {
-
-        var body: some View {
-            ScrollViewHeader {
-                ZStack(alignment: .bottomLeading) {
-                    ScrollViewHeaderGradient(.blue, .topLeading, .yellow, .bottom)
-                    ScrollViewHeaderGradient()
-                    headerTitle
-                }
+    static var header: some View {
+        ScrollViewHeader {
+            ZStack {
+                LinearGradient(
+                    colors: [.init(red: 0.5, green: 0.4, blue: 0.5), .black],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+                AsyncImage(
+                    url: URL(string: "https://upload.wikimedia.org/wikipedia/en/8/8f/AnthraxWCFYA.jpg"),
+                    content: { image in
+                        image.image?.resizable()
+                            .aspectRatio(contentMode: .fit)
+                    }
+                )
+                .aspectRatio(1, contentMode: .fit)
+                .cornerRadius(5)
+                .shadow(radius: 10)
+                .padding(.top, 60)
+                .padding(.horizontal, 20)
             }
-            .colorScheme(.dark)
-            .frame(minHeight: 300)
         }
+        .frame(height: 280)
+    }
 
-        private var headerTitle: some View {
-            VStack(alignment: .leading) {
-                Text("Title").font(.title)
-                Text("Subtitle").font(.headline)
-            }
-            .padding()
+    static var content: some View {
+        VStack(spacing: 20) {
+            title
+            buttons
+            list
+        }
+        .padding()
+    }
+
+    static var title: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text("We've Come for You All")
+                .font(.title2.bold())
+                .frame(maxWidth: .infinity, alignment: .leading)
+            Text("Anthrax")
+                .font(.footnote.bold())
+            Text("Album · 2003")
+                .font(.footnote.bold())
+                .foregroundColor(.secondary)
+        }
+    }
+
+    static var buttons: some View {
+        HStack(spacing: 15) {
+            Image(systemName: "heart")
+            Image(systemName: "arrow.down.circle")
+            Image(systemName: "ellipsis")
+            Spacer()
+            Image(systemName: "shuffle")
+            Image(systemName: "play.circle.fill")
+                .font(.largeTitle)
+                .foregroundColor(.green)
+        }
+        .font(.title3)
+        .navigationBarTitleDisplayMode(.large)
+    }
+
+    static var list: some View {
+        LazyVStack(alignment: .leading, spacing: 30) {
+            listItem("Contact")
+            listItem("What Doesn't Die")
+            listItem("Superhero")
+            listItem("Refuse to Be Denied")
+            listItem("Safe Home")
+            listItem("Any Place But Here")
+            listItem("Nobody Knows Anything")
+        }
+    }
+
+    static func listItem(_ song: String) -> some View {
+        VStack(alignment: .leading) {
+            Text(song).font(.headline)
+            Text("Anthrax")
+                .font(.footnote)
+                .foregroundColor(.secondary)
         }
     }
 
     static var previews: some View {
         NavigationView {
             ScrollView {
-                PreviewHeader()
-                LazyVStack {
-                    ForEach(1...100, id: \.self) {
-                        Text("\($0)").padding(5)
-                        Divider()
-                    }
-                }
+                header
+                content
             }
         }
         .accentColor(.white)
+        .colorScheme(.dark)
     }
 }

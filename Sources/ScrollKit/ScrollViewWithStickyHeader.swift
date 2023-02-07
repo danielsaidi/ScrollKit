@@ -80,7 +80,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private var scrollOffset: CGPoint = .zero
 
     private var headerVisibleRatio: CGFloat {
-        (headerHeight + scrollOffset.y) / headerHeight
+        max(0, (headerHeight + scrollOffset.y) / headerHeight)
     }
 
     public var body: some View {
@@ -144,55 +144,8 @@ private extension ScrollViewWithStickyHeader {
 @available(iOS 15.0, *)
 struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
 
-    struct Preview: View {
-
-        @State
-        private var scrollOffset: CGPoint = .zero
-
-        @State
-        private var headerVisibleRatio: CGFloat = 1
-
-        var body: some View {
-            NavigationView {
-                ScrollViewWithStickyHeader(
-                    header: header,
-                    headerHeight: SpotifyPreviewHeader.height,
-                    onScroll: handleScrollOffset
-                ) {
-                    SpotifyPreviewContent()
-                }
-                #if os(iOS) || os(macOS) || os(tvOS)
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        toolbarTitle
-                    }
-                }
-                #endif
-            }
-        }
-
-        var toolbarTitle: some View {
-            Text("We've Come for You All")
-                .font(.headline.bold())
-                .opacity(-headerVisibleRatio)
-        }
-
-        func header() -> some View {
-            SpotifyPreviewHeader(
-                headerVisibleRatio: headerVisibleRatio
-            )
-        }
-
-        func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
-            self.scrollOffset = offset
-            self.headerVisibleRatio = headerVisibleRatio
-        }
-    }
-
     static var previews: some View {
-        Preview()
-            .accentColor(.white)
-            .colorScheme(.dark)
+        SpotifyPreviewScreen()
     }
 }
 

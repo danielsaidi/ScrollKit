@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import ScrollKit
 
 @available(iOS 15.0, *)
 struct SpotifyPreviewHeader: View {

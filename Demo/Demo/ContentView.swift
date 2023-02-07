@@ -14,21 +14,23 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
+                spotifyLink
                 imageLink
                 gradientLink
                 colorLink
             }
             .tint(.blue)
-            .navigationTitle("Demo")
+            .navigationTitle("ScrollKit")
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .tint(.primary)
+        .tint(.white)
     }
 }
 
 private extension ContentView {
 
     var colorLink: some View {
-        link("photo", "Scroll with color header") {
+        link("paintbrush.pointed.fill", "Scroll with color header") {
             DemoScreen(headerHeight: 200) {
                 Color.blue
             }
@@ -36,7 +38,7 @@ private extension ContentView {
     }
 
     var gradientLink: some View {
-        link("photo", "Scroll with gradient header") {
+        link("paintbrush.fill", "Scroll with gradient header") {
             DemoScreen(headerHeight: 250) {
                 ScrollViewHeaderGradient(.yellow, .blue)
             }
@@ -44,10 +46,19 @@ private extension ContentView {
     }
 
     var imageLink: some View {
-        link("photo", "Scroll with image header") {
+        link("photo.fill", "Scroll with image header") {
             DemoScreen(headerHeight: 250) {
-                ScrollViewHeaderImage(Image("header"))
+                ZStack {
+                    ScrollViewHeaderImage(Image("header"))
+                    ScrollViewHeaderGradient(.black.opacity(0.2), .black.opacity(0.5))
+                }
             }
+        }
+    }
+
+    var spotifyLink: some View {
+        link("music.note", "Spotify album screen") {
+            SpotifyPreviewScreen()
         }
     }
 

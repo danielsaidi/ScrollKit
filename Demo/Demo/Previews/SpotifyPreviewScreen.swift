@@ -18,15 +18,26 @@ struct SpotifyPreviewScreen: View {
     @State
     private var headerVisibleRatio: CGFloat = 1
 
+    @Environment(\.dismiss)
+    private var dismiss
+
     var body: some View {
         scrollView
+            .preferredColorScheme(.dark)
+            .navigationBarBackButtonHidden(true)
             .navigationTitle("\(scrollOffset.y) | \(headerVisibleRatio)")
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     toolbarTitle
                 }
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        dismiss.callAsFunction()
+                    } label: {
+                        Image(systemName: "chevron.left")
+                    }
+                }
             }
-            .preferredColorScheme(.dark)
     }
 
     var scrollView: some View {

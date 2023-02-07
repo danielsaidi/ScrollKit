@@ -9,27 +9,28 @@
 import SwiftUI
 
 /**
- This scroll view lets you provide a header view that sticks
- to the top when the scroll view scrolls.
+ This scroll view lets you provide a scroll view header that
+ sticks to the top when the view scrolls.
 
- This view uses a ``ScrollViewWithOffset`` to get the scroll
- offset, then uses this information to determine how much of
- the header that should be visible.
-
- This view uses a ``ScrollViewHeader``m which means that the
- header will stretch out when the scroll view is pulled down.
+ The view uses ``ScrollViewWithOffset`` to get scroll offset
+ information, which it uses to determine how big part of the
+ header that is visible. It also uses a ``ScrollViewHeader``
+ to make the header stretch out when the view is pulled down.
 
  You can use `onScroll` to provide a function that is called
  whenever the view scrolls. The function receives the scroll
  view offset and a "header visible ratio" that indicates how
- much of the header that is visible. `0` and below indicates
- that the header is scrolled beyond by the nav bar, `1` that
- it is at its original positition and `1` and above that the
- scroll view is being pulled down.
+ much of the header that is visible, where `1` means it's at
+ its original positition, `0` that it's below the navigation
+ bar and greated than `1` that it's being pulled down.
 
- > Note: This scroll view will apply the `inline` navigation
- view title display mode, since the large title style is not
- applicable when you have a sticky header.
+ This view enforces `.navigationBarTitleDisplayMode(.inline)`
+ since a large title doesn't work with a sticky header.
+
+ > Important: `toolbarBackground(.hidden)` is applied on iOS
+ 16 and later, but not on iOS 15 and earlier. If you use the
+ view on iOS 15 and before, you must use make the navigation
+ bar transparent in another way, for with appearance proxies.
  */
 public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
 

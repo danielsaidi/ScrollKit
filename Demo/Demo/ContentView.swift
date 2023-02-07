@@ -14,10 +14,12 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             List {
-                spotifyLink
-                imageLink
-                gradientLink
-                colorLink
+                Section(header: Text("Stretchable headers")) {
+                    spotifyLink
+                    imageLink
+                    gradientLink
+                    colorLink
+                }
             }
             .tint(.blue)
             .navigationTitle("ScrollKit")
@@ -30,7 +32,7 @@ struct ContentView: View {
 private extension ContentView {
 
     var colorLink: some View {
-        link("paintbrush.pointed.fill", "Scroll with color header") {
+        link("paintbrush.pointed.fill", "Color background") {
             DemoScreen(headerHeight: 200) {
                 Color.blue
             }
@@ -38,7 +40,7 @@ private extension ContentView {
     }
 
     var gradientLink: some View {
-        link("paintbrush.fill", "Scroll with gradient header") {
+        link("paintbrush.fill", "Gradient background") {
             DemoScreen(headerHeight: 250) {
                 ScrollViewHeaderGradient(.yellow, .blue)
             }
@@ -46,7 +48,7 @@ private extension ContentView {
     }
 
     var imageLink: some View {
-        link("photo.fill", "Scroll with image header") {
+        link("photo.fill", "Image background") {
             DemoScreen(headerHeight: 250) {
                 ZStack {
                     ScrollViewHeaderImage(Image("header"))

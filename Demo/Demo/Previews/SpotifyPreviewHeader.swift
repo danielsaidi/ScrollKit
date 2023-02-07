@@ -37,7 +37,7 @@ struct SpotifyPreviewHeader: View {
                 .offset(y: verticalOffset)
                 .opacity(headerVisibleRatio)
                 .padding(.top, 60)
-                .padding(.horizontal, 20)
+                .padding(.horizontal, 30)
             }
         }
         .frame(height: Self.height)

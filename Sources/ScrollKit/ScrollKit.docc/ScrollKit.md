@@ -24,8 +24,10 @@ https://github.com/danielsaidi/ScrollKit.git
 or with CocoaPods:
 
 ```
-pod ScrollKit
+pod DSScrollKit
 ```
+
+If you prefer to not have external dependencies, you can also just copy the source code into your app.
 
 
 

@@ -40,7 +40,8 @@ or with CocoaPods:
 pod DSScrollKit
 ```
 
-If you prefer not having external dependencies, you can also just copy the source code into your app.
+If you prefer to not have external dependencies, you can also just copy the source code into your app.
+
 
 
 ## Supported Platforms

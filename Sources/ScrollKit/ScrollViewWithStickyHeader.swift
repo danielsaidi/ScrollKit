@@ -13,24 +13,25 @@ import SwiftUI
  sticks to the top when the view scrolls.
 
  The view uses ``ScrollViewWithOffset`` to get scroll offset
- information, which it uses to determine how big part of the
- header that is visible. It also uses a ``ScrollViewHeader``
- to make the header stretch out when the view is pulled down.
+ information, which it uses together with the navigation bar
+ height to determine how much of the header that's below the
+ navigation bar. It also uses a ``ScrollViewHeader`` to make
+ the header stretch out when the view is pulled down.
 
  You can use `onScroll` to provide a function that is called
  whenever the view scrolls. The function receives the scroll
- view offset and a "header visible ratio" that indicates how
- much of the header that is visible, where `1` means it's at
- its original positition, `0` that it's below the navigation
- bar and greated than `1` that it's being pulled down.
+ view offset and a header visible ratio, which indicates how
+ much of the header that is visible below the navigation bar.
 
  This view enforces `.navigationBarTitleDisplayMode(.inline)`
  since a large title doesn't work with a sticky header.
 
  > Important: `toolbarBackground(.hidden)` is applied on iOS
- 16 and later, but not on iOS 15 and earlier. If you use the
- view on iOS 15 and before, you must use make the navigation
- bar transparent in another way, for with appearance proxies.
+ 16 and later, to make the navigation bar transparent. It is
+ not applied on iOS 15 and earlier. This means that you must
+ use another way to make the navigation bar transparent when
+ you target older iOS versions. One way is to use appearance
+ proxies if you can fall down to UIKit.
  */
 public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
 
@@ -88,8 +89,6 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
         ZStack(alignment: .top) {
             scrollView
             navbarOverlay
-                .ignoresSafeArea(edges: .top)
-                .frame(minHeight: headerMinHeight)
         }
         .prefersNavigationBarHidden()
         #if os(iOS)
@@ -110,8 +109,7 @@ private extension ScrollViewWithStickyHeader {
             Color.clear
                 .frame(height: navigationBarHeight)
                 .overlay(scrollHeader, alignment: .bottom)
-        } else {
-            Color.clear
+                .ignoresSafeArea(edges: .top)
         }
     }
 
@@ -142,11 +140,21 @@ private extension ScrollViewWithStickyHeader {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
 
     static var previews: some View {
+        #if canImport(UIKit)
+        NavigationView {
+            SpotifyPreviewScreen()
+        }
+        .accentColor(.white)
+        .colorScheme(.dark)
+        #else
         SpotifyPreviewScreen()
+            .accentColor(.white)
+            .colorScheme(.dark)
+        #endif
     }
 }
 
@@ -154,14 +162,14 @@ private extension View {
 
     @ViewBuilder
     func prefersNavigationBarHidden() -> some View {
-        #if os(iOS) || os(macOS)
-        if #available(iOS 16.0, macOS 13.0, *) {
+        #if os(watchOS)
+        self
+        #else
+        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 8.0, *) {
             self.toolbarBackground(.hidden)
         } else {
             self
         }
-        #else
-        self
         #endif
     }
 }

@@ -13,27 +13,44 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            List {
-                Section(header: Text("Stretchable headers")) {
-                    spotifyLink
-                    imageLink
-                    gradientLink
-                    colorLink
+            VStack {
+                List {
+                    title
+                    linkSection
                 }
             }
             .tint(.blue)
-            .navigationTitle("ScrollKit")
-            .navigationBarTitleDisplayMode(.inline)
+            .toolbar(.hidden)
         }
         .tint(.white)
+        .toolbarRole(.navigationStack)
+    }
+}
+
+private extension ContentView {
+
+    var title: some View {
+        Text("ScrollKit Demo")
+            .font(.largeTitle)
+            .listRowInsets(.none)
+            .listRowBackground(Color.clear)
+    }
+
+    var linkSection: some View {
+        Section(header: Text("Stretchable headers")) {
+            spotifyLink
+            imageLink
+            gradientLink
+            colorLink
+        }
     }
 }
 
 private extension ContentView {
 
     var colorLink: some View {
-        link("paintbrush.pointed.fill", "Color background") {
-            DemoScreen(headerHeight: 200) {
+        link("paintbrush.pointed.fill", "Short color background") {
+            DemoScreen(headerHeight: 100) {
                 Color.blue
             }
         }

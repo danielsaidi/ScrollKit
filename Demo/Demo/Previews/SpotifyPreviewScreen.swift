@@ -9,7 +9,7 @@
 import SwiftUI
 import ScrollKit
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct SpotifyPreviewScreen: View {
 
     @State
@@ -22,25 +22,6 @@ struct SpotifyPreviewScreen: View {
     private var dismiss
 
     var body: some View {
-        scrollView
-            .preferredColorScheme(.dark)
-            .navigationBarBackButtonHidden(true)
-            .navigationTitle("\(scrollOffset.y) | \(headerVisibleRatio)")
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    toolbarTitle
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button {
-                        dismiss.callAsFunction()
-                    } label: {
-                        Image(systemName: "chevron.left")
-                    }
-                }
-            }
-    }
-
-    var scrollView: some View {
         ScrollViewWithStickyHeader(
             header: scrollViewHeader,
             headerHeight: SpotifyPreviewHeader.height,
@@ -48,6 +29,14 @@ struct SpotifyPreviewScreen: View {
         ) {
             SpotifyPreviewContent()
         }
+        .preferredColorScheme(.dark)
+        #if os(iOS) || os(macOS) || os(tvOS)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                toolbarTitle
+            }
+        }
+        #endif
     }
 
     func scrollViewHeader() -> some View {

@@ -90,14 +90,14 @@ private extension View {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct ScrollViewHeader_Previews: PreviewProvider {
 
     static var previews: some View {
         NavigationView {
             ScrollView {
                 SpotifyPreviewHeader()
-                SpotifyPreviewContent()
+                Color.black
             }
         }
         .accentColor(.white)

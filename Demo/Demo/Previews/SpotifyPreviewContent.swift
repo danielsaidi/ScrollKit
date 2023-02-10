@@ -9,7 +9,7 @@
 import SwiftUI
 import ScrollKit
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct SpotifyPreviewContent: View {
 
     var body: some View {
@@ -22,7 +22,7 @@ struct SpotifyPreviewContent: View {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 private extension SpotifyPreviewContent {
 
     var title: some View {

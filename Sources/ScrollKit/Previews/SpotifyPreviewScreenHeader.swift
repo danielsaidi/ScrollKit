@@ -1,5 +1,5 @@
 //
-//  SpotifyPreviewHeader.swift
+//  SpotifyPreviewScreenHeader.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-06.
@@ -7,33 +7,41 @@
 //
 
 import SwiftUI
-
+/**
+ This view mimics the Spotify release screen header.
+ */
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-struct SpotifyPreviewHeader: View {
+public struct SpotifyPreviewScreenHeader: View {
 
-    static var height: CGFloat = 280
+    public init(
+        info: SpotifyPreviewInfo,
+        headerVisibleRatio: CGFloat = 1
+    ) {
+        self.info = info
+        self.headerVisibleRatio = headerVisibleRatio
+    }
 
-    var headerVisibleRatio: CGFloat = 1
+    public static var height: CGFloat = 280
 
-    var body: some View {
-        ScrollViewHeader {
-            ZStack {
-                ScrollViewHeaderGradient(.viewPurple, .black)
-                ScrollViewHeaderGradient(.viewPurple.opacity(1), .viewPurple.opacity(0))
-                    .opacity(1 - headerVisibleRatio)
-                cover
-            }
+    private var info: SpotifyPreviewInfo
+    private var headerVisibleRatio: CGFloat
+
+    public var body: some View {
+        ZStack {
+            ScrollViewHeaderGradient(info.tintColor, .black)
+            ScrollViewHeaderGradient(info.tintColor.opacity(1), info.tintColor.opacity(0))
+                .opacity(1 - headerVisibleRatio)
+            cover
         }
-        .frame(height: Self.height)
     }
 }
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-private extension SpotifyPreviewHeader {
+private extension SpotifyPreviewScreenHeader {
 
     var cover: some View {
         AsyncImage(
-            url: URL(string: "https://upload.wikimedia.org/wikipedia/en/8/8f/AnthraxWCFYA.jpg"),
+            url: URL(string: info.releaseCoverUrl),
             content: { image in
                 image.image?.resizable()
                     .aspectRatio(contentMode: .fit)
@@ -46,6 +54,7 @@ private extension SpotifyPreviewHeader {
         .offset(y: verticalOffset)
         .opacity(headerVisibleRatio)
         .padding(.top, 60)
+        .padding(.bottom, 20)
         .padding(.horizontal, 20)
     }
 
@@ -70,9 +79,11 @@ private extension CGFloat {
     }
 }
 
-private extension Color {
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+struct SpotifyPreviewScreenHeader_Previews: PreviewProvider {
 
-    static var viewPurple: Color {
-        .init(red: 0.5, green: 0.4, blue: 0.5)
+    static var previews: some View {
+        SpotifyPreviewScreenHeader(info: .anthrax)
+            .frame(height: SpotifyPreviewScreenHeader.height)
     }
 }

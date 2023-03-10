@@ -1,5 +1,5 @@
 //
-//  SpotifyPreviewContent.swift
+//  SpotifyPreviewScreenContent.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-06.
@@ -7,12 +7,20 @@
 //
 
 import SwiftUI
-import ScrollKit
 
+/**
+ This view mimics the Spotify release screen's body content.
+ */
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-struct SpotifyPreviewContent: View {
+public struct SpotifyPreviewScreenContent: View {
 
-    var body: some View {
+    public init(info: SpotifyPreviewInfo) {
+        self.info = info
+    }
+
+    private let info: SpotifyPreviewInfo
+
+    public var body: some View {
         VStack(spacing: 20) {
             title
             buttons
@@ -23,16 +31,16 @@ struct SpotifyPreviewContent: View {
 }
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-private extension SpotifyPreviewContent {
+private extension SpotifyPreviewScreenContent {
 
     var title: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("We've Come for You All")
+            Text(info.releaseTitle)
                 .font(.title2.bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text("Anthrax")
+            Text(info.bandName)
                 .font(.footnote.bold())
-            Text("Album · 2003")
+            Text("\(info.releaseType) · \(info.releaseDate.formatted(.dateTime.year()))")
                 .font(.footnote.bold())
                 .foregroundColor(.secondary)
         }
@@ -54,30 +62,28 @@ private extension SpotifyPreviewContent {
 
     var list: some View {
         LazyVStack(alignment: .leading, spacing: 30) {
-            listGroup
-            listGroup
-            listGroup
-        }
-    }
-
-    var listGroup: some View {
-        Group {
-            listItem("Contact")
-            listItem("What Doesn't Die")
-            listItem("Superhero")
-            listItem("Refuse to Be Denied")
-            listItem("Safe Home")
-            listItem("Any Place But Here")
-            listItem("Nobody Knows Anything")
+            ForEach(Array(info.tracks.enumerated()), id: \.offset) {
+                listItem($0.element)
+            }
         }
     }
 
     func listItem(_ song: String) -> some View {
         VStack(alignment: .leading) {
             Text(song).font(.headline)
-            Text("Anthrax")
+            Text(info.bandName)
                 .font(.footnote)
                 .foregroundColor(.secondary)
+        }
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+struct SpotifyPreviewScreenContent_Previews: PreviewProvider {
+
+    static var previews: some View {
+        ScrollView {
+            SpotifyPreviewScreenContent(info: .anthrax)
         }
     }
 }

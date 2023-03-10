@@ -36,7 +36,7 @@ import SwiftUI
                  Text("Header title")
                     .padding()
              }
-         }.frame(minHeight: 300)
+         }.frame(height: 250)
      }
  }
  ```
@@ -96,8 +96,20 @@ struct ScrollViewHeader_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             ScrollView {
-                SpotifyPreviewHeader()
-                Color.black
+                ScrollViewHeader {
+                    ZStack(alignment: .bottomLeading) {
+                        LinearGradient(
+                            colors: [.blue, .yellow],
+                            startPoint: .topLeading,
+                            endPoint: .bottomTrailing)
+                        LinearGradient(
+                            colors: [.clear, .black.opacity(0.6)],
+                            startPoint: .top,
+                            endPoint: .bottom)
+                        Text("Header title")
+                           .padding()
+                    }
+                }.frame(height: 250)
             }
         }
         .accentColor(.white)

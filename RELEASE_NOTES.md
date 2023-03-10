@@ -6,6 +6,18 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.2
+
+This minor update adds some public previews that you can use in your own apps.
+
+### ✨ New Features
+
+* `SpotifyPreviewInfo` is a new struct that defines preview info for the Spotify previews.
+* `SpotifyPreviewInfo` has several pre-configured albums that you can use in the previews.                
+* `SpotifyPreviewScreen`, `SpotifyPreviewHeader` and `SpotifyPreviewContent` are new preview views.
+
+
+
 ## 0.1
 
 This is the first public release of ScrollKit.

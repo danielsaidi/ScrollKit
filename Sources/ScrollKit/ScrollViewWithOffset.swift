@@ -117,7 +117,7 @@ struct ScrollViewWithOffset_Previews: PreviewProvider {
                 LazyVStack {
                     ForEach(1...100, id: \.self) {
                         Divider()
-                        Text("\($0)").frame(maxWidth: .infinity)
+                        Text("\($0)")
                     }
                 }
             }

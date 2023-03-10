@@ -64,6 +64,13 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 - ``ScrollViewHeader``
 - ``ScrollViewHeaderGradient``
 
+### Previews
+
+- ``SpotifyPreviewInfo``
+- ``SpotifyPreviewScreen``
+- ``SpotifyPreviewScreenContent``
+- ``SpotifyPreviewScreenHeader``
+
 
 
 [License]: https://github.com/danielsaidi/ScrollKit/blob/master/LICENSE

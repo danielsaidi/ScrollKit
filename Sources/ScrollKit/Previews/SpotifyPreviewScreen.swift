@@ -8,8 +8,17 @@
 
 import SwiftUI
 
+/**
+ This view mimics the Spotify release screen.
+ */
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-struct SpotifyPreviewScreen: View {
+public struct SpotifyPreviewScreen: View {
+
+    public init(info: SpotifyPreviewInfo) {
+        self.info = info
+    }
+
+    private var info: SpotifyPreviewInfo
 
     @State
     private var scrollOffset: CGPoint = .zero
@@ -20,16 +29,21 @@ struct SpotifyPreviewScreen: View {
     @Environment(\.dismiss)
     private var dismiss
 
-    var body: some View {
+    public var body: some View {
         ScrollViewWithStickyHeader(
             header: scrollViewHeader,
-            headerHeight: SpotifyPreviewHeader.height,
+            headerHeight: SpotifyPreviewScreenHeader.height,
             onScroll: handleScrollOffset
         ) {
-            SpotifyPreviewContent()
+            SpotifyPreviewScreenContent(info: info)
         }
         .preferredColorScheme(.dark)
         #if os(iOS) || os(macOS) || os(tvOS)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Text("       ") // Hides the back button text :D
+            }
+        }
         .toolbar {
             ToolbarItem(placement: .principal) {
                 toolbarTitle
@@ -39,19 +53,29 @@ struct SpotifyPreviewScreen: View {
     }
 
     func scrollViewHeader() -> some View {
-        SpotifyPreviewHeader(
+        SpotifyPreviewScreenHeader(
+            info: info,
             headerVisibleRatio: headerVisibleRatio
         )
     }
 
     var toolbarTitle: some View {
-        Text("We've Come for You All")
+        Text(info.releaseTitle)
             .font(.headline.bold())
-            .opacity(1-headerVisibleRatio)
+            .opacity(headerVisibleRatio > 0 ? 0 : -5 * headerVisibleRatio)
     }
 
     func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
         self.scrollOffset = offset
         self.headerVisibleRatio = headerVisibleRatio
+    }
+}
+
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
+struct SpotifyPreviewScreen_Previews: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+            SpotifyPreviewScreen(info: .regina)
+        }
     }
 }

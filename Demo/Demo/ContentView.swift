@@ -38,7 +38,9 @@ private extension ContentView {
 
     var linkSection: some View {
         Section(header: Text("Stretchable headers")) {
-            spotifyLink
+            spotifyAnthraxLink
+            spotifyMisfortuneLink
+            spotifyReginaLink
             imageLink
             gradientLink
             colorLink
@@ -75,9 +77,21 @@ private extension ContentView {
         }
     }
 
-    var spotifyLink: some View {
-        link("music.note", "Spotify album screen") {
-            SpotifyPreviewScreen()
+    var spotifyAnthraxLink: some View {
+        link("music.note", "Spotify - Anthrax") {
+            SpotifyPreviewScreen(info: .anthrax)
+        }
+    }
+
+    var spotifyMisfortuneLink: some View {
+        link("music.note", "Spotify - Misfortune") {
+            SpotifyPreviewScreen(info: .misfortune)
+        }
+    }
+
+    var spotifyReginaLink: some View {
+        link("music.note", "Spotify - Regina Spektor") {
+            SpotifyPreviewScreen(info: .regina)
         }
     }
 

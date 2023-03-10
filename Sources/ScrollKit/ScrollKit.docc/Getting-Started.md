@@ -55,9 +55,10 @@ struct MyView: View {
     }
     
     func header() -> some View {
-        ZStack(alignment: .bottomLeading) {
-            Color.blue
-            Color.yellow.opacity(visibleRatio)  // Fades in
+        ZStack {
+            Color.black
+            Color.blue.opacity(1-headerVisibleRatio)  // Fades in
+            Color.yellow.opacity(headerVisibleRatio)  // Fades out
         }
     }
 

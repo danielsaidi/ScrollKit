@@ -82,7 +82,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private var scrollOffset: CGPoint = .zero
 
     private var headerVisibleRatio: CGFloat {
-        max(0, (headerHeight + scrollOffset.y) / headerHeight)
+        (headerHeight + scrollOffset.y) / headerHeight
     }
 
     public var body: some View {
@@ -98,10 +98,6 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
 }
 
 private extension ScrollViewWithStickyHeader {
-
-    var headerView: some View {
-        header().frame(height: headerHeight)
-    }
 
     @ViewBuilder
     var navbarOverlay: some View {
@@ -146,7 +142,7 @@ struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
     static var previews: some View {
         #if canImport(UIKit)
         NavigationView {
-            SpotifyPreviewScreen()
+            SpotifyPreviewScreen(info: .anthrax)
         }
         .accentColor(.white)
         .colorScheme(.dark)

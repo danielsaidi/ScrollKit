@@ -147,7 +147,7 @@ struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
         .accentColor(.white)
         .colorScheme(.dark)
         #else
-        SpotifyPreviewScreen()
+        SpotifyPreviewScreen(info: .anthrax)
             .accentColor(.white)
             .colorScheme(.dark)
         #endif

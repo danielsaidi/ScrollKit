@@ -38,17 +38,11 @@ public struct SpotifyPreviewScreen: View {
             SpotifyPreviewScreenContent(info: info)
         }
         .preferredColorScheme(.dark)
+        #if os(iOS)
+        .hideBackButtonText()
+        #endif
         #if os(iOS) || os(macOS) || os(tvOS)
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Text("       ") // Hides the back button text :D
-            }
-        }
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                toolbarTitle
-            }
-        }
+        .toolbarTitle(toolbarTitleView)
         #endif
     }
 
@@ -59,7 +53,7 @@ public struct SpotifyPreviewScreen: View {
         )
     }
 
-    var toolbarTitle: some View {
+    var toolbarTitleView: some View {
         Text(info.releaseTitle)
             .font(.headline.bold())
             .opacity(headerVisibleRatio > 0 ? 0 : -5 * headerVisibleRatio)
@@ -71,10 +65,38 @@ public struct SpotifyPreviewScreen: View {
     }
 }
 
+private extension View {
+
+    #if os(iOS)
+    func hideBackButtonText() -> some View {
+        self.toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Text("       ") // Hides the back button text :D
+            }
+        }
+    }
+    #endif
+
+    func toolbarTitle<Title: View>(_ view: Title) -> some View {
+        #if os(iOS) || os(macOS) || os(tvOS)
+        self.toolbar {
+            ToolbarItem(placement: .principal) {
+                view
+            }
+        }
+        #else
+        self
+        #endif
+    }
+}
+
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct SpotifyPreviewScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
+            #if os(macOS)
+            Color.clear
+            #endif
             SpotifyPreviewScreen(info: .regina)
         }
     }

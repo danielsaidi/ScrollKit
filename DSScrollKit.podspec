@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'DSScrollKit'
-  s.version          = '0.1.0'
+  s.version          = '0.2.0'
   s.swift_versions   = ['5.7']
   s.summary          = 'ScrollKit is a SwiftUI library that adds powerful scrolling features to SwiftUI, such as offset tracking and sticky scroll header views.'
   s.description      = 'ScrollKit is a SwiftUI library that adds powerful scrolling features to SwiftUI, such as offset tracking and sticky scroll header views. It makes it easy to add cool scroll view features to your SwiftUI apps.'

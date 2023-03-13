@@ -11,6 +11,9 @@ import ScrollKit
 
 struct ContentView: View {
 
+    @State
+    private var isStatusBarHidden = false
+
     var body: some View {
         NavigationStack {
             VStack {
@@ -24,6 +27,7 @@ struct ContentView: View {
         }
         .tint(.white)
         .toolbarRole(.navigationStack)
+        .statusBar(hidden: isStatusBarHidden)
     }
 }
 
@@ -38,9 +42,9 @@ private extension ContentView {
 
     var linkSection: some View {
         Section(header: Text("Stretchable headers")) {
-            spotifyAnthraxLink
-            spotifyMisfortuneLink
-            spotifyReginaLink
+            spotifyLink(.anthrax)
+            spotifyLink(.misfortune)
+            spotifyLink(.regina)
             imageLink
             gradientLink
             colorLink
@@ -52,7 +56,7 @@ private extension ContentView {
 
     var colorLink: some View {
         link("paintbrush.pointed.fill", "Short color background") {
-            DemoScreen(headerHeight: 100) {
+            DemoScreen(isStatusBarHidden: $isStatusBarHidden, headerHeight: 100) {
                 Color.blue
             }
         }
@@ -60,7 +64,7 @@ private extension ContentView {
 
     var gradientLink: some View {
         link("paintbrush.fill", "Gradient background") {
-            DemoScreen(headerHeight: 250) {
+            DemoScreen(isStatusBarHidden: $isStatusBarHidden, headerHeight: 250) {
                 ScrollViewHeaderGradient(.yellow, .blue)
             }
         }
@@ -68,7 +72,7 @@ private extension ContentView {
 
     var imageLink: some View {
         link("photo.fill", "Image background") {
-            DemoScreen(headerHeight: 250) {
+            DemoScreen(isStatusBarHidden: $isStatusBarHidden, headerHeight: 250) {
                 ZStack {
                     ScrollViewHeaderImage(Image("header"))
                     ScrollViewHeaderGradient(.black.opacity(0.2), .black.opacity(0.5))
@@ -77,31 +81,15 @@ private extension ContentView {
         }
     }
 
-    var spotifyAnthraxLink: some View {
-        link("music.note", "Spotify - Anthrax") {
-            SpotifyPreviewScreen(info: .anthrax)
+    func spotifyLink(_ info: SpotifyPreviewInfo) -> some View {
+        link("music.note", "Spotify - \(info.bandName)") {
+            SpotifyPreviewScreen(info: info)
         }
     }
 
-    var spotifyMisfortuneLink: some View {
-        link("music.note", "Spotify - Misfortune") {
-            SpotifyPreviewScreen(info: .misfortune)
-        }
-    }
-
-    var spotifyReginaLink: some View {
-        link("music.note", "Spotify - Regina Spektor") {
-            SpotifyPreviewScreen(info: .regina)
-        }
-    }
-
-    func link<Destination: View>(
-        _ iconName: String,
-        _ title: String,
-        to destination: () -> Destination
-    ) -> some View {
+    func link<Destination: View>(_ icon: String, _ title: String, to destination: () -> Destination) -> some View {
         NavigationLink(destination: destination) {
-            Label(title, systemImage: iconName)
+            Label(title, systemImage: icon)
         }
     }
 }

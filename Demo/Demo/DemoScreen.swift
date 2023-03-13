@@ -15,18 +15,16 @@ import SwiftUI
  */
 struct DemoScreen<Content: View>: View {
 
+    @Binding
+    var isStatusBarHidden: Bool
+
     let headerHeight: CGFloat
 
     @ViewBuilder
     let headerView: () -> Content
 
-
-    @State
-    private var scrollOffset: CGPoint = .zero
-
     @State
     private var headerVisibleRatio: CGFloat = 1
-
 
     var body: some View {
         ScrollViewWithStickyHeader(
@@ -44,7 +42,8 @@ struct DemoScreen<Content: View>: View {
                     .opacity(1 - headerVisibleRatio)
             }
         }
-        .toolbarColorScheme(.dark)
+        .toolbarColorScheme(.dark, for: .navigationBar)
+        .toolbarBackground(.hidden)
         .background(Color.black.opacity(0.1))
     }
 
@@ -81,7 +80,7 @@ struct DemoScreen<Content: View>: View {
     }
 
     func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
-        self.scrollOffset = offset
+        self.isStatusBarHidden = offset.y >= -2
         self.headerVisibleRatio = headerVisibleRatio
     }
 }
@@ -95,6 +94,7 @@ struct DemoScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             DemoScreen(
+                isStatusBarHidden: .constant(true),
                 headerHeight: 250,
                 headerView: header
             )

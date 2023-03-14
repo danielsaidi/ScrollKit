@@ -23,8 +23,8 @@ struct DemoScreen<HeaderView: View>: View {
     @State
     private var headerVisibleRatio: CGFloat = 1
 
-    @EnvironmentObject
-    private var statusBarVisibile: StatusBarVisibileState
+    @State
+    private var scrollOffset: CGPoint = .zero
 
     var body: some View {
         ScrollViewWithStickyHeader(
@@ -44,6 +44,7 @@ struct DemoScreen<HeaderView: View>: View {
         }
         .toolbarBackground(.hidden)
         .toolbarColorScheme(.dark, for: .navigationBar)
+        .hideStatusBarUntilScrolled(using: $scrollOffset)
     }
 
     func header() -> some View {
@@ -64,7 +65,7 @@ struct DemoScreen<HeaderView: View>: View {
     }
 
     var listItems: some View {
-        VStack {
+        LazyVStack {
             ForEach(1...100, id: \.self) {
                 Text("Item \($0)")
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -79,7 +80,7 @@ struct DemoScreen<HeaderView: View>: View {
     }
 
     func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
-        statusBarVisibile.hideUntilScrolled(using: offset)
+        scrollOffset = offset
         self.headerVisibleRatio = headerVisibleRatio
     }
 }

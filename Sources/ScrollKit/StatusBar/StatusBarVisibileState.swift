@@ -123,7 +123,7 @@ public extension StatusBarVisibileState {
        - offset: The offset to use.
      */
     func hideUntilScrolled(using offset: CGPoint) {
-        hide(if: offset, ifGreaterThan: -2)
+        hide(if: offset, ifGreaterThan: -3)
     }
 }
 

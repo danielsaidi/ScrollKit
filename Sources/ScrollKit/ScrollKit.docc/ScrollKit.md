@@ -67,6 +67,7 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 ### Status Bar
 
 - ``StatusBarVisibileState``
+- ``StatusBarVisibilityUpdater``
 
 ### Previews
 

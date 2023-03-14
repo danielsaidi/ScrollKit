@@ -6,6 +6,16 @@ Until then, deprecated features may be removed in the next minor version.
 
 
 
+## 0.3
+
+This minor update adds utilities for handling the status bar.
+
+### ✨ New Features
+
+* `StatusBarVisibleState` is a new observable class for handling status bar visibility.
+
+
+
 ## 0.2
 
 This minor update adds some public previews that you can use in your own apps.

@@ -13,18 +13,18 @@ import SwiftUI
  This view takes a custom header view and height and adds it
  to a scroll view with sticky header.
  */
-struct DemoScreen<Content: View>: View {
-
-    @Binding
-    var isStatusBarHidden: Bool
+struct DemoScreen<HeaderView: View>: View {
 
     let headerHeight: CGFloat
 
     @ViewBuilder
-    let headerView: () -> Content
+    let headerView: () -> HeaderView
 
     @State
     private var headerVisibleRatio: CGFloat = 1
+
+    @EnvironmentObject
+    private var statusBarVisibile: StatusBarVisibileState
 
     var body: some View {
         ScrollViewWithStickyHeader(
@@ -42,9 +42,8 @@ struct DemoScreen<Content: View>: View {
                     .opacity(1 - headerVisibleRatio)
             }
         }
-        .toolbarColorScheme(.dark, for: .navigationBar)
         .toolbarBackground(.hidden)
-        .background(Color.black.opacity(0.1))
+        .toolbarColorScheme(.dark, for: .navigationBar)
     }
 
     func header() -> some View {
@@ -80,7 +79,7 @@ struct DemoScreen<Content: View>: View {
     }
 
     func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
-        self.isStatusBarHidden = offset.y >= -2
+        statusBarVisibile.hideUntilScrolled(using: offset)
         self.headerVisibleRatio = headerVisibleRatio
     }
 }
@@ -94,7 +93,6 @@ struct DemoScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             DemoScreen(
-                isStatusBarHidden: .constant(true),
                 headerHeight: 250,
                 headerView: header
             )

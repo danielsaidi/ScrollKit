@@ -64,6 +64,10 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 - ``ScrollViewHeader``
 - ``ScrollViewHeaderGradient``
 
+### Status Bar
+
+- ``StatusBarVisibileState``
+
 ### Previews
 
 - ``SpotifyPreviewInfo``

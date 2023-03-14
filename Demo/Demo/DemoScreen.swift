@@ -43,8 +43,8 @@ struct DemoScreen<HeaderView: View>: View {
             }
         }
         .toolbarBackground(.hidden)
+        .statusBarHidden(scrollOffset.y > -3)
         .toolbarColorScheme(.dark, for: .navigationBar)
-        .hideStatusBarUntilScrolled(using: $scrollOffset)
     }
 
     func header() -> some View {
@@ -65,22 +65,20 @@ struct DemoScreen<HeaderView: View>: View {
     }
 
     var listItems: some View {
-        LazyVStack {
-            ForEach(1...100, id: \.self) {
-                Text("Item \($0)")
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                Divider()
+        LazyVStack(spacing: 0) {
+            ForEach(1...100, id: \.self) { item in
+                VStack(spacing: 0) {
+                    Text("Item \(item)")
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Divider()
+                }
             }
         }
-        .padding()
-        .background(Material.regular)
-        .cornerRadius(20)
-        .shadow(color: .black.opacity(0.1), radius: 5)
-        .padding()
     }
 
     func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
-        scrollOffset = offset
+        self.scrollOffset = offset
         self.headerVisibleRatio = headerVisibleRatio
     }
 }

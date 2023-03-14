@@ -8,11 +8,12 @@ Until then, deprecated features may be removed in the next minor version.
 
 ## 0.3
 
-This minor update adds utilities for handling the status bar.
+This update adds utilities for handling status bar visibility.
 
 ### ✨ New Features
 
-* `StatusBarVisibleState` is a new observable class for handling status bar visibility.
+* `StatusBarVisibleState` is a new class for handling status bar visibility with shared state, for instance when using `NavigationStack`.
+* `StatusBarVisibilityUpdater` is a new view modifier to automatically update the status bar visibility depending on the current scroll state.
 
 
 

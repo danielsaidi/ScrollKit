@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  StatusBarVisibilityUpdater.swift
 //  ScrollKit
@@ -62,3 +63,4 @@ public extension View {
         self.modifier(StatusBarVisibilityUpdater(scrollOffset: offset))
     }
 }
+#endif

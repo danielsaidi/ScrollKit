@@ -11,33 +11,36 @@ import ScrollKit
 
 struct ContentView: View {
 
-    @StateObject
-    private var statusBarVisibile = StatusBarVisibileState()
-
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 linkSection
+                spotifySection
             }
             .tint(.blue)
             .navigationTitle("Demo")
+            .toolbarColorScheme(.light, for: .navigationBar)
         }
         .tint(.white)
         .toolbarRole(.navigationStack)
-        .statusBarVisibile(statusBarVisibile)
     }
 }
 
 private extension ContentView {
 
     var linkSection: some View {
-        Section(header: Text("Stretchable headers")) {
-            spotifyLink(.anthrax)
-            spotifyLink(.misfortune)
-            spotifyLink(.regina)
+        Section(header: Text("Sticky headers")) {
             imageLink
             gradientLink
             colorLink
+        }
+    }
+
+    var spotifySection: some View {
+        Section(header: Text("Spotify screens")) {
+            spotifyLink(.anthrax)
+            spotifyLink(.misfortune)
+            spotifyLink(.regina)
         }
     }
 }
@@ -45,7 +48,7 @@ private extension ContentView {
 private extension ContentView {
 
     var colorLink: some View {
-        link("paintbrush.pointed.fill", "Short color background") {
+        link("paintbrush.pointed.fill", "Color") {
             DemoScreen(headerHeight: 100) {
                 Color.blue
             }
@@ -53,7 +56,7 @@ private extension ContentView {
     }
 
     var gradientLink: some View {
-        link("paintbrush.fill", "Gradient background") {
+        link("paintbrush.fill", "Gradient") {
             DemoScreen(headerHeight: 250) {
                 ScrollViewHeaderGradient(.yellow, .blue)
             }
@@ -61,7 +64,7 @@ private extension ContentView {
     }
 
     var imageLink: some View {
-        link("photo.fill", "Image background") {
+        link("photo.fill", "Image") {
             DemoScreen(headerHeight: 250) {
                 ZStack {
                     ScrollViewHeaderImage(Image("header"))
@@ -72,7 +75,7 @@ private extension ContentView {
     }
 
     func spotifyLink(_ info: SpotifyPreviewInfo) -> some View {
-        link("music.note", "Spotify - \(info.bandName)") {
+        link("record.circle.fill", "Spotify - \(info.bandName)") {
             SpotifyPreviewScreen(info: info)
         }
     }

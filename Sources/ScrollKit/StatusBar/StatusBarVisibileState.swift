@@ -1,3 +1,4 @@
+#if os(iOS)
 //
 //  StatusBarVisibileState.swift
 //  ScrollKit
@@ -34,13 +35,13 @@ import SwiftUI
  struct ContentView: View {
 
      @StateObject
-     private var statusBarState = StatusBarState()
+     private var state = StatusBarVisibileState()
 
      var body: some View {
          NavigationStack {
              ...
          }
-         .statusBarState(hidden: statusBarState)
+         .statusBarVisible(state)
      }
  }
  ```
@@ -140,8 +141,9 @@ private extension StatusBarVisibileState {
 
 public extension View {
 
-    func statusBarVisibile(_ state: StatusBarVisibileState) -> some View {
-        self.statusBar(hidden: state.isHidden)
+    func statusBarVisible(_ state: StatusBarVisibileState) -> some View {
+        self.statusBarHidden(state.isHidden)
             .environmentObject(state)
     }
 }
+#endif

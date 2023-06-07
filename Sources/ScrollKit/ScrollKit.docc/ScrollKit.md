@@ -5,7 +5,7 @@ ScrollKit is a SwiftUI library that adds powerful scrolling features to SwiftUI,
 
 ## Overview
 
-![SwiftKit logo](Logo.png)
+![Library logotype](Logo.png)
 
 ScrollKit has a ``ScrollViewWithOffset`` that provides you with the scroll view offset as it's scrolled, a ``ScrollViewWithStickyHeader`` that pins the header view to the top as it is scrolled below the navigation bar and a ``ScrollViewHeader`` that automatically stretches out when the scroll view is pulled down.
 

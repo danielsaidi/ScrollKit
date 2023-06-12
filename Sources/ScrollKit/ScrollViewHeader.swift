@@ -109,8 +109,11 @@ struct ScrollViewHeader_Previews: PreviewProvider {
                         Text("Header title")
                            .padding()
                     }
-                }.frame(height: 250)
+                }
+                .frame(height: 250)
             }
+            .navigationTitle("Test")
+            .navigationBarTitleDisplayMode(.inline)
         }
         .accentColor(.white)
         .colorScheme(.dark)

@@ -18,7 +18,7 @@
 
 ## About ScrollKit
 
-ScrollKit is a SwiftUI library that adds powerful scrolling features to SwiftUI, such as scroll offset tracking and scroll view headers that stretch out as you pull down and stick to the top when you scroll.
+ScrollKit adds powerful scrolling features to `SwiftUI`, such as scroll offset tracking and scroll view headers that stretch out as you pull down and stick to the top when you scroll.
 
 The result can look like this, or completely different:
 
@@ -26,7 +26,11 @@ The result can look like this, or completely different:
     <img src="Resources/Demo.gif" width=300 />
 </p>
 
-The views in this library are designed to be easy to use, and basically just add more properties to the standard SwiftUI `ScrollView`. They can be used on all Apple platforms, including iOS, macOS, tvOS and watchOS.
+ScrollKit has a ``ScrollViewWithOffset`` that provides you with the scroll view offset, a ``ScrollViewHeader`` that automatically stretches out when the scroll view is pulled down, and a ``ScrollViewWithStickyHeader`` that pins the header view to the top as it is scrolled below the navigation bar.
+
+ScrollKit's views are designed to be easy to use, and basically just add more properties to the standard SwiftUI `ScrollView`. They can be used on all Apple platforms, including iOS, macOS, tvOS and watchOS.
+
+ScrollKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
 
 
 
@@ -38,19 +42,7 @@ ScrollKit can be installed with the Swift Package Manager:
 https://github.com/danielsaidi/ScrollKit.git
 ```
 
-or with CocoaPods:
-
-```
-pod DSScrollKit
-```
-
 If you prefer to not have external dependencies, you can also just copy the source code into your app.
-
-
-
-## Supported Platforms
-
-ScrollKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
 
 
 
@@ -111,9 +103,11 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 
 
-## Support
+## Support this library
 
-You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support. 
+I manage my various open-source projects in my free time and am really thankful for any help I can get from the community. 
+
+You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support.
 
 
 

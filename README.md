@@ -63,7 +63,7 @@ struct MyView: View {
     
     func handleOffset(_ scrollOffset: CGPoint, visibleHeaderRatio: CGFloat) {
         self.offset = scrollOffset
-        self.visible = visibleHeaderRatio
+        self.visibleRatio = visibleHeaderRatio
     }
     
     func header() -> some View {

@@ -1,5 +1,5 @@
 <p align="center">
-    <img src ="Resources/Logo_GitHub.png" alt="ScrollKit Logo" title="ScrollKit" width=600 />
+    <img src ="Resources/Logo_GitHub.png" alt="ScrollKit Logo" title="ScrollKit" />
 </p>
 
 <p align="center">
@@ -7,30 +7,24 @@
     <img src="https://img.shields.io/badge/swift-5.7-orange.svg" alt="Swift 5.7" title="Swift 5.7" />
     <img src="https://img.shields.io/badge/platform-SwiftUI-blue.svg" alt="Swift UI" title="SwiftUI" />
     <img src="https://img.shields.io/github/license/danielsaidi/ScrollKit" alt="MIT License" title="MIT License" />
-        <a href="https://twitter.com/danielsaidi">
-        <img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" />
-    </a>
-    <a href="https://mastodon.social/@danielsaidi">
-        <img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" />
-    </a>
+    <a href="https://twitter.com/danielsaidi"><img src="https://img.shields.io/twitter/url?label=Twitter&style=social&url=https%3A%2F%2Ftwitter.com%2Fdanielsaidi" alt="Twitter: @danielsaidi" title="Twitter: @danielsaidi" /></a>
+    <a href="https://mastodon.social/@danielsaidi"><img src="https://img.shields.io/mastodon/follow/000253346?label=mastodon&style=social" alt="Mastodon: @danielsaidi@mastodon.social" title="Mastodon: @danielsaidi@mastodon.social" /></a>
 </p>
 
 
 ## About ScrollKit
 
-ScrollKit adds powerful scrolling features to `SwiftUI`, such as scroll offset tracking and scroll view headers that stretch out as you pull down and stick to the top when you scroll.
+ScrollKit adds powerful scrolling features to `SwiftUI`.
+
+Some examples are scroll offset tracking and header views that stretch and transform as you pull down, and stick to the top when you scroll.
 
 The result can look like this, or completely different:
 
 <p align="center" style="border-radius: 10px">
-    <img src="Resources/Demo.gif" width=300 />
+    <img src="Resources/Demo.gif" width=450 />
 </p>
 
-ScrollKit has a ``ScrollViewWithOffset`` that provides you with the scroll view offset, a ``ScrollViewHeader`` that automatically stretches out when the scroll view is pulled down, and a ``ScrollViewWithStickyHeader`` that pins the header view to the top as it is scrolled below the navigation bar.
-
-ScrollKit's views are designed to be easy to use, and basically just add more properties to the standard SwiftUI `ScrollView`. They can be used on all Apple platforms, including iOS, macOS, tvOS and watchOS.
-
-ScrollKit supports `iOS 14`, `macOS 11`, `tvOS 14` and `watchOS 7`.
+ScrollKit is designed to be easy to use, and basically just adds more properties to the standard SwiftUI `ScrollView`. It can be used on all Apple platforms, including iOS, macOS, tvOS and watchOS.
 
 
 
@@ -50,7 +44,7 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 The [online documentation][Documentation] has a [getting started guide][Getting-Started] guide to help you get started with ScrollKit.
 
-To create a scroll view with a stretchable, sticky header, just create a `ScrollViewWithStickyHeader` and provide it with a header view and header height:
+To create a scroll view with a stretchable, sticky header, just create a `ScrollViewWithStickyHeader` and provide it with a view and height:
 
 ```swift
 struct MyView: View {
@@ -85,7 +79,7 @@ struct MyView: View {
 }
 ```
 
-The header visible ratio is based on the header height and scroll view offset and lets you adjust your content as the header is scrolled under the navigation bar, for instance to modify the header and fade in a navigation title.
+The header visible ratio is based on the header height and scroll view offset and lets you adjust your content as the header is scrolled under the navigation bar.
 
 For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started] guide. 
 
@@ -93,7 +87,7 @@ For more information, please see the [online documentation][Documentation] and [
 
 ## Documentation
 
-The [online documentation][Documentation] contains more information, code examples, etc., and makes it easy to overview the various parts of the library.
+The [online documentation][Documentation] has more information, code examples, etc.
 
 
 
@@ -103,17 +97,17 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 
 
-## Support this library
+## Support my work
 
-I manage my various open-source projects in my free time and am really thankful for any help I can get from the community. 
+I manage many open-source projects on my spare time and am very thankful for any help to keep my work going. 
 
-You can sponsor this project on [GitHub Sponsors][Sponsors] or get in touch for paid support.
+You can sponsor my work on [GitHub Sponsors][Sponsors] or get in touch for paid support.
 
 
 
 ## Contact
 
-Feel free to reach out if you have questions or if you want to contribute in any way:
+Feel free to reach out if you have questions or want to contribute in any way:
 
 * Website: [danielsaidi.com][Website]
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]

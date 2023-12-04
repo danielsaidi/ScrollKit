@@ -50,7 +50,9 @@ public struct SpotifyPreviewScreen: View {
         SpotifyPreviewScreenHeader(
             info: info,
             headerVisibleRatio: headerVisibleRatio
-        )
+        ).onTapGesture {
+            print("Tapped")
+        }
     }
 
     var toolbarTitleView: some View {

@@ -2,7 +2,7 @@
 
 ScrollKit will use semver after 1.0. 
 
-Until then, deprecated features may be removed in the next minor version.
+Until then, deprecated features may be removed in any minor version.
 
 
 

@@ -74,9 +74,9 @@ private extension ContentView {
         }
     }
 
-    func spotifyLink(_ info: SpotifyPreviewInfo) -> some View {
+    func spotifyLink(_ info: Spotify.PreviewInfo) -> some View {
         link("record.circle.fill", "Spotify - \(info.bandName)") {
-            SpotifyPreviewScreen(info: info)
+            Spotify.PreviewScreen(info: info)
         }
     }
 

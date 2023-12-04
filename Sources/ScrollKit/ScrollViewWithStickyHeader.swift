@@ -169,8 +169,7 @@ private extension ScrollViewWithStickyHeader {
                 header: header,
                 headerHeight: 250,
                 headerMinHeight: 150,
-                showsIndicators: false,
-                onScroll: { _, _ in }
+                showsIndicators: false
             ) {
                 LazyVStack {
                     ForEach(1...100, id: \.self) {

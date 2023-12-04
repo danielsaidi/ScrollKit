@@ -38,11 +38,9 @@ public struct ScrollViewHeaderImage: View {
     }
 }
 
-struct ScrollViewHeaderImage_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
-        ScrollViewHeaderImage(
-            Image(systemName: "checkmark")
-        )
-    }
+    ScrollViewHeaderImage(
+        Image(systemName: "checkmark")
+    )
 }

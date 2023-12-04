@@ -66,12 +66,10 @@ public struct ScrollViewHeaderGradient: View {
     }
 }
 
-struct ScrollViewHeaderGradient_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
-        VStack {
-            ScrollViewHeaderGradient()
-            ScrollViewHeaderGradient(.blue, .topLeading, .yellow, .bottom)
-        }
+    VStack {
+        ScrollViewHeaderGradient()
+        ScrollViewHeaderGradient(.blue, .topLeading, .yellow, .bottom)
     }
 }

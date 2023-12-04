@@ -96,35 +96,23 @@ struct ScrollViewWithOffset_Previews: PreviewProvider {
     struct Preview: View {
 
         @State
-        private var scrollOffset: CGPoint = .zero
+        var scrollOffset: CGPoint = .zero
 
         var body: some View {
-            #if os(iOS)
             NavigationView {
-                contentView
-                    .navigationTitle(offsetTitle)
-            }
-            #else
-            VStack {
-                Text(offsetTitle)
-                contentView
-            }
-            #endif
-        }
-
-        var contentView: some View {
-            ScrollViewWithOffset(onScroll: updateScrollOffset) {
-                LazyVStack {
-                    ForEach(1...100, id: \.self) {
-                        Divider()
-                        Text("\($0)")
+                #if os(macOS)
+                Color.clear
+                #endif
+                ScrollViewWithOffset(onScroll: updateScrollOffset) {
+                    LazyVStack {
+                        ForEach(1...100, id: \.self) {
+                            Divider()
+                            Text("\($0)")
+                        }
                     }
                 }
+                .navigationTitle("\(Int(scrollOffset.y))")
             }
-        }
-
-        var offsetTitle: String {
-            "Offset: \(Int(scrollOffset.y))"
         }
 
         func updateScrollOffset(_ offset: CGPoint) {

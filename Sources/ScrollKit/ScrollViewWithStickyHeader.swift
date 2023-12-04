@@ -137,19 +137,28 @@ private extension ScrollViewWithStickyHeader {
     }
 }
 
-struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
+#Preview {
     
     struct Preview: View {
+        
+        @State
+        var selection = 0
+        
+        #if canImport(UIKit)
+        var tabView: some View {
+            TabView {
+                Color.red.tag(0)
+                Color.green.tag(1)
+                Color.blue.tag(2)
+            }
+            .tabViewStyle(.page)
+        }
+        #endif
         
         var body: some View {
             ScrollViewWithStickyHeader(header: {
                 #if canImport(UIKit)
-                TabView {
-                    Color.red
-                    Color.green
-                    Color.blue
-                }
-                .tabViewStyle(.page)
+                tabView
                 #else
                 Color.red
                 #endif
@@ -162,20 +171,15 @@ struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
             }
         }
     }
-
-    static var previews: some View {
-        #if canImport(UIKit)
-        NavigationView {
-            Preview()
-        }
-        .accentColor(.white)
-        .colorScheme(.dark)
-        #else
-        Preview()
-            .accentColor(.white)
-            .colorScheme(.dark)
+    
+    return NavigationView {
+        #if os(macOS)
+        Color.clear
         #endif
+        Preview()
     }
+    .accentColor(.white)
+    .colorScheme(.dark)
 }
 
 private extension View {

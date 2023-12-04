@@ -52,10 +52,14 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 
 ### Essentials
 
-- ``ScrollViewWithOffset``
 - ``ScrollViewWithStickyHeader``
+- ``ScrollViewWithOffsetTracking``
+
+### Views
+
 - ``ScrollViewHeader``
 - ``ScrollViewHeaderGradient``
+- ``ScrollViewHeaderImage``
 - ``StatusBarVisibilityUpdater``
 - ``StatusBarVisibleState``
 

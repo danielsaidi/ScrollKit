@@ -42,7 +42,19 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 The [online documentation][Documentation] has a [getting started guide][Getting-Started] guide to help you get started with ScrollKit.
 
-To create a scroll view with a stretchable, sticky header, just create a `ScrollViewWithStickyHeader` and provide it with a view and height:
+You can use a `ScrollViewWithOffsetTracking` view to detect when the view scrolls:
+
+```swift
+ScrollViewWithOffsetTracking { offset in
+    print(offset)
+} content: {
+    // Add your scroll content here, e.g. a `LazyVStack`
+}
+```
+
+You can use this offset in any way you like, e.g. to fade in a navigation bar title.
+
+You can use a `ScrollViewWithStickyHeader` to create a scroll view with a stretchy, sticky header:
 
 ```swift
 struct MyView: View {
@@ -69,15 +81,16 @@ struct MyView: View {
         ScrollViewWithStickyHeader(
             header: header,
             headerHeight: 250,
+            headerMinHeight: 150,
             onScroll: handleOffset
         ) {
-            // Add your scroll view content here as regular
+            // Add your scroll content here, e.g. a `LazyVStack`
         }
     }
 }
 ```
 
-The header visible ratio is based on the header height and scroll view offset and lets you adjust your content as the header is scrolled under the navigation bar.
+The `visibleHeaderRatio` is how many percent (1.0 to 0.0) that is visible below the navigation bar.
 
 For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started] guide. 
 

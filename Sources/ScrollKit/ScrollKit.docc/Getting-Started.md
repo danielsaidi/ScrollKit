@@ -13,9 +13,7 @@ ScrollKit is designed to be easy to use and works on all major Apple platforms (
 
 ## How to track scroll offset
 
-ScrollKit has a ``ScrollViewWithOffsetTracking`` that provides you with the scroll view offset as it's scrolled.
-
-To track the scroll offset, just use this view instead of a regular `ScrollView`:
+ScrollKit has a ``ScrollViewWithOffsetTracking`` that triggers an action when it's scrolled:
 
 ```swift
 struct MyView: View {
@@ -28,14 +26,14 @@ struct MyView: View {
     }
 
     var body: some View {
-        ScrollViewWithOffset(onScroll: handleOffset) {
-            // Add your scroll view content here as regular
+        ScrollViewWithOffsetTracking(onScroll: handleOffset) {
+            // Add your scroll content here, e.g. a `LazyVStack`
         }
     }
 }
 ```
 
-You can then this offset in any way you like, e.g. to fade in a navigation bar title.
+You can then use this offset in any way you like, e.g. to fade in a navigation bar title.
 
 
 
@@ -72,13 +70,13 @@ struct MyView: View {
             headerHeight: 250,
             onScroll: handleOffset
         ) {
-            // Add your scroll view content here as regular
+            // Add your scroll content here, e.g. a `LazyVStack`
         }
     }
 }
 ```
 
-The `visibleHeaderRatio` is how much of the header (1.0 to 0.0) that is below the navigation bar, and can be used to adjust your content as it scrolls below the bar.
+The `visibleHeaderRatio` is how many percent (1.0 to 0.0) that is visible below the navigation bar.
 
 
 

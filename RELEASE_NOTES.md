@@ -15,7 +15,11 @@ This version also moves all Spotify-related previews into a `Spotify` namespace.
 ### 🐛 Bug Fixes
 
 * `ScrollViewWithStickyHeader` now honors the provided min height.
-* `StatusBarVisibleState` is renamed to a correct name.
+
+### 💥 Breaking changes
+
+* `ScrollViewWithOffset` has been renamed to `ScrollViewWithOffsetTracking`.
+* `StatusBarVisibleState` has been renamed to the correct name.
 
 
 

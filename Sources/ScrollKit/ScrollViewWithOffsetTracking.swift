@@ -1,5 +1,5 @@
 //
-//  ScrollViewWithOffset.swift
+//  ScrollViewWithOffsetTracking.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-03.
@@ -9,13 +9,13 @@
 import SwiftUI
 
 /**
- This scroll view wraps a native `ScrollView` and tracks its
- scroll offset as it scrolls.
+ This view wraps a native `ScrollView` and tracks the scroll
+ offset as it's scrolled.
 
  You can use the `onScroll` initializer parameter to provide
  a function that will be called whenever the view scrolls.
  */
-public struct ScrollViewWithOffset<Content: View>: View {
+public struct ScrollViewWithOffsetTracking<Content: View>: View {
 
     /**
      Create a scroll view with offset tracking.
@@ -54,7 +54,7 @@ public struct ScrollViewWithOffset<Content: View>: View {
     }
 }
 
-struct ScrollViewWithOffset_Previews: PreviewProvider {
+struct ScrollViewWithOffsetTracking_Previews: PreviewProvider {
 
     struct Preview: View {
 
@@ -66,7 +66,7 @@ struct ScrollViewWithOffset_Previews: PreviewProvider {
                 #if os(macOS)
                 Color.clear
                 #endif
-                ScrollViewWithOffset(onScroll: updateScrollOffset) {
+                ScrollViewWithOffsetTracking(onScroll: updateScrollOffset) {
                     LazyVStack {
                         ForEach(1...100, id: \.self) {
                             Divider()

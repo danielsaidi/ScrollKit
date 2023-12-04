@@ -12,11 +12,11 @@ import SwiftUI
  This scroll view lets you provide a scroll view header that
  sticks to the top when the view scrolls.
 
- The view uses ``ScrollViewWithOffset`` to get scroll offset
- information, which it uses together with the navigation bar
- height to determine how much of the header that's below the
- navigation bar. It also uses a ``ScrollViewHeader`` to make
- the header stretch out when the view is pulled down.
+ The view contains a ``ScrollViewWithOffsetTracking`` to get
+ the scroll offset, which it then uses to determine how much
+ of the header that's below the navigation bar. It also uses
+ a ``ScrollViewHeader`` to make the header view stretch when
+ the scroll view is pulled down.
 
  You can use `onScroll` to provide a function that is called
  whenever the view scrolls. The function receives the scroll
@@ -117,7 +117,7 @@ private extension ScrollViewWithStickyHeader {
 
     var scrollView: some View {
         GeometryReader { proxy in
-            ScrollViewWithOffset(onScroll: handleScrollOffset) {
+            ScrollViewWithOffsetTracking(onScroll: handleScrollOffset) {
                 VStack(spacing: 0) {
                     scrollHeader
                     content()

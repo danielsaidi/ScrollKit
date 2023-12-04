@@ -6,6 +6,12 @@ Until then, deprecated features may be removed in any minor version.
 
 
 
+## 0.4
+
+This update bumps deployment targets and removes CocoaPods support.
+
+
+
 ## 0.3
 
 This update adds utilities for handling status bar visibility.

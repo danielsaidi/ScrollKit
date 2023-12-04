@@ -8,9 +8,9 @@ ScrollKit adds powerful scrolling features to `SwiftUI`.
 
 ![Library logotype](Logo.png)
 
-Some examples are scroll offset tracking and header views that stretch and transform as you pull down, and stick to the top when you scroll.
+ScrollKit adds powerful scrolling features to `SwiftUI`, like scroll offset tracking and a header view that stretches and transform as you pull down, then sticks to the top when you scroll.
 
-ScrollKit is designed to be easy to use, and basically just adds more properties to the standard SwiftUI `ScrollView`. It can be used on all Apple platforms, including iOS, macOS, tvOS and watchOS.
+ScrollKit is designed to be easy to use and works on all major Apple platforms (iOS, macOS, tvOS and watchOS).
 
 
 

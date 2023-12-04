@@ -10,11 +10,7 @@ import SwiftUI
 
 /**
  This view can be used as a scroll view header and stretches
- out if the scroll view is pulled down.
-
- This makes it possible for this header to have a background
- image or color that will resize to fit any additional space
- that the header receives when it's pulled down.
+ its content when pulled down.
 
  For instance, this creates a header with a background color
  gradient, a dark gradient overlay and a bottom-leading text:
@@ -41,8 +37,8 @@ import SwiftUI
  }
  ```
 
- To add this title to a scroll view, with some content after
- the header, just add the header topmost:
+ To add this title to a scroll view, with more content below
+ the header, just add the header topmost in a `VStack`:
 
  ```swift
  ScrollView(.vertical) {
@@ -53,7 +49,7 @@ import SwiftUI
  }
  ```
 
- This will automatically make the header view stretch out if
+ The `MyHeader` view will now automatically stretch out when
  the scroll view is pulled down.
  */
 public struct ScrollViewHeader<Content: View>: View {
@@ -110,21 +106,25 @@ private extension View {
         
         var content: some View {
             ScrollView {
-                ScrollViewHeader {
-                    ZStack(alignment: .bottomLeading) {
-                        LinearGradient(
-                            colors: [.blue, .yellow],
-                            startPoint: .topLeading,
-                            endPoint: .bottomTrailing)
-                        LinearGradient(
-                            colors: [.clear, .black.opacity(0.6)],
-                            startPoint: .top,
-                            endPoint: .bottom)
-                        Text("Header title")
-                            .padding()
+                VStack {
+                    ScrollViewHeader {
+                        TabView {
+                            Color.red
+                            Color.green
+                            Color.blue
+                        }
+                        #if canImport(UIKit)
+                        .tabViewStyle(.page)
+                        #endif
+                    }
+                    .frame(height: 250)
+                    
+                    LazyVStack {
+                        ForEach(0...100, id: \.self) {
+                            Text("\($0)")
+                        }
                     }
                 }
-                .frame(height: 250)
             }
             .navigationTitle("Test")
             #if canImport(UIKit)

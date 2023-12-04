@@ -98,14 +98,20 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
 }
 
 private extension ScrollViewWithStickyHeader {
+    
+    var isStickyHeaderVisible: Bool {
+        guard let headerMinHeight else { return headerVisibleRatio <= 0 }
+        return scrollOffset.y < -headerMinHeight
+    }
 
     @ViewBuilder
     var navbarOverlay: some View {
-        if headerVisibleRatio <= 0 {
+        if isStickyHeaderVisible {
             Color.clear
                 .frame(height: navigationBarHeight)
                 .overlay(scrollHeader, alignment: .bottom)
                 .ignoresSafeArea(edges: .top)
+                .frame(height: headerMinHeight)
         }
     }
 
@@ -158,9 +164,14 @@ private extension ScrollViewWithStickyHeader {
         }
         
         var body: some View {
-            ScrollViewWithStickyHeader(header: {
-                header()
-            }, headerHeight: 250) {
+            ScrollViewWithStickyHeader(
+                .vertical,
+                header: header,
+                headerHeight: 250,
+                headerMinHeight: 150,
+                showsIndicators: false,
+                onScroll: { _, _ in }
+            ) {
                 LazyVStack {
                     ForEach(1...100, id: \.self) {
                         Text("\($0)")

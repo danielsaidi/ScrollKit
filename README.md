@@ -14,7 +14,7 @@
 
 ## About ScrollKit
 
-ScrollKit adds powerful scrolling features to `SwiftUI`, like scroll offset tracking and header views that stretch and transform as you pull down, then stick to the top when you scroll.
+ScrollKit adds powerful scrolling features to `SwiftUI`, like scroll offset tracking and a header view that stretches and transform as you pull down, then sticks to the top when you scroll.
 
 The result can look like this, or completely different:
 

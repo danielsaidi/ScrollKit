@@ -1,19 +1,21 @@
 # Getting Started
 
-ScrollKit is a SwiftUI library that adds powerful scrolling features to SwiftUI, such as offset tracking and sticky scroll header views.
+ScrollKit adds powerful scrolling features to SwiftUI, such as offset tracking and a sticky scroll header.
 
 
 ## Overview
 
-ScrollKit has a ``ScrollViewWithOffset`` that provides you with the scroll view offset as it's scrolled, a ``ScrollViewWithStickyHeader`` that pins the header view to the top as it is scrolled below the navigation bar and a ``ScrollViewHeader`` that automatically stretches out when the scroll view is pulled down.
+ScrollKit is designed to be easy to use and works on all major Apple platforms (iOS, macOS, tvOS and watchOS).
 
-The scroll views are designed to be easy to use, and basically just add more properties to the standard SwiftUI `ScrollView`. They can be used on all Apple platforms, including iOS, macOS, tvOS and watchOS. 
+ScrollKit is designed to be easy to use and works on all major Apple platforms (iOS, macOS, tvOS and watchOS).
 
 
 
-## How to track the scroll offset
+## How to track scroll offset
 
-To track the scroll offset, you can use a `ScrollViewWithOffset` instead of a regular `ScrollView`:
+ScrollKit has a ``ScrollViewWithOffsetTracking`` that provides you with the scroll view offset as it's scrolled.
+
+To track the scroll offset, just use this view instead of a regular `ScrollView`:
 
 ```swift
 struct MyView: View {
@@ -33,12 +35,15 @@ struct MyView: View {
 }
 ```
 
-You can then use this offset in any way you like, to for instance fade in a navigation bar title.
+You can then this offset in any way you like, e.g. to fade in a navigation bar title.
 
 
-## How to set up a scroll view with a sticky header
 
-To create a scroll view with a sticky header, just create a `ScrollViewWithStickyHeader` and provide it with a header view and header height:
+## How to set up a sticky header
+
+ScrollKit has a ``ScrollViewWithStickyHeader`` that stretches and transforms its header when it's pulled down, then sticks it to the top as it's scrolled.
+
+To create a a sticky header, just use ``ScrollViewWithStickyHeader`` and provide it with a header view and header height:
 
 ```swift
 struct MyView: View {
@@ -51,14 +56,13 @@ struct MyView: View {
     
     func handleOffset(_ scrollOffset: CGPoint, visibleHeaderRatio: CGFloat) {
         self.offset = scrollOffset
-        self.visible = visibleHeaderRatio
+        self.visibleRatio = visibleHeaderRatio
     }
     
     func header() -> some View {
         ZStack {
-            Color.black
-            Color.blue.opacity(1-headerVisibleRatio)  // Fades in
-            Color.yellow.opacity(headerVisibleRatio)  // Fades out
+            Color.red
+            ScrollViewHeaderGradient()  // By default a dark gradient
         }
     }
 
@@ -74,12 +78,13 @@ struct MyView: View {
 }
 ```
 
-The header visible ratio is based on the header height and scroll view offset and lets you adjust your content as the header is scrolled under the navigation bar.
+The `visibleHeaderRatio` is how much of the header (1.0 to 0.0) that is below the navigation bar, and can be used to adjust your content as it scrolls below the bar.
 
 
 
 ## More views
 
-Other than these views, you can use the ``ScrollViewHeader`` in a regular `ScrollView` to create a header that stretches out when the scroll view is pulled down, but scrolls away together with the rest of the scroll view content.
+ScrollKit has some other views as well, for instance:
 
-The library also has a ``ScrollViewHeaderGradient``, which is just a convenience if you want to add a gradient to the header view. This is sometimes needed when you use a background image where light or dark parts of the image can make the text content hard to read.
+* ``ScrollViewHeader`` can be used in a regular `ScrollView` and stretches out when it's pulled down, then scrolls away together with the content.
+* ``ScrollViewHeaderGradient`` is just a convenience that can be used to add a discrete gradient to the header.

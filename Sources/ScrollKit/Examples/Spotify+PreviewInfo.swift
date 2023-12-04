@@ -1,5 +1,5 @@
 //
-//  SpotifyPreviewInfo.swift
+//  Spotify+PreviewInfo.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-03-10.
@@ -8,44 +8,41 @@
 
 import SwiftUI
 
-/**
- This type can be used to provide Spotify preview views with
- badn and album information.
+public extension Spotify {
+    
+    /// This type mimics a Spotify preview screen view model.
+    struct PreviewInfo {
 
- You can use any of the static preconfigured info properties
- or create your own to preview various albums.
- */
-public struct SpotifyPreviewInfo {
+        public init(
+            bandName: String,
+            releaseTitle: String,
+            releaseType: String,
+            releaseDate: Date,
+            releaseCoverUrl: String,
+            tintColor: Color,
+            tracks: [String]) {
+            self.bandName = bandName
+            self.releaseTitle = releaseTitle
+            self.releaseType = releaseType
+            self.releaseDate = releaseDate
+            self.releaseCoverUrl = releaseCoverUrl
+            self.tintColor = tintColor
+            self.tracks = tracks
+        }
 
-    public init(
-        bandName: String,
-        releaseTitle: String,
-        releaseType: String,
-        releaseDate: Date,
-        releaseCoverUrl: String,
-        tintColor: Color,
-        tracks: [String]) {
-        self.bandName = bandName
-        self.releaseTitle = releaseTitle
-        self.releaseType = releaseType
-        self.releaseDate = releaseDate
-        self.releaseCoverUrl = releaseCoverUrl
-        self.tintColor = tintColor
-        self.tracks = tracks
+        public let bandName: String
+        public let releaseTitle: String
+        public let releaseType: String
+        public let releaseDate: Date
+        public let releaseCoverUrl: String
+        public let tintColor: Color
+        public let tracks: [String]
     }
-
-    public let bandName: String
-    public let releaseTitle: String
-    public let releaseType: String
-    public let releaseDate: Date
-    public let releaseCoverUrl: String
-    public let tintColor: Color
-    public let tracks: [String]
 }
 
-public extension SpotifyPreviewInfo {
+public extension Spotify.PreviewInfo {
 
-    static var anthrax = SpotifyPreviewInfo(
+    static var anthrax = Self(
         bandName: "Anthrax",
         releaseTitle: "We've Come for You All",
         releaseType: "Album",
@@ -72,7 +69,7 @@ public extension SpotifyPreviewInfo {
         ]
     )
 
-    static var misfortune = SpotifyPreviewInfo(
+    static var misfortune = Self(
         bandName: "Misfortune",
         releaseTitle: "Forsaken",
         releaseType: "Album",
@@ -91,7 +88,7 @@ public extension SpotifyPreviewInfo {
         ]
     )
 
-    static var regina = SpotifyPreviewInfo(
+    static var regina = Self(
         bandName: "Regina Spector",
         releaseTitle: "Far",
         releaseType: "Album",

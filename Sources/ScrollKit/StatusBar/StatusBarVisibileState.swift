@@ -1,6 +1,6 @@
 #if os(iOS)
 //
-//  StatusBarVisibileState.swift
+//  StatusBarVisibleState.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-03-13.
@@ -35,7 +35,7 @@ import SwiftUI
  struct ContentView: View {
 
      @StateObject
-     private var state = StatusBarVisibileState()
+     private var state = StatusBarVisibleState()
 
      var body: some View {
          NavigationStack {
@@ -49,7 +49,7 @@ import SwiftUI
  Take a look at the demo app for examples of how this can be
  used to hide the status bar until the screen is scrolled.
  */
-public class StatusBarVisibileState: ObservableObject {
+public class StatusBarVisibleState: ObservableObject {
 
     /**
      Create a visibility state instance.
@@ -75,7 +75,7 @@ public class StatusBarVisibileState: ObservableObject {
     public var isAnimated: Bool
 }
 
-public extension StatusBarVisibileState {
+public extension StatusBarVisibleState {
 
     /**
      Update ``isHidden`` to become true when an offset's `y`
@@ -128,7 +128,7 @@ public extension StatusBarVisibileState {
     }
 }
 
-private extension StatusBarVisibileState {
+private extension StatusBarVisibleState {
 
     func updateIsHidden(with value: Bool) {
         if isAnimated {
@@ -141,7 +141,7 @@ private extension StatusBarVisibileState {
 
 public extension View {
 
-    func statusBarVisible(_ state: StatusBarVisibileState) -> some View {
+    func statusBarVisible(_ state: StatusBarVisibleState) -> some View {
         self.statusBarHidden(state.isHidden)
             .environmentObject(state)
     }

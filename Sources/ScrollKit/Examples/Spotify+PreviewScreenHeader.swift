@@ -7,35 +7,37 @@
 //
 
 import SwiftUI
-/**
- This view mimics the Spotify release screen header.
- */
-public struct SpotifyPreviewScreenHeader: View {
 
-    public init(
-        info: SpotifyPreviewInfo,
-        headerVisibleRatio: CGFloat = 1
-    ) {
-        self.info = info
-        self.headerVisibleRatio = headerVisibleRatio
-    }
-
-    public static var height: CGFloat = 280
-
-    private var info: SpotifyPreviewInfo
-    private var headerVisibleRatio: CGFloat
-
-    public var body: some View {
-        ZStack {
-            ScrollViewHeaderGradient(info.tintColor, .black)
-            ScrollViewHeaderGradient(info.tintColor.opacity(1), info.tintColor.opacity(0))
-                .opacity(1 - headerVisibleRatio)
-            cover
+public extension Spotify {
+    
+    /// This view mimics the Spotify album screen header.
+    struct PreviewScreenHeader: View {
+        
+        public init(
+            info: PreviewInfo,
+            headerVisibleRatio: CGFloat = 1
+        ) {
+            self.info = info
+            self.headerVisibleRatio = headerVisibleRatio
+        }
+        
+        public static var height: CGFloat = 280
+        
+        private var info: PreviewInfo
+        private var headerVisibleRatio: CGFloat
+        
+        public var body: some View {
+            ZStack {
+                ScrollViewHeaderGradient(info.tintColor, .black)
+                ScrollViewHeaderGradient(info.tintColor.opacity(1), info.tintColor.opacity(0))
+                    .opacity(1 - headerVisibleRatio)
+                cover
+            }
         }
     }
 }
 
-private extension SpotifyPreviewScreenHeader {
+private extension Spotify.PreviewScreenHeader {
 
     var cover: some View {
         AsyncImage(
@@ -80,7 +82,7 @@ private extension CGFloat {
 struct SpotifyPreviewScreenHeader_Previews: PreviewProvider {
 
     static var previews: some View {
-        SpotifyPreviewScreenHeader(info: .anthrax)
-            .frame(height: SpotifyPreviewScreenHeader.height)
+        Spotify.PreviewScreenHeader(info: .anthrax)
+            .frame(height: Spotify.PreviewScreenHeader.height)
     }
 }

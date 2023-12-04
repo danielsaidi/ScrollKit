@@ -50,24 +50,18 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 
 - <doc:Getting-Started>
 
-### Views
+### Essentials
 
 - ``ScrollViewWithOffset``
 - ``ScrollViewWithStickyHeader``
 - ``ScrollViewHeader``
 - ``ScrollViewHeaderGradient``
-
-### Status Bar
-
-- ``StatusBarVisibileState``
 - ``StatusBarVisibilityUpdater``
+- ``StatusBarVisibleState``
 
-### Previews
+### Examples
 
-- ``SpotifyPreviewInfo``
-- ``SpotifyPreviewScreen``
-- ``SpotifyPreviewScreenContent``
-- ``SpotifyPreviewScreenHeader``
+- ``Spotify``
 
 
 

@@ -1,5 +1,5 @@
 //
-//  SpotifyPreviewScreenContent.swift
+//  Spotify+PreviewScreenContent.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-06.
@@ -8,28 +8,29 @@
 
 import SwiftUI
 
-/**
- This view mimics the Spotify release screen's body content.
- */
-public struct SpotifyPreviewScreenContent: View {
-
-    public init(info: SpotifyPreviewInfo) {
-        self.info = info
-    }
-
-    private let info: SpotifyPreviewInfo
-
-    public var body: some View {
-        VStack(spacing: 20) {
-            title
-            buttons
-            list
+public extension Spotify {
+    
+    /// This view mimics a Spotify album screen content view.
+    struct PreviewScreenContent: View {
+        
+        public init(info: PreviewInfo) {
+            self.info = info
         }
-        .padding()
+        
+        private let info: PreviewInfo
+        
+        public var body: some View {
+            VStack(spacing: 20) {
+                title
+                buttons
+                list
+            }
+            .padding()
+        }
     }
 }
 
-private extension SpotifyPreviewScreenContent {
+private extension Spotify.PreviewScreenContent {
 
     var title: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -80,7 +81,7 @@ struct SpotifyPreviewScreenContent_Previews: PreviewProvider {
 
     static var previews: some View {
         ScrollView {
-            SpotifyPreviewScreenContent(info: .anthrax)
+            Spotify.PreviewScreenContent(info: .anthrax)
         }
     }
 }

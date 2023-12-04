@@ -11,13 +11,13 @@ import SwiftUI
 
 /**
  This modifier can be used to automatically keep an injected
- ``StatusBarVisibileState`` up to date as a view scrolls.
+ ``StatusBarVisibleState`` up to date as a view scrolls.
 
  For now, the easiest way to apply this modifier is by using
  the `.hideStatusBarUntilScrolled(_)` view modifier.
 
  If this modifier needs to be extended in the future, we can
- add an enum to set how the ``StatusBarVisibileState`` is to
+ add an enum to set how the ``StatusBarVisibleState`` is to
  be updated for a certain scroll offset, but for now it only
  hides the status bar until the offset indicates that a view
  has been scrolled.
@@ -35,7 +35,7 @@ public struct StatusBarVisibilityUpdater: ViewModifier {
     private var presentationMode
 
     @EnvironmentObject
-    private var state: StatusBarVisibileState
+    private var state: StatusBarVisibleState
 
     public func body(content: Content) -> some View {
         content
@@ -55,7 +55,7 @@ public struct StatusBarVisibilityUpdater: ViewModifier {
 public extension View {
 
     /**
-     Automatically keep a ``StatusBarVisibileState`` updated
+     Automatically keep a ``StatusBarVisibleState`` updated
      so it hides the status bar until the provided offset is
      indicating that a view has been scrolled.
      */

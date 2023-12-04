@@ -10,7 +10,6 @@ import SwiftUI
 /**
  This view mimics the Spotify release screen header.
  */
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct SpotifyPreviewScreenHeader: View {
 
     public init(
@@ -36,7 +35,6 @@ public struct SpotifyPreviewScreenHeader: View {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 private extension SpotifyPreviewScreenHeader {
 
     var cover: some View {
@@ -79,7 +77,6 @@ private extension CGFloat {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct SpotifyPreviewScreenHeader_Previews: PreviewProvider {
 
     static var previews: some View {

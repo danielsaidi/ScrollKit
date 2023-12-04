@@ -11,7 +11,6 @@ import SwiftUI
 /**
  This view mimics the Spotify release screen.
  */
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct SpotifyPreviewScreen: View {
 
     public init(info: SpotifyPreviewInfo) {
@@ -92,7 +91,6 @@ private extension View {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct SpotifyPreviewScreen_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {

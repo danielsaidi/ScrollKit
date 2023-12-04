@@ -90,7 +90,6 @@ private extension View {
     }
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct ScrollViewHeader_Previews: PreviewProvider {
     
     struct Preview: View {

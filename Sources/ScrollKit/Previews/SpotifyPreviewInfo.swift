@@ -15,7 +15,6 @@ import SwiftUI
  You can use any of the static preconfigured info properties
  or create your own to preview various albums.
  */
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public struct SpotifyPreviewInfo {
 
     public init(
@@ -44,7 +43,6 @@ public struct SpotifyPreviewInfo {
     public let tracks: [String]
 }
 
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 public extension SpotifyPreviewInfo {
 
     static var anthrax = SpotifyPreviewInfo(

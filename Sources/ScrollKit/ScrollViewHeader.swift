@@ -92,9 +92,24 @@ private extension View {
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct ScrollViewHeader_Previews: PreviewProvider {
-
-    static var previews: some View {
-        NavigationView {
+    
+    struct Preview: View {
+        
+        var body: some View {
+            #if canImport(UIKit)
+            NavigationView {
+                content
+            }
+            .accentColor(.white)
+            .colorScheme(.dark)
+            #else
+            content
+                .accentColor(.white)
+                .colorScheme(.dark)
+            #endif
+        }
+        
+        var content: some View {
             ScrollView {
                 ScrollViewHeader {
                     ZStack(alignment: .bottomLeading) {
@@ -107,15 +122,19 @@ struct ScrollViewHeader_Previews: PreviewProvider {
                             startPoint: .top,
                             endPoint: .bottom)
                         Text("Header title")
-                           .padding()
+                            .padding()
                     }
                 }
                 .frame(height: 250)
             }
             .navigationTitle("Test")
+            #if canImport(UIKit)
             .navigationBarTitleDisplayMode(.inline)
+            #endif
         }
-        .accentColor(.white)
-        .colorScheme(.dark)
+    }
+
+    static var previews: some View {
+        Preview()
     }
 }

@@ -115,6 +115,7 @@ private extension ScrollViewWithStickyHeader {
                 VStack(spacing: 0) {
                     scrollHeader
                     content()
+                        .frame(maxHeight: .infinity)
                 }
             }
             .onAppear {
@@ -138,16 +139,40 @@ private extension ScrollViewWithStickyHeader {
 
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
 struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
+    
+    struct Preview: View {
+        
+        var body: some View {
+            ScrollViewWithStickyHeader(header: {
+                #if canImport(UIKit)
+                TabView {
+                    Color.red
+                    Color.green
+                    Color.blue
+                }
+                .tabViewStyle(.page)
+                #else
+                Color.red
+                #endif
+            }, headerHeight: 250) {
+                LazyVStack {
+                    ForEach(1...100, id: \.self) {
+                        Text("\($0)")
+                    }
+                }
+            }
+        }
+    }
 
     static var previews: some View {
         #if canImport(UIKit)
         NavigationView {
-            SpotifyPreviewScreen(info: .anthrax)
+            Preview()
         }
         .accentColor(.white)
         .colorScheme(.dark)
         #else
-        SpotifyPreviewScreen(info: .anthrax)
+        Preview()
             .accentColor(.white)
             .colorScheme(.dark)
         #endif

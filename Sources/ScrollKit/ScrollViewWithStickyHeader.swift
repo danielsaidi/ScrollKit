@@ -144,24 +144,22 @@ private extension ScrollViewWithStickyHeader {
         @State
         var selection = 0
         
-        #if canImport(UIKit)
-        var tabView: some View {
+        func header() -> some View {
+            #if canImport(UIKit)
             TabView {
                 Color.red.tag(0)
                 Color.green.tag(1)
                 Color.blue.tag(2)
             }
             .tabViewStyle(.page)
+            #else
+            Color.red
+            #endif
         }
-        #endif
         
         var body: some View {
             ScrollViewWithStickyHeader(header: {
-                #if canImport(UIKit)
-                tabView
-                #else
-                Color.red
-                #endif
+                header()
             }, headerHeight: 250) {
                 LazyVStack {
                     ForEach(1...100, id: \.self) {
@@ -189,7 +187,7 @@ private extension View {
         #if os(watchOS)
         self
         #else
-        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 8.0, *) {
+        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, *) {
             self.toolbarBackground(.hidden)
         } else {
             self

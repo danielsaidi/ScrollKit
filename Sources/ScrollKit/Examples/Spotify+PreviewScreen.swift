@@ -49,9 +49,7 @@ public extension Spotify {
             Spotify.PreviewScreenHeader(
                 info: info,
                 headerVisibleRatio: headerVisibleRatio
-            ).onTapGesture {
-                print("Tapped")
-            }
+            )
         }
         
         var toolbarTitleView: some View {

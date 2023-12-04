@@ -127,7 +127,7 @@ private extension View {
                 }
             }
             .navigationTitle("Test")
-            #if canImport(UIKit)
+            #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
         }

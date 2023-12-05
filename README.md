@@ -50,7 +50,7 @@ ScrollViewWithOffsetTracking { offset in
 }
 ```
 
-It also has a `ScrollViewWithStickyHeader` that makes it easy to set up a stretchy, sticky header:
+ScrollKit also has a `ScrollViewWithStickyHeader` that makes it easy to set up a stretchy, sticky header:
 
 ```swift
 struct MyView: View {
@@ -86,7 +86,7 @@ struct MyView: View {
 }
 ```
 
-For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started] guide. 
+For more information, please see the [getting started guide][Getting-Started].
 
 
 

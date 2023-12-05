@@ -40,9 +40,7 @@ If you prefer to not have external dependencies, you can also just copy the sour
 
 ## Getting started
 
-The [online documentation][Documentation] has a [getting started guide][Getting-Started] guide to help you get started with ScrollKit.
-
-You can use a `ScrollViewWithOffsetTracking` view to detect when the view scrolls:
+ScrollKit has a `ScrollViewWithOffsetTracking` view that can detect scrolling:
 
 ```swift
 ScrollViewWithOffsetTracking { offset in
@@ -52,9 +50,7 @@ ScrollViewWithOffsetTracking { offset in
 }
 ```
 
-You can use this offset in any way you like, e.g. to fade in a navigation bar title.
-
-You can use a `ScrollViewWithStickyHeader` to create a scroll view with a stretchy, sticky header:
+It also has a `ScrollViewWithStickyHeader` that makes it easy to set up a stretchy, sticky header:
 
 ```swift
 struct MyView: View {
@@ -90,15 +86,13 @@ struct MyView: View {
 }
 ```
 
-The `visibleHeaderRatio` is how many percent (1.0 to 0.0) that is visible below the navigation bar.
-
 For more information, please see the [online documentation][Documentation] and [getting started guide][Getting-Started] guide. 
 
 
 
 ## Documentation
 
-The [online documentation][Documentation] has more information, code examples, etc.
+The [online documentation][Documentation] has more information, articles, code examples, etc.
 
 
 
@@ -110,9 +104,7 @@ The demo app lets you explore the library on iOS and macOS. To try it out, just 
 
 ## Support my work
 
-I manage many open-source projects on my spare time and am very thankful for any help to keep my work going. 
-
-You can sponsor my work on [GitHub Sponsors][Sponsors] or get in touch for paid support.
+You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][GitHub].
 
 
 
@@ -135,6 +127,7 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 
 [Email]: mailto:daniel.saidi@gmail.com
 [Website]: https://www.danielsaidi.com
+[GitHub]: https://www.github.com/danielsaidi
 [Twitter]: https://www.twitter.com/danielsaidi
 [Mastodon]: https://mastodon.social/@danielsaidi
 [Sponsors]: https://github.com/sponsors/danielsaidi

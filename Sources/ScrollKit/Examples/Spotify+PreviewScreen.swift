@@ -90,12 +90,13 @@ private extension View {
     }
 }
 
-#Preview {
-
-    NavigationView {
-        #if os(macOS)
-        Color.clear
-        #endif
-        Spotify.PreviewScreen(info: .regina)
+struct Spotify_Preview: PreviewProvider {
+    static var previews: some View {
+        NavigationView {
+             #if os(macOS)
+             Color.clear
+             #endif
+             Spotify.PreviewScreen(info: .regina)
+         }
     }
 }

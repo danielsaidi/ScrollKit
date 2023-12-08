@@ -86,7 +86,8 @@ private extension View {
     }
 }
 
-#Preview {
+
+struct ScrollViewHeader_Previews: PreviewProvider {
     
     struct Preview: View {
         
@@ -132,6 +133,7 @@ private extension View {
             #endif
         }
     }
-
-    return Preview()
+    static var previews: some View {
+        Preview()
+    }
 }

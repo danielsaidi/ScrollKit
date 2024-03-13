@@ -6,7 +6,7 @@ Until then, deprecated features may be removed in any minor version.
 
 
 
-## 0.4
+## 0.5
 
 This version makes more stuff public and adds support form visionOS.
 

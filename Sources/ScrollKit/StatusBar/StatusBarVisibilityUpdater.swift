@@ -1,4 +1,4 @@
-#if os(iOS)
+#if os(iOS) || os(visionOS)
 //
 //  StatusBarVisibilityUpdater.swift
 //  ScrollKit
@@ -42,6 +42,7 @@ public struct StatusBarVisibilityUpdater: ViewModifier {
             .onAppear {
                 state.hideUntilScrolled(using: offset)
             }
+            #if os(iOS)
             .onChange(of: offset) {
                 state.hideUntilScrolled(using: $0)
             }
@@ -49,6 +50,15 @@ public struct StatusBarVisibilityUpdater: ViewModifier {
                 offset.y = 0
                 state.isHidden = false
             }
+            #else
+            .onChange(of: offset) {
+                state.hideUntilScrolled(using: $1)
+            }
+            .onChange(of: presentationMode.wrappedValue.isPresented) { _, _ in
+                offset.y = 0
+                state.isHidden = false
+            }
+            #endif
     }
 }
 

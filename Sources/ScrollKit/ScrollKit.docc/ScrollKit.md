@@ -1,6 +1,6 @@
 # ``ScrollKit``
 
-ScrollKit adds powerful scrolling features to `SwiftUI`.
+ScrollKit is a Swift SDK that lets adds powerful scroll features to SwiftUI.
 
 
 
@@ -8,9 +8,9 @@ ScrollKit adds powerful scrolling features to `SwiftUI`.
 
 ![Library logotype](Logo.png)
 
-ScrollKit provides scroll offset tracking and a header view that stretches and transform as you pull down, then sticks to the top when you scroll.
+ScrollKit is a SwiftUI SDK that lets adds powerful scroll features, like scroll offset tracking, and a header view that stretches and transforms as you pull down, and sticks to the top.
 
-ScrollKit is designed to be easy to use and works on all major Apple platforms (iOS, macOS, tvOS and watchOS).
+ScrollKit is designed to be easy to use and works on all major Apple platforms.
 
 
 
@@ -22,8 +22,6 @@ ScrollKit can be installed with the Swift Package Manager:
 https://github.com/danielsaidi/ScrollKit.git
 ```
 
-If you prefer to not have external dependencies, you can also just copy the source code into your app.
-
 
 
 ## Getting started
@@ -34,13 +32,13 @@ The <doc:Getting-Started> article helps you get started with ScrollKit.
 
 ## Repository
 
-For more information, source code, etc., visit the [project repository][Repository].
+For more information, source code, etc., visit the [project repository](https://github.com/danielsaidi/ScrollKit).
 
 
 
 ## License
 
-ScrollKit is available under the MIT license. See the [LICENSE][License] file for more info.
+ScrollKit is available under the MIT license.
 
 
 
@@ -66,8 +64,3 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 ### Examples
 
 - ``Spotify``
-
-
-
-[License]: https://github.com/danielsaidi/ScrollKit/blob/master/LICENSE
-[Repository]: https://github.com/danielsaidi/ScrollKit

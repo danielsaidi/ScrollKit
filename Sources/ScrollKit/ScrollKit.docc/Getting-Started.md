@@ -2,13 +2,16 @@
 
 ScrollKit adds powerful scrolling features to SwiftUI, such as offset tracking and a sticky scroll header.
 
+@Metadata {
 
-## Overview
+    @PageImage(
+        purpose: card,
+        source: "Page",
+        alt: "Page icon"
+    )
 
-ScrollKit is designed to be easy to use and works on all major Apple platforms (iOS, macOS, tvOS and watchOS).
-
-ScrollKit is designed to be easy to use and works on all major Apple platforms (iOS, macOS, tvOS and watchOS).
-
+    @PageColor(blue)
+}
 
 
 ## How to track scroll offset
@@ -39,9 +42,9 @@ You can then use this offset in any way you like, e.g. to fade in a navigation b
 
 ## How to set up a sticky header
 
-ScrollKit has a ``ScrollViewWithStickyHeader`` that stretches and transforms its header when it's pulled down, then sticks it to the top as it's scrolled.
+ScrollKit has a ``ScrollViewWithStickyHeader`` that stretches and transforms when it's pulled down, and sticks it to the top when its scroll view is scrolled.
 
-To create a a sticky header, just use ``ScrollViewWithStickyHeader`` and provide it with a header view and header height:
+To use a sticky header, just add one to a view and provide it with a content view, a start height, an optional minimum height, etc.:
 
 ```swift
 struct MyView: View {
@@ -68,6 +71,7 @@ struct MyView: View {
         ScrollViewWithStickyHeader(
             header: header,
             headerHeight: 250,
+            headerMinHeight: 150,
             onScroll: handleOffset
         ) {
             // Add your scroll content here, e.g. a `LazyVStack`
@@ -76,7 +80,7 @@ struct MyView: View {
 }
 ```
 
-The `visibleHeaderRatio` is how many percent (1.0 to 0.0) that is visible below the navigation bar.
+The `visibleHeaderRatio` is how many percent (1.0 to 0.0) that is visible below the navigation bar. You can use this information to transform the content in the header accordingly.
 
 
 
@@ -84,5 +88,16 @@ The `visibleHeaderRatio` is how many percent (1.0 to 0.0) that is visible below 
 
 ScrollKit has some other views as well, for instance:
 
-* ``ScrollViewHeader`` can be used in a regular `ScrollView` and stretches out when it's pulled down, then scrolls away together with the content.
-* ``ScrollViewHeaderGradient`` is just a convenience that can be used to add a discrete gradient to the header.
+@TabNavigator {
+   @Tab("ScrollViewHeader") {
+       Can be used in a regular `ScrollView` and stretches out when it's pulled down, then scrolls away together with the content.
+   }
+
+   @Tab("ScrollViewHeaderGradient") {
+       A convenience that can be used to add a discrete gradient to the header.
+   }
+   
+   @Tab("ScrollViewHeaderImage") {
+       Takes any image and adjusts it to be presented as a scroll view header.
+   }
+}

@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-12-04.
-//  Copyright © 2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -12,9 +12,9 @@ import SwiftUI
  This view can be wrap any `ScrollView` or `List` content to
  get offset tracking working when the view is scrolled.
  
- To use this view, just add it to the `ScrollView` or `List`,
- add the content to it then apply `withScrollOffsetTracking`
- to the `ScrollView` or `List`:
+ To use this view, add it to the `ScrollView` or `List`, add
+ the content to it then apply the `withScrollOffsetTracking`
+ view modifier to the view, for instance like this:
  
  ```swift
  List {
@@ -33,9 +33,9 @@ import SwiftUI
  The offset tracking action will trigger whenever the scroll
  view scrolls, and provide you with the scroll offset.
  */
-struct ScrollViewOffsetTracker<Content: View>: View {
+public struct ScrollViewOffsetTracker<Content: View>: View {
     
-    init(
+    public init(
         @ViewBuilder content: @escaping () -> Content
     ) {
         self.content = content
@@ -43,7 +43,7 @@ struct ScrollViewOffsetTracker<Content: View>: View {
     
     private var content: () -> Content
 
-    var body: some View {
+    public var body: some View {
         ZStack(alignment: .top) {
             GeometryReader { geo in
                 Color.clear
@@ -58,6 +58,20 @@ struct ScrollViewOffsetTracker<Content: View>: View {
         }
     }
 }
+
+public extension View {
+
+    /// Add this modifier to a `ScrollView`, a `List` or any
+    /// other view that has a ``ScrollViewOffsetTracker`` in
+    /// itself, to track its scroll offset.
+    func withScrollOffsetTracking(
+        action: @escaping (_ offset: CGPoint) -> Void
+    ) -> some View {
+        self.coordinateSpace(name: ScrollOffsetNamespace.namespace)
+            .onPreferenceChange(ScrollOffsetPreferenceKey.self, perform: action)
+    }
+}
+
 
 enum ScrollOffsetNamespace {
 

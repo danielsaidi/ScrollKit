@@ -12,9 +12,10 @@
 </p>
 
 
+
 ## About ScrollKit
 
-ScrollKit adds powerful scrolling features to `SwiftUI`, like scroll offset tracking and a header view that stretches and transform as you pull down, then sticks to the top when you scroll.
+ScrollKit is a SwiftUI SDK that lets adds powerful scrolling features, like scroll offset tracking, and a header view that stretches and transforms as you pull down, and sticks to the top.
 
 The result can look like this, or completely different:
 
@@ -22,7 +23,7 @@ The result can look like this, or completely different:
     <img src="Resources/Demo.gif" width=425 />
 </p>
 
-ScrollKit is designed to be easy to use and works on all major Apple platforms (iOS, macOS, tvOS and watchOS).
+ScrollKit is designed to be easy to use and works on all major Apple platforms.
 
 
 
@@ -33,8 +34,6 @@ ScrollKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/ScrollKit.git
 ```
-
-If you prefer to not have external dependencies, you can also just copy the source code into your app.
 
 
 
@@ -98,13 +97,15 @@ The [online documentation][Documentation] has more information, articles, code e
 
 ## Demo Application
 
-The demo app lets you explore the library on iOS and macOS. To try it out, just open and run the `Demo` project.
+The demo app lets you explore the library. To try it out, just open and run the `Demo` project.
 
 
 
 ## Support my work
 
-You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][GitHub].
+You can [sponsor me][Sponsors] on GitHub Sponsors or [reach out][Email] for paid support, to help support my [open-source projects][OpenSource].
+
+Your support makes it possible for me to put more work into these projects and make them the best they can be.
 
 
 
@@ -126,12 +127,15 @@ ScrollKit is available under the MIT license. See the [LICENSE][License] file fo
 
 
 [Email]: mailto:daniel.saidi@gmail.com
-[Website]: https://www.danielsaidi.com
-[GitHub]: https://www.github.com/danielsaidi
-[Twitter]: https://www.twitter.com/danielsaidi
+
+[Website]: https://danielsaidi.com
+[GitHub]: https://github.com/danielsaidi
+[Twitter]: https://twitter.com/danielsaidi
 [Mastodon]: https://mastodon.social/@danielsaidi
+[OpenSource]: https://danielsaidi.com/opensource
 [Sponsors]: https://github.com/sponsors/danielsaidi
 
-[Documentation]: https://danielsaidi.github.io/ScrollKit/documentation/scrollkit/
+[Documentation]: https://danielsaidi.github.io/ScrollKit/
 [Getting-Started]: https://danielsaidi.github.io/ScrollKit/documentation/scrollkit/getting-started
+
 [License]: https://github.com/danielsaidi/ScrollKit/blob/master/LICENSE

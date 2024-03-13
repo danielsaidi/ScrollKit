@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-03.
-//  Copyright © 2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -17,15 +17,13 @@ import SwiftUI
  */
 public struct ScrollViewWithOffsetTracking<Content: View>: View {
 
-    /**
-     Create a scroll view with offset tracking.
-
-     - Parameters:
-       - axes: The scroll axes to use, by default `.vertical`.
-       - showsIndicators: Whether or not to show scroll indicators, by default `true`.
-       - onScroll: An action that will be called whenever the scroll offset changes, by default `nil`.
-       - content: The scroll view content.
-     */
+    /// Create a scroll view with offset tracking.
+    ///
+    /// - Parameters:
+    ///   - axes: The scroll axes to use, by default `.vertical`.
+    ///   - showsIndicators: Whether or not to show scroll indicators, by default `true`.
+    ///   - onScroll: An action that will be called whenever the scroll offset changes, by default `nil`.
+    ///   - content: The scroll view content.
     public init(
         _ axes: Axis.Set = .vertical,
         showsIndicators: Bool = true,
@@ -54,7 +52,7 @@ public struct ScrollViewWithOffsetTracking<Content: View>: View {
     }
 }
 
-struct ScrollViewWithOffsetTracking_Previews: PreviewProvider {
+#Preview {
 
     struct Preview: View {
 
@@ -83,7 +81,5 @@ struct ScrollViewWithOffsetTracking_Previews: PreviewProvider {
         }
     }
 
-    static var previews: some View {
-        Preview()
-    }
+    return Preview()
 }

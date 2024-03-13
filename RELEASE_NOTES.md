@@ -8,6 +8,12 @@ Until then, deprecated features may be removed in any minor version.
 
 ## 0.4
 
+This version makes more stuff public and adds support form visionOS.
+
+
+
+## 0.4
+
 This version updates to Swift 5.9, bumps deployment targets and removes CocoaPods support.
 
 This version also moves all Spotify-related previews into a `Spotify` namespace.

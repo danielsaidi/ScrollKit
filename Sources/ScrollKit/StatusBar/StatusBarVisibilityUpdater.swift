@@ -4,7 +4,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-03-14.
-//  Copyright © 2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -54,11 +54,9 @@ public struct StatusBarVisibilityUpdater: ViewModifier {
 
 public extension View {
 
-    /**
-     Automatically keep a ``StatusBarVisibleState`` updated
-     so it hides the status bar until the provided offset is
-     indicating that a view has been scrolled.
-     */
+    /// Automatically keep ``StatusBarVisibleState`` updated
+    /// so it hides the status bar until the provided offset 
+    /// is indicating that a view has been scrolled.
     func hideStatusBarUntilScrolled(using offset: Binding<CGPoint>) -> some View {
         self.modifier(StatusBarVisibilityUpdater(scrollOffset: offset))
     }

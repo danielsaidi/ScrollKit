@@ -54,9 +54,7 @@ import SwiftUI
  */
 public struct ScrollViewHeader<Content: View>: View {
 
-    /**
-     Create a stretchable scroll view header.
-     */
+    /// Create a stretchable scroll view header.
     public init(
         @ViewBuilder content: @escaping () -> Content
     ) {

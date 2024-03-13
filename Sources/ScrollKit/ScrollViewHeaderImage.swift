@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-04.
-//  Copyright © 2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -17,12 +17,10 @@ import SwiftUI
  */
 public struct ScrollViewHeaderImage: View {
 
-    /**
-     Create a scroll view header image.
-
-     - Parameters:
-       - image: The image to wrap.
-     */
+    /// Create a scroll view header image.
+    ///
+    /// - Parameters:
+    ///   - image: The image to wrap.
     public init(_ image: Image) {
         self.image = image
     }

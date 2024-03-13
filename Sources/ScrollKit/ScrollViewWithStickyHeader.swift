@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-03.
-//  Copyright © 2023 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -35,18 +35,16 @@ import SwiftUI
  */
 public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
 
-    /**
-     Create a scroll view with a sticky header.
-
-     - Parameters:
-       - axes: The scroll axes to use, by default `.vertical`.
-       - header: The scroll view header builder.
-       - headerHeight: The height to apply to the scroll view header.
-       - headerMinHeight: The minimum height to apply to the scroll view header, by default `nil`.
-       - showsIndicators: Whether or not to show scroll indicators, by default `true`.
-       - onScroll: An action that will be called whenever the scroll offset changes, by default `nil`.
-       - content: The scroll view content builder.
-     */
+    /// Create a scroll view with a sticky header.
+    ///
+    /// - Parameters:
+    ///   - axes: The scroll axes to use, by default `.vertical`.
+    ///   - header: The scroll view header builder.
+    ///   - headerHeight: The height to apply to the scroll view header.
+    ///   - headerMinHeight: The minimum height to apply to the scroll view header, by default `nil`.
+    ///   - showsIndicators: Whether or not to show scroll indicators, by default `true`.
+    ///   - onScroll: An action that will be called whenever the scroll offset changes, by default `nil`.
+    ///   - content: The scroll view content builder.
     public init(
         _ axes: Axis.Set = .vertical,
         @ViewBuilder header: @escaping () -> Header,

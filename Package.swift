@@ -8,20 +8,24 @@ let package = Package(
         .iOS(.v15),
         .macOS(.v12),
         .tvOS(.v15),
-        .watchOS(.v8)
+        .watchOS(.v8),
+        .visionOS(.v1)
     ],
     products: [
         .library(
             name: "ScrollKit",
-            targets: ["ScrollKit"])
+            targets: ["ScrollKit"]
+        )
     ],
     dependencies: [],
     targets: [
         .target(
             name: "ScrollKit",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "ScrollKitTests",
-            dependencies: ["ScrollKit"])
+            dependencies: ["ScrollKit"]
+        )
     ]
 )

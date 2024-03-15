@@ -85,8 +85,8 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
     static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {}
 }
 
-#Preview {
-    
+
+struct ScrollViewOffsetTracker_Preview: PreviewProvider {
     struct Preview: View {
         
         @State
@@ -109,10 +109,12 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
         }
     }
     
-    return NavigationView {
-        #if os(macOS)
-        Color.clear
-        #endif
-        Preview()
+    static var previews: some View {
+        NavigationView {
+            #if os(macOS)
+            Color.clear
+            #endif
+            Preview()
+        }
     }
 }

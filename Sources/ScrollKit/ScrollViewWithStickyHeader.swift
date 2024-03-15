@@ -141,7 +141,7 @@ private extension ScrollViewWithStickyHeader {
     }
 }
 
-#Preview {
+struct ScrollViewWithStickyHeader_Previews: PreviewProvider {
     
     struct Preview: View {
         
@@ -178,14 +178,17 @@ private extension ScrollViewWithStickyHeader {
         }
     }
     
-    return NavigationView {
-        #if os(macOS)
-        Color.clear
-        #endif
-        Preview()
+    
+    static var previews: some View {
+        NavigationView {
+            #if os(macOS)
+            Color.clear
+            #endif
+            Preview()
+        }
+        .accentColor(.white)
+        .colorScheme(.dark)
     }
-    .accentColor(.white)
-    .colorScheme(.dark)
 }
 
 private extension View {

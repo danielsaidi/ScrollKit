@@ -99,7 +99,8 @@ private extension ScrollViewWithStickyHeader {
     
     var isStickyHeaderVisible: Bool {
         guard let headerMinHeight else { return headerVisibleRatio <= 0 }
-        return scrollOffset.y < -(headerHeight - headerMinHeight)
+        return scrollOffset.y < -(headerHeight - (headerMinHeight / 2))
+//        return scrollOffset.y < -headerMinHeight
     }
 
     @ViewBuilder

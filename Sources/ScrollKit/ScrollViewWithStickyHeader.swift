@@ -115,7 +115,11 @@ private extension ScrollViewWithStickyHeader {
 
     var scrollView: some View {
         GeometryReader { proxy in
-            ScrollViewWithOffsetTracking(onScroll: handleScrollOffset) {
+            ScrollViewWithOffsetTracking(
+                axes,
+                showsIndicators: showsIndicators,
+                onScroll: handleScrollOffset
+            ) {
                 VStack(spacing: 0) {
                     scrollHeader
                     content()

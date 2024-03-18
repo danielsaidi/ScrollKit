@@ -99,7 +99,8 @@ private extension ScrollViewWithStickyHeader {
     
     var isStickyHeaderVisible: Bool {
         guard let headerMinHeight else { return headerVisibleRatio <= 0 }
-        return scrollOffset.y < -headerMinHeight
+        return scrollOffset.y < -(headerHeight - (headerMinHeight / 2))
+//        return scrollOffset.y < -headerMinHeight
     }
 
     @ViewBuilder
@@ -115,7 +116,11 @@ private extension ScrollViewWithStickyHeader {
 
     var scrollView: some View {
         GeometryReader { proxy in
-            ScrollViewWithOffsetTracking(onScroll: handleScrollOffset) {
+            ScrollViewWithOffsetTracking(
+                axes,
+                showsIndicators: showsIndicators,
+                onScroll: handleScrollOffset
+            ) {
                 VStack(spacing: 0) {
                     scrollHeader
                     content()

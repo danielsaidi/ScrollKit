@@ -98,5 +98,7 @@ private extension View {
         #endif
         Spotify.PreviewScreen(info: .regina)
     }
+    #if os(iOS)
     .navigationViewStyle(.stack)
+    #endif
 }

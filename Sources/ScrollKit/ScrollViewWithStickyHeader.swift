@@ -190,7 +190,9 @@ private extension ScrollViewWithStickyHeader {
     }
     .colorScheme(.dark)
     .accentColor(.white)
+    #if os(iOS)
     .navigationViewStyle(.stack)
+    #endif
 }
 
 private extension View {

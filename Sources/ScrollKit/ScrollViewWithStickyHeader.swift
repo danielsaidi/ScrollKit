@@ -8,31 +8,30 @@
 
 import SwiftUI
 
-/**
- This scroll view lets you provide a scroll view header that
- sticks to the top when the view scrolls.
-
- The view contains a ``ScrollViewWithOffsetTracking`` to get
- the scroll offset, which it then uses to determine how much
- of the header that's below the navigation bar. It also uses
- a ``ScrollViewHeader`` to make the header view stretch when
- the scroll view is pulled down.
-
- You can use `onScroll` to provide a function that is called
- whenever the view scrolls. The function receives the scroll
- view offset and a header visible ratio, which indicates how
- much of the header that is visible below the navigation bar.
-
- This view enforces `.navigationBarTitleDisplayMode(.inline)`
- since a large title doesn't work with a sticky header.
-
- > Important: `toolbarBackground(.hidden)` is applied on iOS
- 16 and later, to make the navigation bar transparent. It is
- not applied on iOS 15 and earlier. This means that you must
- use another way to make the navigation bar transparent when
- you target older iOS versions. One way is to use appearance
- proxies if you can fall down to UIKit.
- */
+/// This scroll view lets you inject a header view that will
+/// stick to the top when the view scrolls.
+///
+/// The view wraps a ``ScrollViewWithOffsetTracking`` to get
+/// scroll offset that it then uses to determine how much of
+/// the header that's below the navigation bar. It also uses
+/// a ``ScrollViewHeader`` to make your header view properly
+/// stretch out when the scroll view is pulled down.
+///
+/// You can use the `onScroll` init parameter to pass in any
+/// function that should be called whenever the view scrolls.
+/// The function is called with the scroll view offset and a
+/// "header visible ratio", which indicates how much of your
+/// header that is visible below the navigation bar.
+///
+/// This view will automatically use an inline title display
+/// mode, since it doesn't work for a large nativation title.
+///
+/// > Important: `toolbarBackground(.hidden)` is applied for
+/// iOS 16 and later, to make the navigation bar transparent.
+/// It's not applied on iOS 15 and earlier, which means that
+/// you must use another way to make the bar transparent for
+/// older iOS versions. One way is to use appearance proxies
+/// if you can fall down to UIKit.
 public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
 
     /// Create a scroll view with a sticky header.
@@ -95,6 +94,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     }
 }
 
+@MainActor
 private extension ScrollViewWithStickyHeader {
     
     var isStickyHeaderVisible: Bool {

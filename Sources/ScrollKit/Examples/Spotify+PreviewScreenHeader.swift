@@ -10,7 +10,7 @@ import SwiftUI
 
 public extension Spotify {
     
-    /// This view mimics the Spotify album screen header.
+    /// This view mimics a Spotify album screen header.
     struct PreviewScreenHeader: View {
         
         public init(
@@ -21,7 +21,7 @@ public extension Spotify {
             self.headerVisibleRatio = headerVisibleRatio
         }
         
-        public static var height: CGFloat = 280
+        public static let height: CGFloat = 280
         
         private var info: PreviewInfo
         private var headerVisibleRatio: CGFloat
@@ -79,10 +79,8 @@ private extension CGFloat {
     }
 }
 
-struct SpotifyPreviewScreenHeader_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
-        Spotify.PreviewScreenHeader(info: .anthrax)
-            .frame(height: Spotify.PreviewScreenHeader.height)
-    }
+    Spotify.PreviewScreenHeader(info: .anthrax)
+        .frame(height: Spotify.PreviewScreenHeader.height)
 }

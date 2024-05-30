@@ -8,31 +8,30 @@
 
 import SwiftUI
 
-/**
- This view can be wrap any `ScrollView` or `List` content to
- get offset tracking working when the view is scrolled.
- 
- To use this view, add it to the `ScrollView` or `List`, add
- the content to it then apply the `withScrollOffsetTracking`
- view modifier to the view, for instance like this:
- 
- ```swift
- List {
-     ScrollViewOffsetTracker {
-         ForEach(0...100, id: \.self) {
-             Text("\($0)")
-                 .frame(width: 200, height: 200)
-         }
-     }
- }
- .withScrollOffsetTracking { offset in
-    print(offset)
- }
- ```
- 
- The offset tracking action will trigger whenever the scroll
- view scrolls, and provide you with the scroll offset.
- */
+/// This view can wrap any `ScrollView` or `List` content to
+/// get offset tracking working when the view is scrolled.
+///
+/// To use this view, add it to a `ScrollView` or `List` and
+/// add a content view to it, then simply apply the modifier
+/// ``SwiftUI/View/withScrollOffsetTracking(action:)``, just
+/// like this:
+///
+/// ```swift
+/// List {
+///     ScrollViewOffsetTracker {
+///         ForEach(0...100, id: \.self) {
+///             Text("\($0)")
+///                 .frame(width: 200, height: 200)
+///         }
+///     }
+/// }
+/// .withScrollOffsetTracking {
+///     offset in print(offset)
+///     }
+/// ```
+///
+/// The offset action will trigger when the list scrolls and
+/// provide you with the scroll offset.
 public struct ScrollViewOffsetTracker<Content: View>: View {
     
     public init(
@@ -62,8 +61,8 @@ public struct ScrollViewOffsetTracker<Content: View>: View {
 public extension View {
 
     /// Add this modifier to a `ScrollView`, a `List` or any
-    /// other view that has a ``ScrollViewOffsetTracker`` in
-    /// itself, to track its scroll offset.
+    /// view that has a ``ScrollViewOffsetTracker`` to track
+    /// its scroll offset.
     func withScrollOffsetTracking(
         action: @escaping (_ offset: CGPoint) -> Void
     ) -> some View {
@@ -80,7 +79,7 @@ enum ScrollOffsetNamespace {
 
 struct ScrollOffsetPreferenceKey: PreferenceKey {
 
-    static var defaultValue: CGPoint = .zero
+    static var defaultValue: CGPoint { .zero }
 
     static func reduce(value: inout CGPoint, nextValue: () -> CGPoint) {}
 }

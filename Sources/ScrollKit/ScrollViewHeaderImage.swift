@@ -8,13 +8,11 @@
 
 import SwiftUI
 
-/**
- This view takes any image and adjusts it to be presented as
- a scroll view header.
-
- This view will make sure that the image stretches correctly
- and that it clips to the available space.
- */
+/// This view takes any image and adjusts it to be presented
+/// as a scroll view header.
+///
+/// This view makes sure that your image stretches correctly
+/// and that it clips to the available space.
 public struct ScrollViewHeaderImage: View {
 
     /// Create a scroll view header image.
@@ -32,7 +30,8 @@ public struct ScrollViewHeaderImage: View {
             image
                 .resizable()
                 .aspectRatio(contentMode: .fill)
-        ).clipped()
+        )
+        .clipped()
     }
 }
 

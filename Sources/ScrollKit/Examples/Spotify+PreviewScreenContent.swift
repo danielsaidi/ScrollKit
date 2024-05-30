@@ -77,11 +77,9 @@ private extension Spotify.PreviewScreenContent {
     }
 }
 
-struct SpotifyPreviewScreenContent_Previews: PreviewProvider {
+#Preview {
 
-    static var previews: some View {
-        ScrollView {
-            Spotify.PreviewScreenContent(info: .anthrax)
-        }
+    ScrollView {
+        Spotify.PreviewScreenContent(info: .anthrax)
     }
 }

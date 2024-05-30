@@ -8,13 +8,11 @@
 
 import SwiftUI
 
-/**
- This view wraps a native `ScrollView` and tracks the scroll
- offset as it's scrolled.
-
- You can use the `onScroll` initializer parameter to provide
- a function that will be called whenever the view scrolls.
- */
+/// This view wraps a native scroll view, and will track its
+/// scroll offset as it's scrolled.
+///
+/// You can use the `onScroll` init parameter to pass in any
+/// function that should be called whenever the view scrolls.
 public struct ScrollViewWithOffsetTracking<Content: View>: View {
 
     /// Create a scroll view with offset tracking.

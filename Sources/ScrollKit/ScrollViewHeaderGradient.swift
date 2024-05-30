@@ -8,13 +8,11 @@
 
 import SwiftUI
 
-/**
- This view can be used as a scroll view header overlay, when
- the background may cause the content to be hard to overview.
-
- This is basically just a convenience to avoid having to use
- a `LinearGradient` and define its colors, anchor points etc.
- */
+/// This view can be used as a header view overlay, when the
+/// background may cause the content to be hard to overview.
+///
+/// This is basically just a convenience, to avoid having to
+/// use a `LinearGradient` from scratch.
 public struct ScrollViewHeaderGradient: View {
 
     /// Create a scroll view header gradient.

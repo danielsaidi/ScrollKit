@@ -10,7 +10,7 @@ import SwiftUI
 
 public extension Spotify {
     
-    /// This view mimics the Spotify album screen.
+    /// This view mimics a Spotify album screen.
     struct PreviewScreen: View {
         
         public init(info: PreviewInfo) {

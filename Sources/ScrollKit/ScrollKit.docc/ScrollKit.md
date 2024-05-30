@@ -61,6 +61,10 @@ ScrollKit is available under the MIT license.
 - ``StatusBarVisibilityUpdater``
 - ``StatusBarVisibleState``
 
+### Helpers
+
+- ``ScrollViewOffsetTracker``
+
 ### Examples
 
 - ``Spotify``

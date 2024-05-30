@@ -98,4 +98,5 @@ private extension View {
         #endif
         Spotify.PreviewScreen(info: .regina)
     }
+    .navigationViewStyle(.stack)
 }

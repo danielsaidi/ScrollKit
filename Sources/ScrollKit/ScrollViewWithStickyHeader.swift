@@ -188,8 +188,9 @@ private extension ScrollViewWithStickyHeader {
         #endif
         Preview()
     }
-    .accentColor(.white)
     .colorScheme(.dark)
+    .accentColor(.white)
+    .navigationViewStyle(.stack)
 }
 
 private extension View {

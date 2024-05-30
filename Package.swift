@@ -21,7 +21,9 @@ let package = Package(
     targets: [
         .target(
             name: "ScrollKit",
-            dependencies: []
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency")
+            ]
         ),
         .testTarget(
             name: "ScrollKitTests",

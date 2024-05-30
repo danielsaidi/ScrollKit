@@ -6,6 +6,12 @@ Until then, deprecated features may be removed in any minor version.
 
 
 
+## 0.5.1
+
+This version adds support for strict concurrency.
+
+
+
 ## 0.5
 
 This version makes more stuff public and adds support form visionOS.

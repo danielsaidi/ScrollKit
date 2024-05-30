@@ -10,6 +10,8 @@ Until then, deprecated features may be removed in any minor version.
 
 This version adds support for strict concurrency.
 
+Thanks to murilocappucci@gmail.com, the `ScrollViewWithStickyHeader` now properly passes on the axis and indicator parameters to `ScrollViewWithOffsetTracking`. 
+
 
 
 ## 0.5

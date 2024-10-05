@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 56;
+	objectVersion = 60;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		A97CA01A298EBEC7001EB4F3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A97CA019298EBEC7001EB4F3 /* Preview Assets.xcassets */; };
 		A97CA023298EBF8F001EB4F3 /* DemoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = A97CA022298EBF8F001EB4F3 /* DemoScreen.swift */; };
 		A97CA026298EC05D001EB4F3 /* ScrollKit in Frameworks */ = {isa = PBXBuildFile; productRef = A97CA025298EC05D001EB4F3 /* ScrollKit */; };
+		A9CBE3032CB13D8100DFE99A /* ScrollKit in Frameworks */ = {isa = PBXBuildFile; productRef = A9CBE3022CB13D8100DFE99A /* ScrollKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,7 +22,6 @@
 		A97CA014298EBEC6001EB4F3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		A97CA016298EBEC7001EB4F3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A97CA019298EBEC7001EB4F3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		A97CA021298EBEF8001EB4F3 /* ScrollKit */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = ScrollKit; path = ..; sourceTree = "<group>"; };
 		A97CA022298EBF8F001EB4F3 /* DemoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoScreen.swift; sourceTree = "<group>"; };
 		A97CA027298ECAAD001EB4F3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -31,6 +31,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A9CBE3032CB13D8100DFE99A /* ScrollKit in Frameworks */,
 				A97CA026298EC05D001EB4F3 /* ScrollKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -41,7 +42,6 @@
 		A97CA006298EBEC6001EB4F3 = {
 			isa = PBXGroup;
 			children = (
-				A97CA020298EBEF8001EB4F3 /* Packages */,
 				A97CA011298EBEC6001EB4F3 /* Demo */,
 				A97CA010298EBEC6001EB4F3 /* Products */,
 				A97CA024298EC05D001EB4F3 /* Frameworks */,
@@ -77,14 +77,6 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		A97CA020298EBEF8001EB4F3 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				A97CA021298EBEF8001EB4F3 /* ScrollKit */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		A97CA024298EC05D001EB4F3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +102,7 @@
 			name = Demo;
 			packageProductDependencies = (
 				A97CA025298EC05D001EB4F3 /* ScrollKit */,
+				A9CBE3022CB13D8100DFE99A /* ScrollKit */,
 			);
 			productName = Demo;
 			productReference = A97CA00F298EBEC6001EB4F3 /* Demo.app */;
@@ -140,6 +133,9 @@
 				Base,
 			);
 			mainGroup = A97CA006298EBEC6001EB4F3;
+			packageReferences = (
+				A9CBE3012CB13D8100DFE99A /* XCLocalSwiftPackageReference "../../scrollkit" */,
+			);
 			productRefGroup = A97CA010298EBEC6001EB4F3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -372,8 +368,19 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCLocalSwiftPackageReference section */
+		A9CBE3012CB13D8100DFE99A /* XCLocalSwiftPackageReference "../../scrollkit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = ../../scrollkit;
+		};
+/* End XCLocalSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		A97CA025298EC05D001EB4F3 /* ScrollKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ScrollKit;
+		};
+		A9CBE3022CB13D8100DFE99A /* ScrollKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ScrollKit;
 		};

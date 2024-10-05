@@ -83,19 +83,15 @@ struct DemoScreen<HeaderView: View>: View {
     }
 }
 
-struct DemoScreen_Previews: PreviewProvider {
+#Preview {
 
-    static func header() -> some View {
-        ScrollViewHeaderImage(Image("header"))
-    }
-
-    static var previews: some View {
-        NavigationView {
-            DemoScreen(
-                headerHeight: 250,
-                headerView: header
-            )
-        }
+    NavigationView {
+        DemoScreen(
+            headerHeight: 250,
+            headerView: {
+                ScrollViewHeaderImage(Image("header"))
+            }
+        )
     }
 }
 

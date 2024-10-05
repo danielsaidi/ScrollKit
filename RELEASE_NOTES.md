@@ -6,6 +6,12 @@ Until then, deprecated features may be removed in any minor version.
 
 
 
+## 0.6
+
+This version makes ScrollKit use Swift 6.
+
+
+
 ## 0.5.1
 
 This version adds support for strict concurrency.

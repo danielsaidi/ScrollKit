@@ -17,13 +17,11 @@
 
 ScrollKit is a SwiftUI SDK that adds powerful scroll features, like offset tracking and a header view that stretches & transforms as you pull down, and sticks to the top when you scroll.
 
-The result can look like this, or completely different:
-
 <p align="center" style="border-radius: 10px">
     <img src="Resources/Demo.gif" width=425 />
 </p>
 
-ScrollKit is designed to be easy to use and works on all major Apple platforms.
+ScrollKit works on all major Apple platforms and is designed to be easy to use. It current doesn't use the new `ScrollView` APIs for OS backwards compatibility reasons, but will eventually do so.
 
 
 

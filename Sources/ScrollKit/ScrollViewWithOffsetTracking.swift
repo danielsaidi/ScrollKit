@@ -42,15 +42,39 @@ public struct ScrollViewWithOffsetTracking<Content: View>: View {
     public typealias ScrollAction = (_ offset: CGPoint) -> Void
 
     public var body: some View {
-        ScrollView(axes, showsIndicators: showsIndicators) {
-            ScrollViewOffsetTracker {
-                content()
+        if #available(
+            iOS 18.0,
+            macOS 15.0,
+            tvOS 18.0,
+            visionOS 2.0,
+            watchOS 11.0,
+            *
+        ) {
+            ScrollViewReader { proxy in
+                ZStack(alignment: .top) {
+                    ScrollView(axes, showsIndicators: showsIndicators) {
+                        content()
+                    }
+                }
+                .onScrollGeometryChange(for: Bool.self) { geometry in
+                    let adjustedOffsetY: CGPoint = CGPoint(x: 0, y: -(geometry.contentOffset.y + geometry.contentInsets.top))
+                    onScroll(adjustedOffsetY)
+                    
+                    return geometry.contentOffset.y > geometry.contentInsets.top
+                } action: { oldValue, newValue in }
             }
-        }.withScrollOffsetTracking(action: onScroll)
+        } else {
+            ScrollView(axes, showsIndicators: showsIndicators) {
+                ScrollViewOffsetTracker {
+                    content()
+                }
+            }
+            .withScrollOffsetTracking(action: onScroll)
+        }
     }
 }
 
-#Preview {
+#Preview("iOS 18") {
 
     struct Preview: View {
 
@@ -70,6 +94,42 @@ public struct ScrollViewWithOffsetTracking<Content: View>: View {
                         }
                     }
                 }
+                .navigationTitle("\(Int(scrollOffset.y))")
+            }
+        }
+
+        func updateScrollOffset(_ offset: CGPoint) {
+            self.scrollOffset = offset
+        }
+    }
+
+    return Preview()
+}
+
+
+#Preview {
+
+    struct Preview: View {
+
+        @State
+        var scrollOffset: CGPoint = .zero
+
+        var body: some View {
+            NavigationView {
+                #if os(macOS)
+                Color.clear
+                #endif
+                ScrollView(.vertical, showsIndicators: true) {
+                    ScrollViewOffsetTracker {
+                        LazyVStack {
+                            ForEach(1...100, id: \.self) {
+                                Divider()
+                                Text("\($0)")
+                            }
+                        }
+                    }
+                }
+                .withScrollOffsetTracking(action: updateScrollOffset)
                 .navigationTitle("\(Int(scrollOffset.y))")
             }
         }

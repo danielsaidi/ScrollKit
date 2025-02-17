@@ -96,7 +96,9 @@ private extension View {
         #if os(macOS)
         Color.clear
         #endif
-        Spotify.PreviewScreen(info: .regina)
+        NavigationLink("Test") {
+            Spotify.PreviewScreen(info: .regina)
+        }
     }
     #if os(iOS)
     .navigationViewStyle(.stack)

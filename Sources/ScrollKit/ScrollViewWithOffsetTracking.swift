@@ -39,7 +39,7 @@ public struct ScrollViewWithOffsetTracking<Content: View>: View {
     private let onScroll: ScrollAction
     private let content: () -> Content
 
-    public typealias ScrollAction = (_ offset: CGPoint) -> Void
+    public typealias ScrollAction = @MainActor @Sendable (_ offset: CGPoint) -> Void
 
     public var body: some View {
         ScrollView(axes, showsIndicators: showsIndicators) {

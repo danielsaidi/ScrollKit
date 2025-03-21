@@ -99,14 +99,14 @@ private extension ScrollViewWithStickyHeader {
     
     var isStickyHeaderVisible: Bool {
         guard let headerMinHeight else { return headerVisibleRatio <= 0 }
-        return scrollOffset.y < -headerMinHeight
+        return scrollOffset.y < -(headerHeight - headerMinHeight)
     }
 
     @ViewBuilder
     var navbarOverlay: some View {
         if isStickyHeaderVisible {
             Color.clear
-                .frame(height: navigationBarHeight)
+                .frame(height: headerMinHeight != nil ? nil : navigationBarHeight)
                 .overlay(scrollHeader, alignment: .bottom)
                 .ignoresSafeArea(edges: .top)
                 .frame(height: headerMinHeight)
@@ -170,7 +170,7 @@ private extension ScrollViewWithStickyHeader {
                 .vertical,
                 header: header,
                 headerHeight: 250,
-                headerMinHeight: 150,
+                headerMinHeight: 60,
                 showsIndicators: false
             ) {
                 LazyVStack {

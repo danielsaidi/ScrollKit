@@ -19,14 +19,14 @@ public extension Spotify {
         
         private var info: PreviewInfo
         
-        @State
-        private var scrollOffset: CGPoint = .zero
-        
-        @State
-        private var headerVisibleRatio: CGFloat = 1
-        
         @Environment(\.dismiss)
         private var dismiss
+        
+        @State
+        private var headerVisibleRatio = 1.0
+        
+        @State
+        private var scrollOffset = CGPoint.zero
         
         public var body: some View {
             ScrollViewWithStickyHeader(
@@ -90,7 +90,7 @@ private extension View {
     }
 }
 
-#Preview {
+#Preview("Navigation") {
 
     NavigationView {
         #if os(macOS)
@@ -103,4 +103,26 @@ private extension View {
     #if os(iOS)
     .navigationViewStyle(.stack)
     #endif
+}
+
+#Preview("Sheet") {
+    
+    struct Preview: View {
+        
+        @State var isPresented = false
+        
+        var body: some View {
+            Button("Present") {
+                isPresented.toggle()
+            }
+            .sheet(isPresented: $isPresented) {
+                NavigationView {
+                    Spotify.PreviewScreen(info: .regina)
+                }
+                .navigationViewStyle(.stack)
+            }
+        }
+    }
+    
+    return Preview()
 }

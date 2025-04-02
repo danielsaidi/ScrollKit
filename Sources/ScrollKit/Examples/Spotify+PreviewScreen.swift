@@ -105,6 +105,7 @@ private extension View {
     #endif
 }
 
+#if os(iOS)
 #Preview("Sheet") {
     
     struct Preview: View {
@@ -126,3 +127,5 @@ private extension View {
     
     return Preview()
 }
+#endif
+

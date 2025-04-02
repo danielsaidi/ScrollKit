@@ -145,42 +145,58 @@ private extension ScrollViewWithStickyHeader {
     }
 }
 
-#Preview {
+private struct Preview: View {
     
-    struct Preview: View {
-        
-        @State
-        var selection = 0
-        
-        func header() -> some View {
-            #if canImport(UIKit)
-            TabView {
-                Color.red.tag(0)
-                Color.green.tag(1)
-                Color.blue.tag(2)
-            }
-            .tabViewStyle(.page)
-            #else
-            Color.red
-            #endif
+    @State
+    var headerVisibleRatio = 0.0
+    
+    @State
+    var scrollOffset = CGPoint.zero
+    
+    func header() -> some View {
+        #if canImport(UIKit)
+        TabView {
+            Color.red.tag(0)
+            Color.green.tag(1)
+            Color.blue.tag(2)
         }
-        
-        var body: some View {
-            ScrollViewWithStickyHeader(
-                .vertical,
-                header: header,
-                headerHeight: 250,
-                headerMinHeight: 60,
-                showsIndicators: false
-            ) {
-                LazyVStack {
-                    ForEach(1...100, id: \.self) {
-                        Text("\($0)")
-                    }
+        .tabViewStyle(.page)
+        .overlay {
+            VStack {
+                Text("Offset: \(scrollOffset.y)")
+                Text("Ratio: \(headerVisibleRatio)")
+            }
+        }
+        #else
+        VStack {
+            Color.blue
+            Color.red
+        }
+        #endif
+    }
+    
+    var body: some View {
+        ScrollViewWithStickyHeader(
+            .vertical,
+            header: header,
+            headerHeight: 250,
+            headerMinHeight: 150,
+            showsIndicators: false,
+            onScroll: { offset, headerVisibleRatio in
+                self.scrollOffset = offset
+                self.headerVisibleRatio = headerVisibleRatio
+            }
+        ) {
+            LazyVStack {
+                ForEach(1...100, id: \.self) {
+                    Text("\($0)")
                 }
             }
         }
     }
+}
+
+#Preview("Navigation") {
     
     return NavigationView {
         #if os(macOS)
@@ -195,7 +211,35 @@ private extension ScrollViewWithStickyHeader {
     #endif
 }
 
+#Preview("Sheet") {
+ 
+    struct SheetPreview: View {
+        
+        @State var isPresented = true
+        
+        var body: some View {
+            Button("Present") {
+                isPresented.toggle()
+            }
+            .sheet(isPresented: $isPresented) {
+                Preview()
+            }
+        }
+    }
+    
+    return SheetPreview()
+}
+
 private extension View {
+    
+    func isInSheet(in geo: GeometryProxy) -> Bool {
+        #if os(iOS)
+        guard UIScreen.main.traitCollection.userInterfaceIdiom == .phone else { return false }
+        return geo.safeAreaInsets.top == 0
+        #else
+        return false
+        #endif
+    }
 
     @ViewBuilder
     func prefersNavigationBarHidden() -> some View {

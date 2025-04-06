@@ -50,6 +50,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
         headerHeight: CGFloat,
         headerMinHeight: CGFloat? = nil,
         showsIndicators: Bool = true,
+        scrollManager: ScrollManager? = nil,
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -58,6 +59,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
         self.header = header
         self.headerHeight = headerHeight
         self.headerMinHeight = headerMinHeight
+        self.scrollManager = scrollManager
         self.onScroll = onScroll
         self.content = content
     }
@@ -69,6 +71,8 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private let headerMinHeight: CGFloat?
     private let onScroll: ScrollAction?
     private let content: () -> Content
+
+    @ObservedObject private weak var scrollManager: ScrollManager?
 
     public typealias ScrollAction = (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
@@ -115,20 +119,27 @@ private extension ScrollViewWithStickyHeader {
 
     var scrollView: some View {
         GeometryReader { proxy in
-            ScrollViewWithOffsetTracking(
-                axes,
-                showsIndicators: showsIndicators,
-                onScroll: handleScrollOffset
-            ) {
-                VStack(spacing: 0) {
-                    scrollHeader
-                    content()
-                        .frame(maxHeight: .infinity)
+            ScrollViewReader { scrollProxy in
+                ScrollViewWithOffsetTracking(
+                    axes,
+                    showsIndicators: showsIndicators,
+                    onScroll: handleScrollOffset
+                ) {
+                    VStack(spacing: 0) {
+                        scrollHeader
+                            .id(ScrollTargets.header)
+                        content()
+                            .frame(maxHeight: .infinity)
+                            .id(ScrollTargets.content)
+                    }
                 }
             }
             .onAppear {
                 DispatchQueue.main.async {
                     navigationBarHeight = proxy.safeAreaInsets.top
+                }
+                .onAppear {
+                    scrollManager?.setProxy(scrollProxy)
                 }
             }
         }

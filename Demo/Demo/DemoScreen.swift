@@ -25,11 +25,14 @@ struct DemoScreen<HeaderView: View>: View {
 
     @State
     private var scrollOffset: CGPoint = .zero
+    
+    private let scrollManager = ScrollManager()
 
     var body: some View {
         ScrollViewWithStickyHeader(
             header: header,
             headerHeight: headerHeight,
+            scrollManager: scrollManager,
             onScroll: handleScrollOffset
         ) {
             listItems
@@ -40,6 +43,24 @@ struct DemoScreen<HeaderView: View>: View {
                     .font(.headline)
                     .previewHeaderContent()
                     .opacity(1 - headerVisibleRatio)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    scrollManager.scrollToContent()
+                } label: {
+                    Label("Scroll to content", systemImage: "hand.point.up")
+                        .labelStyle(.iconOnly)
+                }
+                .buttonStyle(.plain)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    scrollManager.scrollToHeader()
+                } label: {
+                    Label("Scroll to header", systemImage: "hand.point.down")
+                        .labelStyle(.iconOnly)
+                }
+                .buttonStyle(.plain)
             }
         }
         .toolbarBackground(.hidden)

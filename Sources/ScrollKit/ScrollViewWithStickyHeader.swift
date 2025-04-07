@@ -71,11 +71,11 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private let headerMinHeight: CGFloat?
     private let onScroll: ScrollAction?
     private let content: () -> Content
-
-    @ObservedObject private weak var scrollManager: ScrollManager?
-
+    
     public typealias ScrollAction = (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
 
+    private var scrollManager: ScrollManager?
+    
     @State
     private var navigationBarHeight: CGFloat = 0
 
@@ -127,19 +127,19 @@ private extension ScrollViewWithStickyHeader {
                 ) {
                     VStack(spacing: 0) {
                         scrollHeader
-                            .id(ScrollTargets.header)
+                            .id(ScrollManager.ScrollTargets.header)
                         content()
                             .frame(maxHeight: .infinity)
-                            .id(ScrollTargets.content)
+                            .id(ScrollManager.ScrollTargets.content)
                     }
+                }
+                .onAppear {
+                    scrollManager?.setProxy(scrollProxy)
                 }
             }
             .onAppear {
                 DispatchQueue.main.async {
                     navigationBarHeight = proxy.safeAreaInsets.top
-                }
-                .onAppear {
-                    scrollManager?.setProxy(scrollProxy)
                 }
             }
         }

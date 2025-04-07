@@ -48,7 +48,7 @@ struct DemoScreen<HeaderView: View>: View {
                 Button {
                     scrollManager.scrollToContent()
                 } label: {
-                    Label("Scroll to content", systemImage: "hand.point.up")
+                    Label("Scroll to content", systemImage: "hand.point.down")
                         .labelStyle(.iconOnly)
                 }
                 .buttonStyle(.plain)
@@ -57,7 +57,7 @@ struct DemoScreen<HeaderView: View>: View {
                 Button {
                     scrollManager.scrollToHeader()
                 } label: {
-                    Label("Scroll to header", systemImage: "hand.point.down")
+                    Label("Scroll to header", systemImage: "hand.point.up")
                         .labelStyle(.iconOnly)
                 }
                 .buttonStyle(.plain)

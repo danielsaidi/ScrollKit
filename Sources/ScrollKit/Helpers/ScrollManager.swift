@@ -26,7 +26,7 @@ import SwiftUI
 /// - Important: `ScrollManager` uses `ScrollViewReader`
 ///   under the hood, so the scrollable views must have
 ///   valid `.id(...)` values matching the internal targets.
-public class ScrollManager: ObservableObject {
+public class ScrollManager {
 
     /// Creates a new scroll manager instance.
     public init() { }

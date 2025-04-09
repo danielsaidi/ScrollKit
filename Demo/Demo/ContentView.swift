@@ -22,7 +22,7 @@ struct ContentView: View {
             .toolbarColorScheme(.light, for: .navigationBar)
         }
         .tint(.white)
-        // .navigationViewStyle(.stack)
+        .navigationViewStyle(.stack)
         .toolbarRole(.navigationStack)
     }
 }
@@ -88,8 +88,6 @@ private extension ContentView {
     }
 }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-    }
+#Preview {
+    ContentView()
 }

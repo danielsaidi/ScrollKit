@@ -122,7 +122,8 @@ private extension ScrollViewWithStickyHeader {
     func headerMinHeight(
         in geo: GeometryProxy
     ) -> Double {
-        headerMinHeight + geo.safeAreaInsets.top
+        let safeMinHeight = headerMinHeight + geo.safeAreaInsets.top
+        return min(safeMinHeight, headerHeight)
     }
     
     func isStickyHeaderVisible(
@@ -184,6 +185,57 @@ private extension ScrollViewWithStickyHeader {
     }
 }
 
+#Preview("Demo") {
+    ScrollViewWithStickyHeader(
+        header: { Color.red },
+        headerHeight: 200,
+        headerMinHeight: 200
+    ) {
+        LazyVStack(spacing: 0) {
+            ForEach(1...100, id: \.self) { item in
+                VStack(spacing: 0) {
+                    Text("Item \(item)")
+                        .padding()
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                    Divider()
+                }
+            }
+        }
+    }
+}
+
+#Preview("Navigation") {
+    
+    return NavigationView {
+        #if os(macOS)
+        Color.clear
+        #endif
+        Preview()
+    }
+    #if os(iOS)
+    .navigationViewStyle(.stack)
+    #endif
+}
+
+#Preview("Sheet") {
+ 
+    struct SheetPreview: View {
+        
+        @State var isPresented = true
+        
+        var body: some View {
+            Button("Present") {
+                isPresented.toggle()
+            }
+            .sheet(isPresented: $isPresented) {
+                Preview()
+            }
+        }
+    }
+    
+    return SheetPreview()
+}
+
 private struct Preview: View {
     
     @State var visibleHeaderRatio = 0.0
@@ -229,7 +281,7 @@ private struct Preview: View {
             headerHeight: 250,
             headerMinHeight: 100,
             headerStretch: false,
-            contentCornerRadius: contentCornerRadius,
+            contentCornerRadius: 0, //contentCornerRadius,
             showsIndicators: false,
             onScroll: { offset, visibleHeaderRatio in
                 self.scrollOffset = offset
@@ -252,48 +304,7 @@ private struct Preview: View {
     }
 }
 
-#Preview("Navigation") {
-    
-    return NavigationView {
-        #if os(macOS)
-        Color.clear
-        #endif
-        Preview()
-    }
-    #if os(iOS)
-    .navigationViewStyle(.stack)
-    #endif
-}
-
-#Preview("Sheet") {
- 
-    struct SheetPreview: View {
-        
-        @State var isPresented = true
-        
-        var body: some View {
-            Button("Present") {
-                isPresented.toggle()
-            }
-            .sheet(isPresented: $isPresented) {
-                Preview()
-            }
-        }
-    }
-    
-    return SheetPreview()
-}
-
 private extension View {
-    
-    func isInSheet(in geo: GeometryProxy) -> Bool {
-        #if os(iOS)
-        guard UIScreen.main.traitCollection.userInterfaceIdiom == .phone else { return false }
-        return geo.safeAreaInsets.top == 0
-        #else
-        return false
-        #endif
-    }
 
     @ViewBuilder
     func prefersNavigationBarHidden() -> some View {

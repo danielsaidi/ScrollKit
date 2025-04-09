@@ -28,9 +28,19 @@ struct DemoScreen<HeaderView: View>: View {
         ScrollViewWithStickyHeader(
             header: header,
             headerHeight: headerHeight,
+            headerMinHeight: 75,
             onScroll: handleScrollOffset
         ) {
-            listItems
+            LazyVStack(spacing: 0) {
+                ForEach(1...100, id: \.self) { item in
+                    VStack(spacing: 0) {
+                        Text("Item \(item)")
+                            .padding()
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Divider()
+                    }
+                }
+            }
         }
         .toolbar {
             ToolbarItem(placement: .principal) {
@@ -60,19 +70,6 @@ struct DemoScreen<HeaderView: View>: View {
         }
         .padding(20)
         .opacity(visibleHeaderRatio)
-    }
-
-    var listItems: some View {
-        LazyVStack(spacing: 0) {
-            ForEach(1...100, id: \.self) { item in
-                VStack(spacing: 0) {
-                    Text("Item \(item)")
-                        .padding()
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                    Divider()
-                }
-            }
-        }
     }
 
     func handleScrollOffset(_ offset: CGPoint, visibleHeaderRatio: CGFloat) {

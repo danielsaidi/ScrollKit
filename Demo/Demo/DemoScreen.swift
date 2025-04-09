@@ -23,12 +23,15 @@ struct DemoScreen<HeaderView: View>: View {
 
     @State
     private var scrollOffset: CGPoint = .zero
+    
+    private let scrollManager = ScrollManager()
 
     var body: some View {
         ScrollViewWithStickyHeader(
             header: header,
             headerHeight: headerHeight,
             headerMinHeight: 75,
+            scrollManager: scrollManager,
             onScroll: handleScrollOffset
         ) {
             LazyVStack(spacing: 0) {
@@ -48,6 +51,24 @@ struct DemoScreen<HeaderView: View>: View {
                     .font(.headline)
                     .previewHeaderContent()
                     .opacity(1 - visibleHeaderRatio)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    scrollManager.scrollToContent()
+                } label: {
+                    Label("Scroll to content", systemImage: "hand.point.down")
+                        .labelStyle(.iconOnly)
+                }
+                .buttonStyle(.plain)
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                Button {
+                    scrollManager.scrollToHeader()
+                } label: {
+                    Label("Scroll to header", systemImage: "hand.point.up")
+                        .labelStyle(.iconOnly)
+                }
+                .buttonStyle(.plain)
             }
         }
         .toolbarBackground(.hidden)

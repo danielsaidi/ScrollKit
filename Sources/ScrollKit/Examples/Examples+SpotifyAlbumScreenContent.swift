@@ -1,23 +1,23 @@
 //
-//  Spotify+PreviewScreenContent.swift
+//  Examples+SpotifyAlbumScreenContent.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-06.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-public extension Spotify {
+public extension Examples.Spotify.AlbumScreen {
     
     /// This view mimics a Spotify album screen content view.
-    struct PreviewScreenContent: View {
+    struct Content: View {
         
-        public init(info: PreviewInfo) {
-            self.info = info
+        public init(album: Examples.Spotify.Album) {
+            self.album = album
         }
         
-        private let info: PreviewInfo
+        private let album: Examples.Spotify.Album
         
         public var body: some View {
             VStack(spacing: 20) {
@@ -30,16 +30,16 @@ public extension Spotify {
     }
 }
 
-private extension Spotify.PreviewScreenContent {
+private extension Examples.Spotify.AlbumScreen.Content {
 
     var title: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text(info.releaseTitle)
+            Text(album.releaseTitle)
                 .font(.title2.bold())
                 .frame(maxWidth: .infinity, alignment: .leading)
-            Text(info.bandName)
+            Text(album.bandName)
                 .font(.footnote.bold())
-            Text("\(info.releaseType) · \(info.releaseDate.formatted(.dateTime.year()))")
+            Text("\(album.releaseType) · \(album.releaseDate.formatted(.dateTime.year()))")
                 .font(.footnote.bold())
                 .foregroundColor(.secondary)
         }
@@ -61,7 +61,7 @@ private extension Spotify.PreviewScreenContent {
 
     var list: some View {
         LazyVStack(alignment: .leading, spacing: 30) {
-            ForEach(Array(info.tracks.enumerated()), id: \.offset) {
+            ForEach(Array(album.tracks.enumerated()), id: \.offset) {
                 listItem($0.element)
             }
         }
@@ -70,7 +70,7 @@ private extension Spotify.PreviewScreenContent {
     func listItem(_ song: String) -> some View {
         VStack(alignment: .leading) {
             Text(song).font(.headline)
-            Text(info.bandName)
+            Text(album.bandName)
                 .font(.footnote)
                 .foregroundColor(.secondary)
         }
@@ -80,6 +80,6 @@ private extension Spotify.PreviewScreenContent {
 #Preview {
 
     ScrollView {
-        Spotify.PreviewScreenContent(info: .anthrax)
+        Examples.Spotify.AlbumScreen.Content(album: .anthrax)
     }
 }

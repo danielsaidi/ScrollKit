@@ -6,6 +6,18 @@ Until then, deprecated features may be removed in any minor version.
 
 
 
+## 0.7
+
+This version moves examples into a new namespace and renames some View extensions to make more sense. 
+
+### 🗑️ Deprecations
+
+* All examples have been moved into a new `Examples` namespace.
+* The `hideStatusBarUntilScrolled` view extension has been renamed to `statusBarHiddenUntilScrolled`.
+* The `withScrollOffsetTracking` view extension has been renamed to `scrollViewOffsetTracking`.
+
+
+
 ## 0.6.1
 
 This version adjusts the code to address a concurrency warning.

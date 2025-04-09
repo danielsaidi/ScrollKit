@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-04.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import ScrollKit
@@ -21,7 +21,7 @@ struct DemoScreen<HeaderView: View>: View {
     let headerView: () -> HeaderView
 
     @State
-    private var headerVisibleRatio: CGFloat = 1
+    private var visibleHeaderRatio: CGFloat = 1
 
     @State
     private var scrollOffset: CGPoint = .zero
@@ -39,7 +39,7 @@ struct DemoScreen<HeaderView: View>: View {
                 Text("Demo Title")
                     .font(.headline)
                     .previewHeaderContent()
-                    .opacity(1 - headerVisibleRatio)
+                    .opacity(1 - visibleHeaderRatio)
             }
         }
         .toolbarBackground(.hidden)
@@ -61,7 +61,7 @@ struct DemoScreen<HeaderView: View>: View {
             Text("Some additional information")
         }
         .padding(20)
-        .opacity(headerVisibleRatio)
+        .opacity(visibleHeaderRatio)
     }
 
     var listItems: some View {
@@ -77,9 +77,9 @@ struct DemoScreen<HeaderView: View>: View {
         }
     }
 
-    func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
+    func handleScrollOffset(_ offset: CGPoint, visibleHeaderRatio: CGFloat) {
         self.scrollOffset = offset
-        self.headerVisibleRatio = headerVisibleRatio
+        self.visibleHeaderRatio = visibleHeaderRatio
     }
 }
 

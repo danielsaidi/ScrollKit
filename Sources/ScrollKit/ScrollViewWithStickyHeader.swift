@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-03.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -70,7 +70,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private let onScroll: ScrollAction?
     private let content: () -> Content
 
-    public typealias ScrollAction = (_ offset: CGPoint, _ headerVisibleRatio: CGFloat) -> Void
+    public typealias ScrollAction = (_ offset: CGPoint, _ visibleHeaderRatio: CGFloat) -> Void
 
     @State
     private var navigationBarHeight: CGFloat = 0
@@ -78,7 +78,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     @State
     private var scrollOffset: CGPoint = .zero
 
-    private var headerVisibleRatio: CGFloat {
+    private var visibleHeaderRatio: CGFloat {
         (headerHeight + scrollOffset.y) / headerHeight
     }
 
@@ -98,7 +98,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
 private extension ScrollViewWithStickyHeader {
     
     var isStickyHeaderVisible: Bool {
-        guard let headerMinHeight else { return headerVisibleRatio <= 0 }
+        guard let headerMinHeight else { return visibleHeaderRatio <= 0 }
         return scrollOffset.y < -headerMinHeight
     }
 
@@ -141,14 +141,14 @@ private extension ScrollViewWithStickyHeader {
 
     func handleScrollOffset(_ offset: CGPoint) {
         self.scrollOffset = offset
-        self.onScroll?(offset, headerVisibleRatio)
+        self.onScroll?(offset, visibleHeaderRatio)
     }
 }
 
 private struct Preview: View {
     
     @State
-    var headerVisibleRatio = 0.0
+    var visibleHeaderRatio = 0.0
     
     @State
     var scrollOffset = CGPoint.zero
@@ -164,7 +164,7 @@ private struct Preview: View {
         .overlay {
             VStack {
                 Text("Offset: \(scrollOffset.y)")
-                Text("Ratio: \(headerVisibleRatio)")
+                Text("Ratio: \(visibleHeaderRatio)")
             }
         }
         #else
@@ -182,9 +182,9 @@ private struct Preview: View {
             headerHeight: 250,
             headerMinHeight: 150,
             showsIndicators: false,
-            onScroll: { offset, headerVisibleRatio in
+            onScroll: { offset, visibleHeaderRatio in
                 self.scrollOffset = offset
-                self.headerVisibleRatio = headerVisibleRatio
+                self.visibleHeaderRatio = visibleHeaderRatio
             }
         ) {
             LazyVStack {

@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-12-04.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -11,10 +11,9 @@ import SwiftUI
 /// This view can wrap any `ScrollView` or `List` content to
 /// get offset tracking working when the view is scrolled.
 ///
-/// To use this view, add it to a `ScrollView` or `List` and
-/// add a content view to it, then simply apply the modifier
-/// ``SwiftUI/View/withScrollOffsetTracking(action:)``, just
-/// like this:
+/// To use this view, add it within a `ScrollView` or `List`,
+/// then apply ``SwiftUI/View/scrollViewOffsetTracking(action:)``
+/// to the parent view, like this:
 ///
 /// ```swift
 /// List {
@@ -25,9 +24,9 @@ import SwiftUI
 ///         }
 ///     }
 /// }
-/// .withScrollOffsetTracking {
-///     offset in print(offset)
-///     }
+/// .scrollViewOffsetTracking { offset in
+///     print(offset)
+/// }
 /// ```
 ///
 /// The offset action will trigger when the list scrolls and
@@ -63,7 +62,7 @@ public extension View {
     /// Add this modifier to a `ScrollView`, a `List` or any
     /// view that has a ``ScrollViewOffsetTracker`` to track
     /// its scroll offset.
-    func withScrollOffsetTracking(
+    func scrollViewOffsetTracking(
         action: @escaping @MainActor @Sendable (_ offset: CGPoint) -> Void
     ) -> some View {
         self.coordinateSpace(name: ScrollOffsetNamespace.namespace)
@@ -107,7 +106,11 @@ struct ScrollOffsetPreferenceKey: PreferenceKey {
                     }
                 }
             }
-            .withScrollOffsetTracking(action: { offset = .init(x: $0.x.rounded(), y: $0.y.rounded()) })
+            .scrollViewOffsetTracking { offset in
+                let roundedX = offset.x.rounded()
+                let roundedY = offset.y.rounded()
+                self.offset = .init(x: roundedX, y: roundedY)
+            }
             .navigationTitle("\(offset.debugDescription)")
         }
     }

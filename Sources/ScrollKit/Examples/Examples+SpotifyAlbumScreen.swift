@@ -1,29 +1,29 @@
 //
-//  Spotify+PreviewScreen.swift
+//  Examples+SpotifyAlbumScreen.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-07.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-public extension Spotify {
+public extension Examples.Spotify {
     
     /// This view mimics a Spotify album screen.
-    struct PreviewScreen: View {
+    struct AlbumScreen: View {
         
-        public init(info: PreviewInfo) {
-            self.info = info
+        public init(album: Album) {
+            self.album = album
         }
         
-        private var info: PreviewInfo
+        private var album: Album
         
         @Environment(\.dismiss)
         private var dismiss
         
         @State
-        private var headerVisibleRatio = 1.0
+        private var visibleHeaderRatio = 1.0
         
         @State
         private var scrollOffset = CGPoint.zero
@@ -31,10 +31,10 @@ public extension Spotify {
         public var body: some View {
             ScrollViewWithStickyHeader(
                 header: scrollViewHeader,
-                headerHeight: Spotify.PreviewScreenHeader.height,
+                headerHeight: Examples.Spotify.AlbumScreen.Header.height,
                 onScroll: handleScrollOffset
             ) {
-                Spotify.PreviewScreenContent(info: info)
+                Examples.Spotify.AlbumScreen.Content(album: album)
             }
             .preferredColorScheme(.dark)
             #if os(iOS)
@@ -46,21 +46,21 @@ public extension Spotify {
         }
         
         func scrollViewHeader() -> some View {
-            Spotify.PreviewScreenHeader(
-                info: info,
-                headerVisibleRatio: headerVisibleRatio
+            Examples.Spotify.AlbumScreen.Header(
+                album: album,
+                visibleHeaderRatio: visibleHeaderRatio
             )
         }
         
         var toolbarTitleView: some View {
-            Text(info.releaseTitle)
+            Text(album.releaseTitle)
                 .font(.headline.bold())
-                .opacity(headerVisibleRatio > 0 ? 0 : -5 * headerVisibleRatio)
+                .opacity(visibleHeaderRatio > 0 ? 0 : -5 * visibleHeaderRatio)
         }
         
-        func handleScrollOffset(_ offset: CGPoint, headerVisibleRatio: CGFloat) {
+        func handleScrollOffset(_ offset: CGPoint, visibleHeaderRatio: CGFloat) {
             self.scrollOffset = offset
-            self.headerVisibleRatio = headerVisibleRatio
+            self.visibleHeaderRatio = visibleHeaderRatio
         }
     }
 }
@@ -90,14 +90,21 @@ private extension View {
     }
 }
 
-#Preview("Navigation") {
+private var previewAlbum: Examples.Spotify.Album { .misfortune }
+
+#Preview("Plain") {
+
+    Examples.Spotify.AlbumScreen(album: previewAlbum)
+}
+
+#Preview("Push") {
 
     NavigationView {
         #if os(macOS)
         Color.clear
         #endif
         NavigationLink("Test") {
-            Spotify.PreviewScreen(info: .regina)
+            Examples.Spotify.AlbumScreen(album: previewAlbum)
         }
     }
     #if os(iOS)
@@ -118,7 +125,7 @@ private extension View {
             }
             .sheet(isPresented: $isPresented) {
                 NavigationView {
-                    Spotify.PreviewScreen(info: .regina)
+                    Examples.Spotify.AlbumScreen(album: previewAlbum)
                 }
                 .navigationViewStyle(.stack)
             }

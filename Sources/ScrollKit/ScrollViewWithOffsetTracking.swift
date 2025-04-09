@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-02-03.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -46,7 +46,8 @@ public struct ScrollViewWithOffsetTracking<Content: View>: View {
             ScrollViewOffsetTracker {
                 content()
             }
-        }.withScrollOffsetTracking(action: onScroll)
+        }
+        .scrollViewOffsetTracking(action: onScroll)
     }
 }
 

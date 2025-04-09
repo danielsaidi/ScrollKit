@@ -14,6 +14,13 @@ ScrollKit adds powerful scrolling features to SwiftUI, such as offset tracking a
 }
 
 
+## Basic Usage
+
+The most basic use-case is to use the top-level ``ScrollViewWithStickyHeader`` to set up a sticky header within any list or scroll view, then use ``ScrollViewHeaderImage`` and ``ScrollViewHeaderGradient`` to easily manage the stretching.
+
+There are however many other scroll utilities in this library. Some have been replaced by native SwiftUI features that have been added after this library was first released, but are kept due to backwards compatibility. 
+
+
 ## How to track scroll offset
 
 ScrollKit has a ``ScrollViewWithOffsetTracking`` that triggers an action when it's scrolled:
@@ -36,15 +43,29 @@ struct MyView: View {
 }
 ```
 
-You can then use this offset in any way you like, e.g. to fade in a navigation bar title.
+You can also use the ``ScrollViewOffsetTracker`` together with the ``SwiftUICore/View/scrollViewOffsetTracking(action:)`` view modifier:
+
+```swift
+List {
+    ScrollViewOffsetTracker {
+        ForEach(0...100, id: \.self) {
+            Text("\($0)")
+                .frame(width: 200, height: 200)
+        }
+    }
+}
+.scrollViewOffsetTracking { offset in
+    print(offset)
+}
+```
+
+You use the offset in any way you like, e.g. to fade navigation bar title. This is how ``ScrollViewWithStickyHeader`` is implemented.
 
 
 
 ## How to set up a sticky header
 
-ScrollKit has a ``ScrollViewWithStickyHeader`` that stretches and transforms when it's pulled down, and sticks it to the top when its scroll view is scrolled.
-
-To use a sticky header, just add one to a view and provide it with a content view, a start height, an optional minimum height, etc.:
+The ``ScrollViewWithStickyHeader`` has a header view that stretches and transforms when it's pulled down, and sticks to the top as the scroll view content is scrolled:
 
 ```swift
 struct MyView: View {
@@ -54,50 +75,65 @@ struct MyView: View {
     
     @State
     private var visibleRatio = CGFloat.zero
-    
-    func handleOffset(_ scrollOffset: CGPoint, visibleHeaderRatio: CGFloat) {
-        self.offset = scrollOffset
-        self.visibleRatio = visibleHeaderRatio
-    }
-    
-    func header() -> some View {
-        ZStack {
-            Color.red
-            ScrollViewHeaderGradient()  // By default a dark gradient
-        }
-    }
 
     var body: some View {
         ScrollViewWithStickyHeader(
-            header: header,
-            headerHeight: 250,
-            headerMinHeight: 150,
-            onScroll: handleOffset
+            header: stickyHeader,   // A header view
+            headerHeight: 250,      // Its resting height
+            headerMinHeight: 150,   // Its minimum height
+            onScroll: handleScroll  // An optional scroll action
         ) {
             // Add your scroll content here, e.g. a `LazyVStack`
+        }
+    }
+
+    func handleScroll(_ offset: CGPoint, visibleHeaderRatio: CGFloat) {
+        self.scrollOffset = offset
+        self.visibleRatio = visibleHeaderRatio
+    }
+
+    func stickyHeader() -> some View {
+        ZStack {
+            Color.red
+            ScrollViewHeaderGradient()  // By default a dark gradient
+            Text("Scroll offset: \(offset.y)")
         }
     }
 }
 ```
 
-The `visibleHeaderRatio` is how many percent (1.0 to 0.0) that is visible below the navigation bar. You can use this information to transform the content in the header accordingly.
+The visibleHeaderRatio is how many percent (0-1) that is visible below the navigation bar. You can use this to adjust the header content.
+
+
+
+## How to fade in the status bar on scroll
+
+Since it's complicated to control the appearance of a status bar in an app that supports both light and dark mode, and there are some glitches when the scroll offset is zero, ScrollKit has ways to hide the status bar until the view scrolls.
+
+Just add a ``StatusBarVisibleState`` to your view, and apply a ``SwiftUICore/View/statusBarVisible(_:)`` view modifier to the root content. The status bar will then automatically update as you scroll. 
+
+
+```swift
+struct ContentView: View {
+
+    @StateObject
+    private var state = StatusBarVisibleState()
+
+    var body: some View {
+        NavigationStack {
+            ...
+        }
+        .statusBarVisible(state)
+    }
+}
+```
+
+You can also just use the ``SwiftUICore/View/statusBarHiddenUntilScrolled(offset:)`` modifier, which will automatically set up everything and handle the state on scroll.
+
+Note that this is an experimental feature that may contain glitches based on where you use it. Please report any strange behavior if you find that this utility doesn't work as intended in certain scenarios.
 
 
 
 ## More views
 
-ScrollKit has some other views as well, for instance:
-
-@TabNavigator {
-   @Tab("ScrollViewHeader") {
-       Can be used in a regular `ScrollView` and stretches out when it's pulled down, then scrolls away together with the content.
-   }
-
-   @Tab("ScrollViewHeaderGradient") {
-       A convenience that can be used to add a discrete gradient to the header.
-   }
-   
-   @Tab("ScrollViewHeaderImage") {
-       Takes any image and adjusts it to be presented as a scroll view header.
-   }
-}
+ScrollKit has some additional views as well. The ``ScrollViewHeader`` can be used in a regular `ScrollView` and stretches out when it's pulled down, then scrolls away with the content. The ``ScrollViewHeaderGradient`` can be used as a discrete color gradient on top of a header image, to ensure readabilkity. The ``ScrollViewHeaderImage`` takes any custom image and adjusts it to be presented as a stretchy scroll view header.

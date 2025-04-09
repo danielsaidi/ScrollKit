@@ -65,4 +65,4 @@ ScrollKit is available under the MIT license.
 
 ### Examples
 
-- ``Spotify``
+- ``Examples``

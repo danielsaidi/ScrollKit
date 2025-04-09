@@ -4,7 +4,7 @@
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-03-13.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
@@ -132,10 +132,16 @@ private extension StatusBarVisibleState {
 }
 
 public extension View {
-
+    
+    /// Set the status bar visibility based on a state value.
     func statusBarVisible(_ state: StatusBarVisibleState) -> some View {
         self.statusBarHidden(state.isHidden)
             .environmentObject(state)
+    }
+    
+    /// Set the status bar visibility based on a state value.
+    func statusBarHidden(_ state: StatusBarVisibleState) -> some View {
+        self.statusBarVisible(state)
     }
 }
 #endif

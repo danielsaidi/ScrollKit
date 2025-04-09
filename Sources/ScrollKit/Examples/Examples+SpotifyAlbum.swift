@@ -1,17 +1,17 @@
 //
-//  Spotify+PreviewInfo.swift
+//  Examples+SpotifyAlbum.swift
 //  ScrollKit
 //
 //  Created by Daniel Saidi on 2023-03-10.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2025 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI
 
-public extension Spotify {
+public extension Examples.Spotify {
     
     /// This model is used by the Spotify previews.
-    struct PreviewInfo {
+    struct Album {
 
         public init(
             bandName: String,
@@ -20,7 +20,8 @@ public extension Spotify {
             releaseDate: Date,
             releaseCoverUrl: String,
             tintColor: Color,
-            tracks: [String]) {
+            tracks: [String]
+        ) {
             self.bandName = bandName
             self.releaseTitle = releaseTitle
             self.releaseType = releaseType
@@ -40,7 +41,7 @@ public extension Spotify {
     }
 }
 
-public extension Spotify.PreviewInfo {
+public extension Examples.Spotify.Album {
 
     static var anthrax: Self {
         .init(
@@ -77,7 +78,7 @@ public extension Spotify.PreviewInfo {
             releaseTitle: "Forsaken",
             releaseType: "Album",
             releaseDate: Calendar.current.date(from: DateComponents(year: 1999)) ?? .now,
-            releaseCoverUrl: "https://i.discogs.com/75jm2NwzdkgIlEo9ucyl4_o1OCOzB4EQPZua8VQ5W94/rs:fit/g:sm/q:90/h:600/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9SLTQzOTg5/NDUtMTM4NzIwNTE4/Ni02NTI1LmpwZWc.jpeg",
+            releaseCoverUrl: "https://danielsaidi.com/assets/bands/misfortune/forsaken.jpg",
             tintColor: .init(red: 0.5, green: 0.3, blue: 0),
             tracks: [
                 "Forsaken",

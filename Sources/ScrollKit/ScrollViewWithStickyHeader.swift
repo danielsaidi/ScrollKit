@@ -17,11 +17,16 @@ import SwiftUI
 /// a ``ScrollViewHeader`` to make your header view properly
 /// stretch out when the scroll view is pulled down.
 ///
-/// You can apply a `headerHeight` which will be the initial
-/// resting height of your sticky header, a `headerMinHeight`
-/// as its minimum height (below the safe area inset), and a
+/// You can apply a `headerHeight` which will be the resting
+/// height of the header, a `headerMinHeight` as the minimum
+/// header height (below the top safe area), and an optional
 /// `contentCornerRadius` which applies a corner radius mask
-/// under which the content will scroll.
+/// under which the scroll view content will scroll. You can
+/// also set the `headerStretch` parameter to `false` if you
+/// prefer to disable the header stretch effect. This can be
+/// nice when the view is rendered in a sheet, where pulling
+/// down should dismiss the sheet rather than stretching the
+/// sticky header.
 ///
 /// You can use the `onScroll` init parameter to pass in any
 /// function that should be called whenever the view scrolls.
@@ -47,6 +52,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     ///   - header: The scroll view header builder.
     ///   - headerHeight: The height to apply to the scroll view header.
     ///   - headerMinHeight: The minimum height to apply to the scroll view header, by default the `headerHeight`.
+    ///   - headerStretch: Whether to stretch out the header when pulling down, by default `true`.
     ///   - contentCornerRadius: The corner radius to apply to the scroll content.
     ///   - showsIndicators: Whether or not to show scroll indicators, by default `true`.
     ///   - onScroll: An action that will be called whenever the scroll offset changes, by default `nil`.
@@ -56,7 +62,8 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
         @ViewBuilder header: @escaping () -> Header,
         headerHeight: Double,
         headerMinHeight: Double? = nil,
-        contentCornerRadius: CGFloat? = nil,
+        headerStretch: Bool = true,
+        contentCornerRadius: CGFloat = 0,
         showsIndicators: Bool = true,
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: @escaping () -> Content
@@ -66,6 +73,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
         self.header = header
         self.headerHeight = headerHeight
         self.headerMinHeight = headerMinHeight ?? headerHeight
+        self.headerStretch = headerStretch
         self.contentCornerRadius = contentCornerRadius
         self.onScroll = onScroll
         self.content = content
@@ -76,7 +84,8 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private let header: () -> Header
     private let headerHeight: Double
     private let headerMinHeight: Double
-    private let contentCornerRadius: CGFloat?
+    private let headerStretch: Bool
+    private let contentCornerRadius: CGFloat
     private let onScroll: ScrollAction?
     private let content: () -> Content
 
@@ -86,7 +95,10 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private var scrollOffset: CGPoint = .zero
 
     private var visibleHeaderRatio: CGFloat {
-        (headerHeight + scrollOffset.y) / headerHeight
+        let value = (headerHeight + scrollOffset.y) / headerHeight
+        if headerStretch { return value }
+        print(value)
+        return min(1, value)
     }
 
     public var body: some View {
@@ -117,25 +129,15 @@ private extension ScrollViewWithStickyHeader {
         in geo: GeometryProxy
     ) -> Bool {
         let minHeight = headerMinHeight(in: geo)
-        let safe = geo.safeAreaInsets.top
-        
-        print("---")
-        print("True height: \(self.headerHeight)")
-        print("True min: \(self.headerMinHeight)")
-        print("Calculated min: \(minHeight)")
-        print("Safe area: \(safe)")
-        print("Offset: \(scrollOffset.y)")
-        
-        return (scrollOffset.y + 5) < -minHeight
+        return scrollOffset.y < -minHeight
     }
 
-    @ViewBuilder
     func navbarOverlay(
         in geo: GeometryProxy
     ) -> some View {
         let minHeight = headerMinHeight(in: geo)
         let ratioHeight = headerHeight * visibleHeaderRatio
-        Color.clear.overlay(alignment: .bottom) {
+        return Color.clear.overlay(alignment: .bottom) {
             scrollHeader
         }
         .frame(height: max(minHeight, ratioHeight))
@@ -161,11 +163,19 @@ private extension ScrollViewWithStickyHeader {
     
     @ViewBuilder
     var scrollHeader: some View {
-        let radius = contentCornerRadius ?? 0
+        if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
+            scrollHeaderView
+                .scrollViewHeaderWithRoundedContentMask(contentCornerRadius)
+        } else {
+            scrollHeaderView
+        }
+    }
+    
+    @ViewBuilder
+    var scrollHeaderView: some View {
         ScrollViewHeader(content: header)
             .frame(minHeight: headerHeight)
             .edgesIgnoringSafeArea(.all)
-            .scrollViewHeaderWithRoundedContentMask(radius)
     }
 
     func handleScrollOffset(_ offset: CGPoint) {
@@ -217,7 +227,8 @@ private struct Preview: View {
             .vertical,
             header: header,
             headerHeight: 250,
-            headerMinHeight: 50,
+            headerMinHeight: 100,
+            headerStretch: false,
             contentCornerRadius: contentCornerRadius,
             showsIndicators: false,
             onScroll: { offset, visibleHeaderRatio in

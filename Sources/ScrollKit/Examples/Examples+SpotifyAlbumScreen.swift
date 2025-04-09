@@ -40,6 +40,7 @@ public extension Examples.Spotify {
                 header: scrollViewHeader,
                 headerHeight: Examples.Spotify.AlbumScreen.Header.height,
                 headerMinHeight: 50,
+                headerStretch: false,
                 contentCornerRadius: scrollContentCornerRadius,
                 onScroll: handleScrollOffset
             ) {
@@ -136,7 +137,7 @@ private struct Preview: View {
 #if os(iOS)
 #Preview("Sheet") {
     
-    struct Preview: View {
+    struct SheetPreview: View {
         
         @State var isPresented = false
         
@@ -153,7 +154,7 @@ private struct Preview: View {
         }
     }
     
-    return Preview()
+    return SheetPreview()
 }
 #endif
 

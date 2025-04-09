@@ -22,7 +22,7 @@ struct ContentView: View {
             .toolbarColorScheme(.light, for: .navigationBar)
         }
         .tint(.white)
-        .navigationViewStyle(.stack)
+        // .navigationViewStyle(.stack)
         .toolbarRole(.navigationStack)
     }
 }
@@ -75,9 +75,9 @@ private extension ContentView {
         }
     }
 
-    func spotifyLink(_ info: Spotify.PreviewInfo) -> some View {
+    func spotifyLink(_ info: Examples.Spotify.Album) -> some View {
         link("record.circle.fill", "Spotify - \(info.bandName)") {
-            Spotify.PreviewScreen(info: info)
+            Examples.Spotify.AlbumScreen(album: info)
         }
     }
 

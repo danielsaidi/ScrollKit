@@ -9,10 +9,8 @@
 import ScrollKit
 import SwiftUI
 
-/**
- This view takes a custom header view and height and adds it
- to a scroll view with sticky header.
- */
+/// This view takes a custom header view and height and adds
+/// it to a scroll view with sticky header.
 struct DemoScreen<HeaderView: View>: View {
 
     let headerHeight: CGFloat

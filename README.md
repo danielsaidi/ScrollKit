@@ -60,9 +60,11 @@ struct MyView: View {
     var body: some View {
         ScrollViewWithStickyHeader(
             header: stickyHeader,   // A header view
-            headerHeight: 250,      // Its resting height
-            headerMinHeight: 150,   // Its minimum height
-            onScroll: handleScroll  // An optional scroll action
+            headerHeight: 250,      // The resting header height
+            headerMinHeight: 150,   // The minimum header height
+            headerStretch: false,   // Disables the stretch effect
+            contentCornerRadius: 20 // An optional corner radius mask
+            onScroll: handleScroll  // An optional scroll handler action
         ) {
             // Add your scroll content here, e.g. a `LazyVStack`
         }

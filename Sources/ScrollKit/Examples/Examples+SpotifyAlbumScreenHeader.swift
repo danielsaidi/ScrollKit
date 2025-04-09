@@ -37,6 +37,7 @@ public extension Examples.Spotify.AlbumScreen {
                 cover
                     .padding(.bottom, bottomPadding)
             }
+            .clipped()
         }
     }
 }

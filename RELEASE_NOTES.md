@@ -12,6 +12,7 @@ This version moves examples into a new namespace and renames some View extension
 
 ### ✨ New Features
 
+* The `ScrollViewWithStickyHeader` has a new `headerStretch` parameter.
 * The `ScrollViewWithStickyHeader` has a new `contentCornerRadius` parameter.
 * The new `scrollViewContentWithHeaderOverlap(...)` view extension can apply a header overlap to a scroll view content view.
 * The new `scrollViewContentWithRoundedHeaderOverlap(...)` view extension can apply a rounded header overlap to a scroll view content view. 

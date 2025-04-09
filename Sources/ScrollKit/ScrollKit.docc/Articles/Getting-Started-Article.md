@@ -21,9 +21,10 @@ The most basic use-case is to use the top-level ``ScrollViewWithStickyHeader`` t
 There are however many other scroll utilities in this library. Some have been replaced by native SwiftUI features that have been added after this library was first released, but are kept due to backwards compatibility. 
 
 
+
 ## How to track scroll offset
 
-ScrollKit has a ``ScrollViewWithOffsetTracking`` that triggers an action when it's scrolled:
+Althouth there are native alternatives, ScrollKit has a ``ScrollViewWithOffsetTracking`` that triggers an action when it's scrolled:
 
 ```swift
 struct MyView: View {
@@ -63,9 +64,9 @@ You use the offset in any way you like, e.g. to fade navigation bar title. This 
 
 
 
-## How to set up a sticky header
+## How to set up a scroll view with a sticky header
 
-The ``ScrollViewWithStickyHeader`` has a header view that stretches and transforms when it's pulled down, and sticks to the top as the scroll view content is scrolled:
+You can use the ``ScrollViewWithStickyHeader`` view to create a scroll view that has a header view that stretches and transforms when it's pulled down, and sticks to the top as the scroll view content is scrolled:
 
 ```swift
 struct MyView: View {
@@ -106,6 +107,16 @@ The visibleHeaderRatio is how many percent (0-1) that is visible below the navig
 
 
 
+## How to set up a scroll view with a header and overlapping content
+
+A common design pattern is to apply rounded corners to the scroll content, and have it overlay the scroll view header. You can use the ``SwiftUICore/View/scrollViewHeaderRoundedOverlap(_:cornerRadius:)`` view extension to achieve this effect:
+
+![Screenshot](Rounded-Corners)
+
+ScrollKit also has a ``SwiftUICore/View/scrollViewHeaderOverlap(_:)`` variant that just applies the overlap, withough any other view modifications. 
+
+
+
 ## How to fade in the status bar on scroll
 
 Since it's complicated to control the appearance of a status bar in an app that supports both light and dark mode, and there are some glitches when the scroll offset is zero, ScrollKit has ways to hide the status bar until the view scrolls.
@@ -137,3 +148,8 @@ Note that this is an experimental feature that may contain glitches based on whe
 ## More views
 
 ScrollKit has some additional views as well. The ``ScrollViewHeader`` can be used in a regular `ScrollView` and stretches out when it's pulled down, then scrolls away with the content. The ``ScrollViewHeaderGradient`` can be used as a discrete color gradient on top of a header image, to ensure readabilkity. The ``ScrollViewHeaderImage`` takes any custom image and adjusts it to be presented as a stretchy scroll view header.
+
+
+## More view extensions
+
+

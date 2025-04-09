@@ -15,16 +15,19 @@ public extension Examples.Spotify.AlbumScreen {
         
         public init(
             album: Examples.Spotify.Album,
+            bottomPadding: Double = 0,
             visibleHeaderRatio: CGFloat = 1
         ) {
             self.album = album
+            self.bottomPadding = bottomPadding
             self.visibleHeaderRatio = visibleHeaderRatio
         }
         
         public static let height: CGFloat = 280
         
-        private var album: Examples.Spotify.Album
-        private var visibleHeaderRatio: CGFloat
+        private let album: Examples.Spotify.Album
+        private let bottomPadding: Double
+        private let visibleHeaderRatio: CGFloat
         
         public var body: some View {
             ZStack {
@@ -32,6 +35,7 @@ public extension Examples.Spotify.AlbumScreen {
                 ScrollViewHeaderGradient(album.tintColor.opacity(1), album.tintColor.opacity(0))
                     .opacity(1 - visibleHeaderRatio)
                 cover
+                    .padding(.bottom, bottomPadding)
             }
         }
     }

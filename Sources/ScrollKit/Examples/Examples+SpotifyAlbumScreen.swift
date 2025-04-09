@@ -19,6 +19,9 @@ public extension Examples.Spotify {
         
         private var album: Album
         
+        @Environment(\.colorScheme)
+        private var colorScheme
+        
         @Environment(\.dismiss)
         private var dismiss
         
@@ -28,15 +31,22 @@ public extension Examples.Spotify {
         @State
         private var scrollOffset = CGPoint.zero
         
+        private var scrollContentCornerRadius: Double {
+            colorScheme == .dark ? 0.0 : 20
+        }
+        
         public var body: some View {
             ScrollViewWithStickyHeader(
                 header: scrollViewHeader,
                 headerHeight: Examples.Spotify.AlbumScreen.Header.height,
+                headerMinHeight: 50,
+                contentCornerRadius: scrollContentCornerRadius,
                 onScroll: handleScrollOffset
             ) {
-                Examples.Spotify.AlbumScreen.Content(album: album)
+                if #available(iOS 16.0, *) {
+                    Examples.Spotify.AlbumScreen.Content(album: album)
+                }
             }
-            .preferredColorScheme(.dark)
             #if os(iOS)
             .hideBackButtonText()
             #endif
@@ -48,6 +58,7 @@ public extension Examples.Spotify {
         func scrollViewHeader() -> some View {
             Examples.Spotify.AlbumScreen.Header(
                 album: album,
+                bottomPadding: scrollContentCornerRadius,
                 visibleHeaderRatio: visibleHeaderRatio
             )
         }
@@ -90,11 +101,21 @@ private extension View {
     }
 }
 
-private var previewAlbum: Examples.Spotify.Album { .misfortune }
+private struct Preview: View {
+    
+    var body: some View {
+        Examples.Spotify.AlbumScreen(album: .misfortune)
+    }
+}
 
-#Preview("Plain") {
+#Preview("Light") {
 
-    Examples.Spotify.AlbumScreen(album: previewAlbum)
+    Preview()
+}
+
+#Preview("Dark") {
+
+    Preview().preferredColorScheme(.dark)
 }
 
 #Preview("Push") {
@@ -104,7 +125,7 @@ private var previewAlbum: Examples.Spotify.Album { .misfortune }
         Color.clear
         #endif
         NavigationLink("Test") {
-            Examples.Spotify.AlbumScreen(album: previewAlbum)
+            Preview()
         }
     }
     #if os(iOS)
@@ -125,7 +146,7 @@ private var previewAlbum: Examples.Spotify.Album { .misfortune }
             }
             .sheet(isPresented: $isPresented) {
                 NavigationView {
-                    Examples.Spotify.AlbumScreen(album: previewAlbum)
+                    Preview()
                 }
                 .navigationViewStyle(.stack)
             }

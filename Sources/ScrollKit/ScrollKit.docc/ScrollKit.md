@@ -26,7 +26,7 @@ https://github.com/danielsaidi/ScrollKit.git
 
 ## Getting started
 
-The <doc:Getting-Started> article helps you get started with ScrollKit.
+The <doc:Getting-Started-Article> article helps you get started with ScrollKit.
 
 
 
@@ -46,7 +46,7 @@ ScrollKit is available under the MIT license.
 
 ### Articles
 
-- <doc:Getting-Started>
+- <doc:Getting-Started-Article>
 
 ### Essentials
 

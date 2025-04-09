@@ -1,0 +1,110 @@
+//
+//  View+RoundedScollContent.swift
+//  ScrollKit
+//
+//  Created by Daniel Saidi on 2025-04-09.
+//  Copyright © 2025 Daniel Saidi. All rights reserved.
+//
+
+#if os(iOS) || os(visionOS)
+import SwiftUI
+
+public extension View {
+    
+    /// Make a scroll view's content view overlap the scroll
+    /// header, by applying a negative offset.
+    ///
+    /// Do not use this together with a sticky header, since
+    /// a sticky header will overlap the content, which will
+    /// ruin this overlap effect.
+    ///
+    /// - Parameters:
+    ///   - points: The number of points to overlap, by default `10`.
+    func scrollViewContentWithHeaderOverlap(
+        _ points: Double? = nil
+    ) -> some View {
+        self.offset(y: -(points ?? 10))
+    }
+}
+
+@available(iOS 16.0, *)
+public extension View {
+    
+    /// Make a scroll view's content view overlap the scroll
+    /// header with rounded corners.
+    ///
+    /// Do not use this together with a sticky header, since
+    /// a sticky header will overlap the content, which will
+    /// ruin this overlap effect.
+    ///
+    /// - Parameters:
+    ///   - points: The number of points to overlap, by default `10`.
+    ///   - radius: The top corner radius, by default `8`.
+    func scrollViewContentWithRoundedHeaderOverlap(
+        _ overlap: Double? = nil,
+        cornerRadius radius: CGFloat = 8
+    ) -> some View {
+        self.background(.background)
+            .clipShape(UnevenRoundedRectangle(topLeadingRadius: radius, topTrailingRadius: radius))
+            .frame(maxHeight: .infinity)
+            .scrollViewContentWithHeaderOverlap(overlap)
+    }
+}
+
+public extension View {
+        
+    /// Make a scroll view header view apply rounded corners
+    /// that cut out a mask for the scroll view content view.
+    ///
+    /// - Parameters:
+    ///   - points: The number of points to overlap, by default `0`.
+    @ViewBuilder
+    func scrollViewHeaderWithRoundedContentMask(
+        _ points: Double = 0
+    ) -> some View {
+        if #available(iOS 16.0, *) {
+            if points > 0 {
+                self.mask {
+                    VStack(spacing: 0) {
+                        /// Make the black color overflow waaaay up.
+                        Color.black.scaleEffect(100, anchor: .bottom)
+                        ZStack {
+                            Color.white
+                            UnevenRoundedRectangle(
+                                topLeadingRadius: 20,
+                                topTrailingRadius: 20
+                            )
+                            .fill(.black)
+                        }
+                        .compositingGroup()
+                        .luminanceToAlpha()
+                        .frame(height: 20)
+                    }
+                }
+            } else {
+                self
+            }
+        } else {
+            self
+        }
+    }
+}
+#endif
+
+#Preview {
+    
+    ScrollViewWithStickyHeader(
+        .vertical,
+        header: { Color.red },
+        headerHeight: 250,
+        headerMinHeight: 150,
+        contentCornerRadius: 20,
+        showsIndicators: false,
+    ) {
+        LazyVStack {
+            ForEach(1...100, id: \.self) {
+                Text("\($0)")
+            }
+        }
+    }
+}

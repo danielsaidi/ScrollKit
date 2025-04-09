@@ -8,7 +8,22 @@ Until then, deprecated features may be removed in any minor version.
 
 ## 0.7
 
-This version moves examples into a new namespace and renames some View extensions to make more sense. 
+This version moves examples into a new namespace and renames some View extensions to make more sense.
+
+### ✨ New Features
+
+* The `ScrollViewWithStickyHeader` has a new `contentCornerRadius` parameter.
+* The new `scrollViewContentWithHeaderOverlap(...)` view extension can apply a header overlap to a scroll view content view.
+* The new `scrollViewContentWithRoundedHeaderOverlap(...)` view extension can apply a rounded header overlap to a scroll view content view. 
+* The new `scrollViewHeaderWithRoundedContentMask(...)` view extension can apply a rounded corner mask to a scroll view header. 
+ 
+### 💡 Behavior Changes
+
+* `ScrollViewWithStickyHeader` now wraps its content in a `GeometryReader` to properly handle scroll offset.
+
+### 🐛 Bug Fixes
+
+* `ScrollViewWithStickyHeader` now honors the provided min height better, by using the geometry reader safe area insets.
 
 ### 🗑️ Deprecations
 

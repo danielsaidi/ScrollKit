@@ -6,6 +6,22 @@ Until then, deprecated features may be removed in any minor version.
 
 
 
+## 0.7.1
+
+This version fixes a few 0.7 bugs and behaviors.
+
+### 💡 Behavior Changes
+
+* The `ScrollViewWithStickyHeader` now defaults the minimum header height to the top safe area, instead of the header height.
+* The `scrollViewHeaderWithRoundedContentMask(_:)` view extension has been renamed to `scrollViewHeaderWithRoundedContentCorners(cornerRadius:)` for clarity.
+
+### 🐛 Bug Fixes
+
+* The `ScrollViewWithStickyHeader` no longer prints as it scrolls.
+* The `scrollViewHeaderWithRoundedContentMask(_:)` view extension didn't apply the provided corner radius. This has been fixed.
+
+
+
 ## 0.7
 
 This version moves examples into a new namespace and renames some View extensions to make more sense.

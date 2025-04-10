@@ -147,11 +147,15 @@ Note that this is an experimental feature that may contain glitches based on whe
 
 
 
-## More views
+## Additional view utilities
 
-ScrollKit has some additional views as well. The ``ScrollViewHeader`` can be used in a regular `ScrollView` and stretches out when it's pulled down, then scrolls away with the content. The ``ScrollViewHeaderGradient`` can be used as a discrete color gradient on top of a header image, to ensure readabilkity. The ``ScrollViewHeaderImage`` takes any custom image and adjusts it to be presented as a stretchy scroll view header.
+ScrollKit has more views and view extensions that can be used as standalone features.
+
+### Views
+
+The ``ScrollViewHeader`` can be used as a header view within a scroll view and will stretch out when pulled down, then scroll away with the content. The ``ScrollViewHeaderGradient`` is a discrete color gradient that can be used improve readability when text is added above a light image. The ``ScrollViewHeaderImage`` takes a custom image and adjusts it to be presented as a stretchy scroll view header, by changing its aspect ratio.
 
 
-## More view extensions
+## View extensions
 
-
+There are many ``SwiftUICore/View`` extensions within the library, that are used by the various view components, but that can be used as standalone features as well. Some examples are ``SwiftUICore/View/hideStatusBarUntilScrolled(using:)``, which can be used to hide the status bar based on an observable value, ``SwiftUICore/View/scrollViewContentWithRoundedHeaderOverlap(_:cornerRadius:)``, which lets a view overlap a static header view with rounded corners, and ``SwiftUICore/View/scrollViewHeaderWithRoundedContentCorners(cornerRadius:)`` which is used by ``ScrollViewWithStickyHeader`` to create a rounded, inverse content mask under which the scroll view content scrolls. 

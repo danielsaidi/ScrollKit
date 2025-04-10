@@ -53,12 +53,12 @@ public extension View {
     /// that cut out a mask for the scroll view content view.
     ///
     /// - Parameters:
-    ///   - points: The number of points to overlap, by default `0`.
+    ///   - cornerRadius: The number of points to overlap, by default `0`.
     @ViewBuilder
-    func scrollViewHeaderWithRoundedContentMask(
-        _ points: Double = 0
+    func scrollViewHeaderWithRoundedContentCorners(
+        cornerRadius: Double = 0
     ) -> some View {
-        if points > 0 {
+        if cornerRadius > 0 {
             self.mask {
                 VStack(spacing: 0) {
                     /// Make the black color overflow waaaay up.
@@ -66,14 +66,14 @@ public extension View {
                     ZStack {
                         Color.white
                         UnevenRoundedRectangle(
-                            topLeadingRadius: 20,
-                            topTrailingRadius: 20
+                            topLeadingRadius: cornerRadius,
+                            topTrailingRadius: cornerRadius
                         )
                         .fill(.black)
                     }
                     .compositingGroup()
                     .luminanceToAlpha()
-                    .frame(height: 20)
+                    .frame(height: cornerRadius)
                 }
             }
         } else {

@@ -51,7 +51,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     ///   - axes: The scroll axes to use, by default `.vertical`.
     ///   - header: The scroll view header builder.
     ///   - headerHeight: The height to apply to the scroll view header.
-    ///   - headerMinHeight: The minimum height to apply to the scroll view header, by default the `headerHeight`.
+    ///   - headerMinHeight: The minimum height to apply to the scroll view header, by default the `top safe area insets`.
     ///   - headerStretch: Whether to stretch out the header when pulling down, by default `true`.
     ///   - contentCornerRadius: The corner radius to apply to the scroll content.
     ///   - showsIndicators: Whether or not to show scroll indicators, by default `true`.
@@ -72,7 +72,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
         self.showsIndicators = showsIndicators
         self.header = header
         self.headerHeight = headerHeight
-        self.headerMinHeight = headerMinHeight ?? headerHeight
+        self.headerMinHeight = headerMinHeight
         self.headerStretch = headerStretch
         self.contentCornerRadius = contentCornerRadius
         self.onScroll = onScroll
@@ -83,7 +83,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private let showsIndicators: Bool
     private let header: () -> Header
     private let headerHeight: Double
-    private let headerMinHeight: Double
+    private let headerMinHeight: Double?
     private let headerStretch: Bool
     private let contentCornerRadius: CGFloat
     private let onScroll: ScrollAction?
@@ -97,7 +97,6 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private var visibleHeaderRatio: CGFloat {
         let value = (headerHeight + scrollOffset.y) / headerHeight
         if headerStretch { return value }
-        print(value)
         return min(1, value)
     }
 
@@ -122,7 +121,8 @@ private extension ScrollViewWithStickyHeader {
     func headerMinHeight(
         in geo: GeometryProxy
     ) -> Double {
-        let safeMinHeight = headerMinHeight + geo.safeAreaInsets.top
+        let minHeight = headerMinHeight ?? 0
+        let safeMinHeight = minHeight + geo.safeAreaInsets.top
         return min(safeMinHeight, headerHeight)
     }
     
@@ -166,7 +166,9 @@ private extension ScrollViewWithStickyHeader {
     var scrollHeader: some View {
         if #available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *) {
             scrollHeaderView
-                .scrollViewHeaderWithRoundedContentMask(contentCornerRadius)
+                .scrollViewHeaderWithRoundedContentCorners(
+                    cornerRadius: contentCornerRadius
+                )
         } else {
             scrollHeaderView
         }
@@ -189,7 +191,7 @@ private extension ScrollViewWithStickyHeader {
     ScrollViewWithStickyHeader(
         header: { Color.red },
         headerHeight: 200,
-        headerMinHeight: 200
+        headerMinHeight: nil
     ) {
         LazyVStack(spacing: 0) {
             ForEach(1...100, id: \.self) { item in
@@ -210,7 +212,7 @@ private extension ScrollViewWithStickyHeader {
         #if os(macOS)
         Color.clear
         #endif
-        Preview()
+        Preview(isInSheet: false)
     }
     #if os(iOS)
     .navigationViewStyle(.stack)
@@ -228,7 +230,7 @@ private extension ScrollViewWithStickyHeader {
                 isPresented.toggle()
             }
             .sheet(isPresented: $isPresented) {
-                Preview()
+                Preview(isInSheet: true)
             }
         }
     }
@@ -237,6 +239,8 @@ private extension ScrollViewWithStickyHeader {
 }
 
 private struct Preview: View {
+    
+    let isInSheet: Bool
     
     @State var visibleHeaderRatio = 0.0
     @State var scrollOffset = CGPoint.zero
@@ -247,13 +251,11 @@ private struct Preview: View {
         #if canImport(UIKit)
         TabView {
             Group {
-                Group {
-                    headerPageView(.red).tag(0)
-                    headerPageView(.green).tag(1)
-                    headerPageView(.blue).tag(2)
-                }
-                .edgesIgnoringSafeArea(.all)
+                headerPageView(.red).tag(0)
+                headerPageView(.green).tag(1)
+                headerPageView(.blue).tag(2)
             }
+            .edgesIgnoringSafeArea(.all)
         }
         .tabViewStyle(.page)
         #else
@@ -281,7 +283,7 @@ private struct Preview: View {
             headerHeight: 250,
             headerMinHeight: 100,
             headerStretch: false,
-            contentCornerRadius: 0, //contentCornerRadius,
+            contentCornerRadius: 10, //contentCornerRadius,
             showsIndicators: false,
             onScroll: { offset, visibleHeaderRatio in
                 self.scrollOffset = offset

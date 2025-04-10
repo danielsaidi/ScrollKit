@@ -161,10 +161,10 @@ private extension ScrollViewWithStickyHeader {
                 VStack(spacing: 0) {
                     scrollHeader
                         .opacity(0)
-                        .id(ScrollManager.ScrollTargets.header)
+                        .scrollTarget(.header)
                     content()
                         .frame(maxHeight: .infinity)
-                        .id(ScrollManager.ScrollTargets.content)
+                        .scrollTarget(.content)
                 }
             }
             .onAppear {

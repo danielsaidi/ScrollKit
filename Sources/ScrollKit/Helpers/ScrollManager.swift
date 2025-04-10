@@ -8,64 +8,64 @@
 
 import SwiftUI
 
-/// A class that manages programmatic scrolling within a
-/// scroll view that uses sticky headers.
+/// This class can be used for programmatic scrolling within
+/// a scroll view.
 ///
-/// `ScrollManager` can be used to scroll to specific
-/// parts of a scroll view (e.g. the sticky header or
-/// the main content) using a `ScrollViewProxy`.
+/// This class can be used to scroll to any specific part of
+/// a scroll view (e.g. the header or the main content) with
+/// a `ScrollViewProxy`. Simply add a ``ScrollTarget`` ID to
+/// your scroll view's header view and content then call any
+/// manager instance's ``setProxy(_:)`` with the scroll view
+/// proxy from any scroll view reader in your view.
 ///
-/// To use it, inject an instance into a compatible scroll
-/// view like `ScrollViewWithStickyHeader`, which will
-/// register its internal proxy with the manager on appear.
+/// Once everything's done, you can use ``scroll(to:anchor:)``
+/// to scroll to any defined targets within your scroll view.
 ///
-/// You can then call `scrollToHeader()` or
-/// `scrollToContent()` from your view model or UI logic
-/// to trigger animated scrolling actions.
+/// The ``ScrollViewWithStickyHeader`` has support for using
+/// this manager, but you can add it to any custom view.
 ///
-/// - Important: `ScrollManager` uses `ScrollViewReader`
-///   under the hood, so the scrollable views must have
-///   valid `.id(...)` values matching the internal targets.
+/// - Important: The manager uses a `ScrollViewReader` under
+/// the hood, so yoyr scroll view must apply valid `.id(...)`
+/// values to the header and content.
 public class ScrollManager {
 
     /// Creates a new scroll manager instance.
     public init() { }
 
-    private var proxy: ScrollViewProxy?
-
-    /// Scroll to the sticky header in the scroll view.
+    /// The currently configured scroll view proxy, if any.
+    public private(set) var proxy: ScrollViewProxy?
+    
+    /// Scroll to any target within .
     ///
-    /// - Parameter anchor: The anchor point to scroll to,
-    ///   defaulting to `.top`.
-    public func scrollToHeader(anchor: UnitPoint = .top) {
+    /// - Parameters:
+    ///   - target: The target to scroll to.
+    ///   - anchor: The anchor point to scroll to, by default `.top`.
+    public func scroll(
+        to target: ScrollTarget,
+        anchor: UnitPoint = .top
+    ) {
         withAnimation {
-            proxy?.scrollTo(ScrollTargets.header, anchor: anchor)
-        }
-    }
-
-    /// Scroll to the main content in the scroll view.
-    ///
-    /// - Parameter anchor: The anchor point to scroll to,
-    ///   defaulting to `.top`.
-    public func scrollToContent(anchor: UnitPoint = .top) {
-        withAnimation {
-            proxy?.scrollTo(ScrollTargets.content, anchor: anchor)
+            proxy?.scrollTo(target, anchor: anchor)
         }
     }
 
     /// Set the internal scroll proxy.
-    ///
-    /// This method is intended for internal use by views
-    /// like `ScrollViewWithStickyHeader`.
-    ///
-    /// - Parameter proxy: The `ScrollViewProxy` to store.
-    internal func setProxy(_ proxy: ScrollViewProxy) {
+    public func setProxy(_ proxy: ScrollViewProxy) {
         self.proxy = proxy
     }
 
     /// Internal scroll target identifiers.
-    enum ScrollTargets {
-        static let header = "scrollkit-target-header"
-        static let content = "scrollkit-target-content"
+    public enum ScrollTarget: String {
+        case header, content
+    }
+}
+
+public extension View {
+    
+    /// Register the view as a scroll target.
+    func scrollTarget(
+        _ target: ScrollManager.ScrollTarget
+    ) -> some View {
+        self.id(target)
     }
 }

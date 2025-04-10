@@ -52,23 +52,15 @@ struct DemoScreen<HeaderView: View>: View {
                     .previewHeaderContent()
                     .opacity(1 - visibleHeaderRatio)
             }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    scrollManager.scrollToContent()
-                } label: {
-                    Label("Scroll to content", systemImage: "hand.point.down")
-                        .labelStyle(.iconOnly)
+            ToolbarItemGroup(placement: .topBarTrailing) {
+                Menu("Scroll to...") {
+                    Button("Header") {
+                        scrollManager.scroll(to: .header)
+                    }
+                    Button("Content") {
+                        scrollManager.scroll(to: .content)
+                    }
                 }
-                .buttonStyle(.plain)
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button {
-                    scrollManager.scrollToHeader()
-                } label: {
-                    Label("Scroll to header", systemImage: "hand.point.up")
-                        .labelStyle(.iconOnly)
-                }
-                .buttonStyle(.plain)
             }
         }
         .toolbarBackground(.hidden)

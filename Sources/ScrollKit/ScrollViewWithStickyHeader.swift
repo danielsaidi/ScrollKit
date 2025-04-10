@@ -55,6 +55,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     ///   - headerStretch: Whether to stretch out the header when pulling down, by default `true`.
     ///   - contentCornerRadius: The corner radius to apply to the scroll content.
     ///   - showsIndicators: Whether or not to show scroll indicators, by default `true`.
+    ///   - scrollManager: A class that manages programmatic scrolling to header or content.
     ///   - onScroll: An action that will be called whenever the scroll offset changes, by default `nil`.
     ///   - content: The scroll view content builder.
     public init(
@@ -65,6 +66,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
         headerStretch: Bool = true,
         contentCornerRadius: CGFloat = 0,
         showsIndicators: Bool = true,
+        scrollManager: ScrollManager? = nil,
         onScroll: ScrollAction? = nil,
         @ViewBuilder content: @escaping () -> Content
     ) {
@@ -75,6 +77,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
         self.headerMinHeight = headerMinHeight
         self.headerStretch = headerStretch
         self.contentCornerRadius = contentCornerRadius
+        self.scrollManager = scrollManager
         self.onScroll = onScroll
         self.content = content
     }
@@ -86,11 +89,12 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
     private let headerMinHeight: Double?
     private let headerStretch: Bool
     private let contentCornerRadius: CGFloat
+    private let scrollManager: ScrollManager?
     private let onScroll: ScrollAction?
     private let content: () -> Content
-
+    
     public typealias ScrollAction = (_ offset: CGPoint, _ visibleHeaderRatio: CGFloat) -> Void
-
+    
     @State
     private var scrollOffset: CGPoint = .zero
 
@@ -148,16 +152,23 @@ private extension ScrollViewWithStickyHeader {
     func scrollView(
         in geo: GeometryProxy
     ) -> some View {
-        ScrollViewWithOffsetTracking(
-            axes,
-            showsIndicators: showsIndicators,
-            onScroll: handleScrollOffset
-        ) {
-            VStack(spacing: 0) {
-                scrollHeader
-                    .opacity(0)
-                content()
-                    .frame(maxHeight: .infinity)
+        ScrollViewReader { scrollProxy in
+            ScrollViewWithOffsetTracking(
+                axes,
+                showsIndicators: showsIndicators,
+                onScroll: handleScrollOffset
+            ) {
+                VStack(spacing: 0) {
+                    scrollHeader
+                        .opacity(0)
+                        .id(ScrollManager.ScrollTargets.header)
+                    content()
+                        .frame(maxHeight: .infinity)
+                        .id(ScrollManager.ScrollTargets.content)
+                }
+            }
+            .onAppear {
+                scrollManager?.setProxy(scrollProxy)
             }
         }
     }

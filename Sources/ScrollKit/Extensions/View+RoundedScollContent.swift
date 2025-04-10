@@ -84,13 +84,17 @@ public extension View {
 
 #Preview {
     
-    ScrollViewWithStickyHeader(
+    func previewHeader() -> some View {
+        Color.red
+    }
+    
+    return ScrollViewWithStickyHeader(
         .vertical,
-        header: { Color.red },
+        header: previewHeader,
         headerHeight: 250,
         headerMinHeight: 150,
         contentCornerRadius: 20,
-        showsIndicators: false,
+        showsIndicators: false
     ) {
         LazyVStack {
             ForEach(1...100, id: \.self) {

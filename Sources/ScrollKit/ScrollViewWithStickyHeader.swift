@@ -199,8 +199,13 @@ private extension ScrollViewWithStickyHeader {
 }
 
 #Preview("Demo") {
-    ScrollViewWithStickyHeader(
-        header: { Color.red },
+    
+    func previewHeader() -> some View {
+        Color.red
+    }
+    
+    return ScrollViewWithStickyHeader(
+        header: previewHeader,
         headerHeight: 200,
         headerMinHeight: nil
     ) {
@@ -294,12 +299,9 @@ private struct Preview: View {
             headerHeight: 250,
             headerMinHeight: 100,
             headerStretch: false,
-            contentCornerRadius: 10, //contentCornerRadius,
+            contentCornerRadius: 10, // contentCornerRadius,
             showsIndicators: false,
-            onScroll: { offset, visibleHeaderRatio in
-                self.scrollOffset = offset
-                self.visibleHeaderRatio = visibleHeaderRatio
-            }
+            onScroll: handleScroll
         ) {
             LazyVStack {
                 ForEach(1...100, id: \.self) {
@@ -314,6 +316,14 @@ private struct Preview: View {
             }
             .background(Color.yellow)
         }
+    }
+    
+    func handleScroll(
+        offset: CGPoint,
+        visibleHeaderRatio: CGFloat
+    ) {
+        self.scrollOffset = offset
+        self.visibleHeaderRatio = visibleHeaderRatio
     }
 }
 

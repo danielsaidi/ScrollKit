@@ -22,48 +22,6 @@ There are however many other scroll utilities in this library. Some have been re
 
 
 
-## How to track scroll offset
-
-Althouth there are native alternatives, ScrollKit has a ``ScrollViewWithOffsetTracking`` that triggers an action when it's scrolled:
-
-```swift
-struct MyView: View {
-
-    @State
-    private var offset = CGPoint.zero
-    
-    func handleOffset(_ scrollOffset: CGPoint) {
-        self.offset = scrollOffset
-    }
-
-    var body: some View {
-        ScrollViewWithOffsetTracking(onScroll: handleOffset) {
-            // Add your scroll content here, e.g. a `LazyVStack`
-        }
-    }
-}
-```
-
-You can also use the ``ScrollViewOffsetTracker`` together with the ``SwiftUICore/View/scrollViewOffsetTracking(action:)`` view modifier:
-
-```swift
-List {
-    ScrollViewOffsetTracker {
-        ForEach(0...100, id: \.self) {
-            Text("\($0)")
-                .frame(width: 200, height: 200)
-        }
-    }
-}
-.scrollViewOffsetTracking { offset in
-    print(offset)
-}
-```
-
-You use the offset in any way you like, e.g. to fade navigation bar title. This is how ``ScrollViewWithStickyHeader`` is implemented.
-
-
-
 ## How to set up a scroll view with a sticky header
 
 You can use the ``ScrollViewWithStickyHeader`` view to create a scroll view that has a header view that stretches and transforms when it's pulled down, and sticks to the top as the scroll view content is scrolled:
@@ -109,13 +67,53 @@ The visibleHeaderRatio is how many percent (0-1) that is visible below the navig
 
 
 
-## How to set up a scroll view with a header and overlapping content
+## How to track scroll offset
 
-A common design pattern is to apply rounded corners to the scroll content, and have it overlay the scroll view header. You can use the ``SwiftUICore/View/scrollViewHeaderRoundedOverlap(_:cornerRadius:)`` view extension to achieve this effect:
+Althouth there are native alternatives, ScrollKit has a ``ScrollViewWithOffsetTracking`` that triggers an action when it's scrolled:
 
-![Screenshot](Rounded-Corners)
+```swift
+struct MyView: View {
 
-ScrollKit also has a ``SwiftUICore/View/scrollViewHeaderOverlap(_:)`` variant that just applies the overlap, withough any other view modifications. 
+    @State
+    private var offset = CGPoint.zero
+    
+    func handleOffset(_ scrollOffset: CGPoint) {
+        self.offset = scrollOffset
+    }
+
+    var body: some View {
+        ScrollViewWithOffsetTracking(onScroll: handleOffset) {
+            // Add your scroll content here, e.g. a `LazyVStack`
+        }
+    }
+}
+```
+
+You can also use the ``ScrollViewOffsetTracker`` together with the ``SwiftUICore/View/scrollViewOffsetTracking(action:)`` view modifier:
+
+```swift
+List {
+    ScrollViewOffsetTracker {
+        ForEach(0...100, id: \.self) {
+            Text("\($0)")
+                .frame(width: 200, height: 200)
+        }
+    }
+}
+.scrollViewOffsetTracking { offset in
+    print(offset)
+}
+```
+
+You use the offset in any way you like, e.g. to fade navigation bar title. This is how ``ScrollViewWithStickyHeader``, which also provides you with the scroll offset, is implemented.
+
+
+
+## How to trigger scrolling with code
+
+You can use the ``ScrollManager`` to scroll to certain parts of a scroll view. See the documentation on how to set it up.
+
+The ``ScrollViewWithStickyHeader`` applies the propert header and content IDs, and lets you inject a manager and use it to scroll within the scroll view.
 
 
 

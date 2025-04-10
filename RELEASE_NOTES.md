@@ -6,6 +6,23 @@ Until then, deprecated features may be removed in any minor version.
 
 
 
+## 0.8
+
+Thanks to [@gabrielribeiro](https://github.com/gabrielribeiro), this version adds a `ScrollManager` that can be used to scroll to certain parts of a scroll view. 
+
+This version also fixes a few 0.7 linting errors.
+
+### ✨ Features
+
+* The `ScrollManager` is a new type that can be used to scroll within a scroll view.
+* The `ScrollViewWithStickyHeader` can now take a `ScrollManager` in its initializer.  
+
+### 🐛 Bug Fixes
+
+* This version fixes linting errors that were accidentally introduced in 0.7, since Xcode 16.3 isn't able to run build scripts.
+
+
+
 ## 0.7.1
 
 This version fixes a few 0.7 bugs and behaviors.

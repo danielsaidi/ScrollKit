@@ -49,11 +49,14 @@ ScrollViewWithOffsetTracking { offset in
 ScrollKit has a `ScrollViewWithStickyHeader` that makes it easy to set up a stretchy, sticky header:
 
 ```swift
+import SwiftUI
+import ScrollKit
+
 struct MyView: View {
 
     @State
-    private var offset = CGPoint.zero
-    
+    private var scrollOffset = CGPoint.zero
+
     @State
     private var visibleRatio = CGFloat.zero
 
@@ -63,7 +66,7 @@ struct MyView: View {
             headerHeight: 250,      // The resting header height
             headerMinHeight: 150,   // The minimum header height
             headerStretch: false,   // Disables the stretch effect
-            contentCornerRadius: 20 // An optional corner radius mask
+            contentCornerRadius: 20, // An optional corner radius mask
             onScroll: handleScroll  // An optional scroll handler action
         ) {
             // Add your scroll content here, e.g. a `LazyVStack`
@@ -79,7 +82,7 @@ struct MyView: View {
         ZStack {
             Color.red
             ScrollViewHeaderGradient()  // By default a dark gradient
-            Text("Scroll offset: \(offset.y)")
+            Text("Scroll offset: \(scrollOffset.y)")
         }
     }
 }

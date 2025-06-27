@@ -6,6 +6,16 @@ Until then, deprecated features may be removed in any minor version.
 
 
 
+## 0.8.1
+
+Thanks to [@alexmomotiuk](https://github.com/alexmomotiuk), the bottom safe area but is fixed.
+
+### 🐛 Bug Fixes
+
+* The bottom safe area but is fixed. 
+
+
+
 ## 0.8
 
 Thanks to [@gabrielribeiro](https://github.com/gabrielribeiro), this version adds a `ScrollManager` that can be used to scroll to certain parts of a scroll view. 

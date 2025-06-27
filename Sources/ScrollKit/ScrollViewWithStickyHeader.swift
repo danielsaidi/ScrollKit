@@ -110,7 +110,7 @@ public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
                 scrollView(in: geo)
                 navbarOverlay(in: geo)
             }
-            .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.top)
         }
         .prefersNavigationBarHidden()
         #if os(iOS)

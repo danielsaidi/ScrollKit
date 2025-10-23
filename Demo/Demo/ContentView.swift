@@ -12,18 +12,15 @@ import ScrollKit
 struct ContentView: View {
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 linkSection
                 spotifySection
             }
             .tint(.blue)
-            .navigationTitle("Demo")
+            .navigationTitle("ScrollKit")
             .toolbarColorScheme(.light, for: .navigationBar)
         }
-        .tint(.white)
-        .navigationViewStyle(.stack)
-        .toolbarRole(.navigationStack)
     }
 }
 
@@ -50,7 +47,7 @@ private extension ContentView {
 
     var colorLink: some View {
         link("paintbrush.pointed.fill", "Color") {
-            DemoScreen(headerHeight: 100) {
+            DemoScreen(headerHeight: 250) {
                 Color.blue
             }
         }

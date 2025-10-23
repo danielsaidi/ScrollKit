@@ -19,18 +19,12 @@ public extension Examples.Spotify {
         
         private var album: Album
         
-        @Environment(\.colorScheme)
-        private var colorScheme
-        
-        @Environment(\.dismiss)
-        private var dismiss
-        
-        @State
-        private var visibleHeaderRatio = 1.0
-        
-        @State
-        private var scrollOffset = CGPoint.zero
-        
+        @Environment(\.colorScheme) private var colorScheme
+        @Environment(\.dismiss) private var dismiss
+
+        @State private var visibleHeaderRatio = 1.0
+        @State private var scrollOffset = CGPoint.zero
+
         private var scrollContentCornerRadius: Double {
             colorScheme == .dark ? 0.0 : 20
         }
@@ -40,7 +34,7 @@ public extension Examples.Spotify {
                 header: scrollViewHeader,
                 headerHeight: Examples.Spotify.AlbumScreen.Header.height,
                 headerMinHeight: 50,
-                headerStretch: false,
+                headerStretch: true,
                 contentCornerRadius: scrollContentCornerRadius,
                 onScroll: handleScrollOffset
             ) {
@@ -48,9 +42,6 @@ public extension Examples.Spotify {
                     Examples.Spotify.AlbumScreen.Content(album: album)
                 }
             }
-            #if os(iOS)
-            .hideBackButtonText()
-            #endif
             #if os(iOS) || os(macOS) || os(tvOS)
             .toolbarTitle(toolbarTitleView)
             #endif
@@ -78,16 +69,6 @@ public extension Examples.Spotify {
 }
 
 private extension View {
-
-    #if os(iOS)
-    func hideBackButtonText() -> some View {
-        self.toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                Text("       ") // Hides the back button text :D
-            }
-        }
-    }
-    #endif
 
     func toolbarTitle<Title: View>(_ view: Title) -> some View {
         #if os(iOS) || os(macOS) || os(tvOS)

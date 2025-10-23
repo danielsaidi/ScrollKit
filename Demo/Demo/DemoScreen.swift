@@ -30,7 +30,7 @@ struct DemoScreen<HeaderView: View>: View {
         ScrollViewWithStickyHeader(
             header: header,
             headerHeight: headerHeight,
-            headerMinHeight: 75,
+            // headerMinHeight: 50,
             scrollManager: scrollManager,
             onScroll: handleScrollOffset
         ) {
@@ -51,16 +51,6 @@ struct DemoScreen<HeaderView: View>: View {
                     .font(.headline)
                     .previewHeaderContent()
                     .opacity(1 - visibleHeaderRatio)
-            }
-            ToolbarItemGroup(placement: .topBarTrailing) {
-                Menu("Scroll to...") {
-                    Button("Header") {
-                        scrollManager.scroll(to: .header)
-                    }
-                    Button("Content") {
-                        scrollManager.scroll(to: .content)
-                    }
-                }
             }
         }
         .toolbarBackground(.hidden)

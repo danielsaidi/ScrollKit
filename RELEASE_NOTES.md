@@ -1,8 +1,14 @@
 # Release Notes
 
-ScrollKit will use semver after 1.0. 
+[ScrollKit](https://github.com/danielsaidi/ScrollKit) will use semver after 1.0.
 
-Until then, deprecated features may be removed in any minor version.
+Until then, breaking changes can happen any minor version bump.
+
+
+
+## 0.9
+
+This version bumps the package to Swift 6.1 and makes the demo app target iOS 26.
 
 
 

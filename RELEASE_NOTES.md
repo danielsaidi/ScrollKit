@@ -2,7 +2,7 @@
 
 [ScrollKit](https://github.com/danielsaidi/ScrollKit) will use semver after 1.0.
 
-Until then, breaking changes can happen any minor version bump.
+Until then, breaking changes can happen in any minor version bump.
 
 
 

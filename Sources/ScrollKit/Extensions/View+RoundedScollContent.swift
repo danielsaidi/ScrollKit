@@ -10,12 +10,11 @@ import SwiftUI
 
 public extension View {
     
-    /// Make a scroll view's content view overlap the scroll
-    /// header, by applying a negative offset.
+    /// Make a scroll view's content view overlap the scroll header by applying a
+    /// negative offset.
     ///
-    /// Do not use this together with a sticky header, since
-    /// a sticky header will overlap the content, which will
-    /// ruin this overlap effect.
+    /// Do not use this together with a sticky header, since such a sticky header
+    /// will overlap the content, which will ruin this overlap effect.
     ///
     /// - Parameters:
     ///   - points: The number of points to overlap, by default `10`.
@@ -29,12 +28,11 @@ public extension View {
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public extension View {
     
-    /// Make a scroll view's content view overlap the scroll
-    /// header with rounded corners.
+    /// Make a scroll view's content view overlap the scroll header by applying a
+    /// custom rounded corner edge.
     ///
-    /// Do not use this together with a sticky header, since
-    /// a sticky header will overlap the content, which will
-    /// ruin this overlap effect.
+    /// Do not use this together with a sticky header, since such a sticky header
+    /// will overlap the content, which will ruin this overlap effect.
     ///
     /// - Parameters:
     ///   - points: The number of points to overlap, by default `10`.
@@ -49,8 +47,8 @@ public extension View {
             .scrollViewContentWithHeaderOverlap(overlap)
     }
         
-    /// Make a scroll view header view apply rounded corners
-    /// that cut out a mask for the scroll view content view.
+    /// Make a scroll view's header view apply rounded corners to the view that
+    /// follows it, by cutting out a mask for the scroll view content view.
     ///
     /// - Parameters:
     ///   - cornerRadius: The number of points to overlap, by default `0`.

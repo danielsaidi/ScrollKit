@@ -10,7 +10,7 @@ import SwiftUI
 
 public extension Examples.Spotify {
     
-    /// This model is used by the Spotify previews.
+    /// This struct represents a Spotify album.
     struct Album {
 
         public init(

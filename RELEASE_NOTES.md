@@ -10,6 +10,10 @@ Until then, breaking changes can happen any minor version bump.
 
 This version bumps the package to Swift 6.1 and makes the demo app target iOS 26.
 
+### 💥 Breaking changes
+
+* All deprecated code has been removed.
+
 
 
 ## 0.8.1

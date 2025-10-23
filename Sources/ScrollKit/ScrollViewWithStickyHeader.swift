@@ -8,41 +8,37 @@
 
 import SwiftUI
 
-/// This scroll view lets you inject a header view that will
-/// stick to the top when the view scrolls.
+/// This scroll view lets you inject a header view that will stick to the top.
 ///
-/// The view wraps a ``ScrollViewWithOffsetTracking`` to get
-/// scroll offset that it then uses to determine how much of
-/// the header that's below the navigation bar. It also uses
-/// a ``ScrollViewHeader`` to make your header view properly
-/// stretch out when the scroll view is pulled down.
+/// This view uses a ``ScrollViewWithOffsetTracking`` to get the scroll
+/// offset, which it then uses to determine how much of the header that's below the
+/// navigation bar.
 ///
-/// You can apply a `headerHeight` which will be the resting
-/// height of the header, a `headerMinHeight` as the minimum
-/// header height (below the top safe area), and an optional
-/// `contentCornerRadius` which applies a corner radius mask
-/// under which the scroll view content will scroll. You can
-/// also set the `headerStretch` parameter to `false` if you
-/// prefer to disable the header stretch effect. This can be
-/// nice when the view is rendered in a sheet, where pulling
-/// down should dismiss the sheet rather than stretching the
-/// sticky header.
+/// This view also uses a ``ScrollViewHeader`` to make any custom header
+/// view properly stretch out when the scroll view is pulled down.
 ///
-/// You can use the `onScroll` init parameter to pass in any
-/// function that should be called whenever the view scrolls.
-/// The function is called with the scroll view offset and a
-/// "header visible ratio", which indicates how much of your
-/// header that is visible below the navigation bar.
+/// You can apply a `headerHeight` which will be used as the resting height of
+/// the header view, a `headerMinHeight` which will be used as the minimum
+/// height below the top safe area, and a `contentCornerRadius` which will
+/// apply a corner radius mask under which the scroll view content will scroll.
 ///
-/// This view will automatically use an inline title display
-/// mode, since it doesn't work for a large nativation title.
+/// You can also set the `headerStretch` parameter to `false` if you prefer
+/// to disable the header stretch effect. This can be nice when the view is rendered
+/// in a sheet, where pulling down should dismiss the sheet rather than stretching
+/// the sticky header.
 ///
-/// > Important: `toolbarBackground(.hidden)` is applied for
-/// iOS 16 and later, to make the navigation bar transparent.
-/// It's not applied on iOS 15 and earlier, which means that
-/// you must use another way to make the bar transparent for
-/// older iOS versions. One way is to use appearance proxies
-/// if you can fall down to UIKit.
+/// You can use `onScroll` to pass in a function that should be called when the
+/// view scrolls. The function will be called with the scroll view offset and a "header
+/// visible ratio", which indicates how much of your header that is visible below the
+/// navigation bar. You can use this ratio to adjust the header content.
+///
+/// This view will automatically apply an inline title display mode, since it does not
+/// work together with a large nativation title.
+///
+/// > Important: `.toolbarBackground(.hidden)` is applied for iOS 16 and
+/// later, to make the navigation bar transparent. For earlier os versions, you must
+/// use another way to make the navigation bar transparent, for instance by using
+/// the UIKit appearance proxies.
 public struct ScrollViewWithStickyHeader<Header: View, Content: View>: View {
 
     /// Create a scroll view with a sticky header.

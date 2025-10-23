@@ -8,11 +8,9 @@
 
 import SwiftUI
 
-/// This view takes any image and adjusts it to be presented
-/// as a scroll view header.
+/// This view takes any image and adjusts it to be used as a scroll view header.
 ///
-/// This view makes sure that your image stretches correctly
-/// and that it clips to the available space.
+/// The view will automatically stretch correctly and clip to the available space.
 public struct ScrollViewHeaderImage: View {
 
     /// Create a scroll view header image.

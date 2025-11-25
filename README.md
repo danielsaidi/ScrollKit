@@ -7,9 +7,7 @@
     <img src="https://img.shields.io/badge/swift-6.1-orange.svg" alt="Swift 6.1" />
     <a href="https://danielsaidi.github.io/ScrollKit"><img src="https://img.shields.io/badge/documentation-web-blue.svg" alt="Documentation" /></a>
     <a href="https://github.com/danielsaidi/ScrollKit/blob/master/LICENSE"><img src="https://img.shields.io/github/license/danielsaidi/ScrollKit" alt="MIT License" /></a>
-    <a href="https://github.com/sponsors/danielsaidi"><img src="https://img.shields.io/badge/sponsor-GitHub-red.svg" alt="Sponsor my work" /></a>
 </p>
-
 
 
 # ScrollKit
@@ -23,7 +21,6 @@ ScrollKit is a SwiftUI library that adds powerful scroll features, like offset t
 ScrollKit works on all major Apple platforms and is designed to be easy to use. It doesn't use the new `ScrollView` APIs for backwards compatibility reasons, but will eventually do so.
 
 
-
 ## Installation
 
 ScrollKit can be installed with the Swift Package Manager:
@@ -31,12 +28,6 @@ ScrollKit can be installed with the Swift Package Manager:
 ```
 https://github.com/danielsaidi/ScrollKit.git
 ```
-
-
-## Support My Work
-
-You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
-
 
 
 ## Getting started
@@ -96,17 +87,19 @@ struct MyView: View {
 For more information, please see the [getting started guide][Getting-Started].
 
 
-
 ## Documentation
 
 The [online documentation][Documentation] has more information, articles, code examples, etc.
-
 
 
 ## Demo Application
 
 The demo app lets you explore the library. To try it out, just open and run the `Demo` project.
 
+
+## Support My Work
+
+You can [become a sponsor][Sponsors] to help me dedicate more time on my various [open-source tools][OpenSource]. Every contribution, no matter the size, makes a real difference in keeping these tools free and actively developed.
 
 
 ## Contact
@@ -119,11 +112,9 @@ Feel free to reach out if you have questions or want to contribute in any way:
 * Mastodon: [@danielsaidi@mastodon.social][Mastodon]
 
 
-
 ## License
 
 ScrollKit is available under the MIT license. See the [LICENSE][License] file for more info.
-
 
 
 [Email]: mailto:daniel.saidi@gmail.com

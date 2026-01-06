@@ -3,7 +3,7 @@
 //  ScrollKit
 //
 //  Created by Gabriel Ribeiro on 2025-04-06.
-//  Copyright © 2023-2024 Daniel Saidi. All rights reserved.
+//  Copyright © 2023-2026 Daniel Saidi. All rights reserved.
 //
 
 import SwiftUI

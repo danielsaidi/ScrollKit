@@ -8,11 +8,11 @@
 
 import SwiftUI
 
-/// This view can be used as a scroll view header, and will automatically stretch its
-/// content when pulled down.
+/// This view can be used as a scroll view header, and will
+/// automatically stretch its content when it's pulled down.
 ///
-/// For instance, this would create a scroll view header with a gradient background,
-/// a gradient overlay and a bottom-leading text:
+/// For instance, this will create a scroll view header with
+/// a gradient background, a gradient overlay, and some text:
 ///
 /// ```swift
 /// struct MyHeader: View {
@@ -38,8 +38,8 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// To add this view to a scroll view with more content below the header view, just
-/// add the header topmost in a `VStack`:
+/// To add the view to a scroll view with more content below
+/// the header view, just add it topmost in a `VStack`:
 ///
 /// ```swift
 /// ScrollView(.vertical) {
@@ -50,7 +50,8 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// Your header view will automatically stretch when the scroll view is pulled down.
+/// Your header view will automatically stretch whenever the
+/// scroll view is pulled down.
 public struct ScrollViewHeader<Content: View>: View {
 
     /// Create a stretchable scroll view header.

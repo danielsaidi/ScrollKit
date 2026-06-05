@@ -8,6 +8,5 @@
 
 import Foundation
 
-/// This is a namespace with various examples on how you can use this library to
-/// achieve certain effects.
+/// This is a namespace with various library examples.
 public struct Examples {}

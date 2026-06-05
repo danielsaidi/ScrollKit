@@ -8,20 +8,23 @@
 
 import SwiftUI
 
-/// This class can be used for programmatic scrolling within a scroll view.
+/// This class can be used for programmatic scrolling within
+/// a scroll view.
 ///
-/// This manager can be used to scroll to a specific part of a scroll view's content,
-/// like the header view, or the main content view, usinc a `ScrollViewProxy`.
+/// This manager can be used to scroll to a specific part of
+/// a scroll view, like the header view, or the main content
+/// view, usinc a `ScrollViewProxy`.
 ///
-/// To use this, simply add a ``ScrollTarget`` ID to your scroll view's header
-/// view and content then call any manager instance's ``setProxy(_:)`` with
-/// the scroll view proxy from any scroll view reader in your view.
+/// To use it, just add a ``ScrollTarget`` ID to your scroll
+/// view's header view and content, then call ``setProxy(_:)``
+/// with any scroll view reader proxy.
 ///
-/// You can then use ``scroll(to:anchor:)`` to scroll to any targets within
-/// your scroll view's content view.
+/// You can then use ``scroll(to:anchor:)`` to scroll to any
+/// target within your scroll view's content view.
 ///
-/// > Important: The scroll manager uses a `ScrollViewReader`, so the scroll
-/// view must apply valid `.id(...)` values to the header and its content.
+/// > Important: The scroll manager uses a `ScrollViewReader`,
+/// so the scroll view must apply valid `.id(...)` values to
+/// the header and its content.
 public class ScrollManager {
 
     /// Creates a new scroll manager instance.

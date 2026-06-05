@@ -8,12 +8,13 @@
 
 import SwiftUI
 
-/// This view can be used as to the content view of a `ScrollView` or a `List`
-/// to be able to get the scroll offset as the view is scrolled.
+/// This view can be used to detect how many points a scroll
+/// view has scrolled.
 ///
-/// To use this view, just add it as the main content view in a `ScrollView` or a
-/// `List`, then apply ``SwiftUI/View/scrollViewOffsetTracking(action:)``
-/// to the parent view, like this:
+/// To use the view, just add it as the main content view in
+/// a `ScrollView` or a `List`, then apply the view modifier
+/// ``SwiftUI/View/scrollViewOffsetTracking(action:)`` to the
+/// outermost parent view, like this:
 ///
 /// ```swift
 /// List {
@@ -29,7 +30,7 @@ import SwiftUI
 /// }
 /// ```
 ///
-/// The offset action will be called with the scroll offset whenever the view scrolls.
+/// The offset action is called whenever the view scrolls.
 public struct ScrollViewOffsetTracker<Content: View>: View {
     
     public init(
@@ -58,8 +59,9 @@ public struct ScrollViewOffsetTracker<Content: View>: View {
 
 public extension View {
 
-    /// Add this modifier to a `ScrollView`, a `List` or any view that has a
-    /// ``ScrollViewOffsetTracker`` to track its scroll offset.
+    /// Add this modifier to a `ScrollView`, a `List` or any
+    /// view that has a ``ScrollViewOffsetTracker`` to track
+    /// its scroll offset.
     func scrollViewOffsetTracking(
         action: @escaping @MainActor @Sendable (_ offset: CGPoint) -> Void
     ) -> some View {
